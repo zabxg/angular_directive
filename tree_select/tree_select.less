@@ -1,0 +1,96 @@
+.hide-scrollbar {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+.compatiable-transition(@delay, @attr, @slowFunc) {
+    transition: @delay @attr @slowFunc;
+    -moz-transition: @delay @attr @slowFunc; /* Firefox 4 */
+    -webkit-transition: @delay @attr @slowFunc; /* Safari 和 Chrome */
+    -o-transition: @delay @attr @slowFunc; /* Opera */
+}
+
+@select-width: 134px;
+@select-height: 40px;
+.tree-select-container {
+    position: relative;
+    border: 0;
+    color: #ffffff;
+    cursor: pointer;
+    .compatiable-transition(.5s, all, ease-in-out);
+    z-index: 10;
+
+    .tree-select-path {
+        line-height: 30px;
+        margin: 0;
+        padding-left: 10px;
+        .tree-select-node {
+            color: #ffffff;
+            margin-right: 10px;
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
+            &.next::before {
+                content: ">";
+                margin-right: 10px;
+            }
+        }
+        &:hover + .tree-select-list-wrap {
+            display: block;
+        }
+    }
+
+    .tree-select-list-wrap {
+        position: absolute;
+        left: @select-width;
+        .compatiable-transition(.5s, all, ease-in-out);
+
+        &.first {
+            left: 0;
+            display: none;
+        }
+        &:hover {
+            display: block;
+        }
+        
+        .tree-select-list {
+            position: absolute;
+            top: 0;
+            padding: 0;
+            margin: 0;
+            max-height: 300px;
+            border: 1px solid #1a3a8c;
+            border-left: 1px solid #3673E430;
+            background: #0E2266;
+            // overflow-x: hidden;
+            overflow-y: auto;
+            .hide-scrollbar;
+            .compatiable-transition(.5s, all, ease-in-out);
+            z-index: 90;
+        }
+        
+        .tree-select-cell {
+            width: @select-width;
+            height: @select-height;
+            line-height: @select-height;
+            font-size: 16px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            .compatiable-transition(.5s, all, ease-in-out);
+
+            &:hover, &.active {
+                color: #FEB13A;
+                background: linear-gradient(90deg, 
+                    rgba(255, 184, 61, 0.2) 0%,
+                    rgba(255, 184, 61, 0.7) 50%,
+                    rgba(255, 184, 61, 0.2) 100%);
+            }
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

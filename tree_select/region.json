@@ -1,0 +1,252 @@
+{
+    "region": [{
+        "originEntity": {
+            "level": 1,
+            "regionCode": "440000",
+            "regionName": "广东省"
+        },
+        "children": [{
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440100,
+                "regionName": "广州市"
+            },
+            "children": [{
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440103,
+                    "regionName": "荔湾区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440104,
+                    "regionName": "越秀区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440105,
+                    "regionName": "海珠区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440106,
+                    "regionName": "天河区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440111,
+                    "regionName": "白云区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440112,
+                    "regionName": "黄埔区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440113,
+                    "regionName": "番禺区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440114,
+                    "regionName": "花都区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440115,
+                    "regionName": "南沙区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440117,
+                    "regionName": "从化区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440118,
+                    "regionName": "增城区"
+                }
+            }]
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440200,
+                "regionName": "韶关市"
+            },
+            "children": [{
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440203,
+                    "regionName": "武江区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440204,
+                    "regionName": "浈江区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440205,
+                    "regionName": "曲江区"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440222,
+                    "regionName": "始兴县"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440224,
+                    "regionName": "仁化县"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440229,
+                    "regionName": "翁源县"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440232,
+                    "regionName": "乳源瑶族自治县"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440233,
+                    "regionName": "新丰县"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440281,
+                    "regionName": "乐昌市"
+                }
+            }, {
+                "originEntity": {
+                    "level": 3,
+                    "regionCode": 440282,
+                    "regionName": "南雄市"
+                }
+            }]
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440300,
+                "regionName": "深圳市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440400,
+                "regionName": "珠海市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440500,
+                "regionName": "汕头市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440600,
+                "regionName": "佛山市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440700,
+                "regionName": "江门市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440800,
+                "regionName": "湛江市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 440900,
+                "regionName": "茂名市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441200,
+                "regionName": "肇庆市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441300,
+                "regionName": "惠州市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441400,
+                "regionName": "梅州市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441500,
+                "regionName": "汕尾市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441600,
+                "regionName": "河源市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441700,
+                "regionName": "阳江市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 441800,
+                "regionName": "清远市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 445100,
+                "regionName": "潮州市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 445200,
+                "regionName": "揭阳市"
+            }
+        }, {
+            "originEntity": {
+                "level": 2,
+                "regionCode": 445300,
+                "regionName": "云浮市"
+            }
+        }]
+    }]
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="directives">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    
+    <script src="angular.js"></script>
+    <script src="index.js" defer></script>
+    <script src="tree_select/tree_select.js" defer></script>
+    <script src="./ng_directive_test.js" defer></script>
+
+    <link rel="stylesheet" href="./tree_select/tree_select.css">
+</head>
+<body ng-controller="mainCtrl">
+
+    <div id="app">
+        <p>{{txt}}</p>
+    </div>
+
+    <div class="container" style="background-color: #0f214a;">
+        <input type="text" ng-model="regionCtrl.regionName">
+        <button ng-click="regionCtrl.setLeaf(regionCtrl.regionName)">测试设置树的方法</button>
+        <tree-select tree-config="regionCtrl.treeConfig" tree="regionCtrl.tree"
+            set-value="regionCtrl.regionSelected"></tree-select>
+            <!-- one-combine-mode='Y' set-value="regionCtrl.regionSelected"></tree-select> -->
+    </div>
+
+    <div>
+        <input type="text" ng-model="name" placeholder="Enter name"/>
+        <br />
+        {{ name }}
+        <hello-world say="say()" name="{{name}}"></hello-world>
+    </div>
+
+</body>
+</html>
