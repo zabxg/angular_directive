@@ -36,7 +36,8 @@ main.controller("mainCtrl", function ($scope, $http) {
     };
 
     $http.get('tree_select/region.json').success(function(data) {
-        console.dir(data.region);
-        $scope.regionCtrl.tree = data.region;
+        $scope.regionCtrl.tree = {
+            children: data.region
+        };
     });
 });

@@ -1,6 +1,6 @@
 var main = angular.module('directives');
 
-main.directive("treeSelect", function ($compile) {
+main.directive("treeSelect", function ($compile, $timeout) {
     return {
         restrict: "E",
         scope: {
@@ -40,6 +40,16 @@ main.directive("treeSelect", function ($compile) {
                     }
                 }
                 return [];
+            };
+            var resetTreeSelected = function (tree, resetFn) {
+                if (!tree) { return; }
+
+                for (var i = 0; i < tree.length; i++) {
+                    resetFn(tree[i][scope.treeConfig.entityField]);
+                    if (tree[i][scope.treeConfig.childrenField]) {
+                        resetTreeSelected(tree[i][scope.treeConfig.childrenField], resetFn);
+                    }
+                }
             };
             // 找路径: 最后的节点满足 obj[key] === value 的条件
             var findPathInTreeLeaf = function (tree, key, value) {
@@ -87,13 +97,69 @@ main.directive("treeSelect", function ($compile) {
             // 在此过程中，可能出现死循环，故使用该变量避免: 
             // 每次使用前置true，则触发setValue时相当于跳过具体的执行函数，之后再置为false
             scope.treeConfig.avoidCycle = false;
+            scope.treeConfig.isTreeShow = false;
+
+            /**
+             * 假设A为移动前所在的节点，B为移动后所在的节点
+             * 1. 移动到同级 -- A状态取消选中 B状态变成选中
+             * 2. 移动到父级 -- A状态取消选中 A所在的父级取消选中 B状态变成选中 (此时A所在的父级可能就是B)
+             * 3. 移动到下级 -- A状态变成选中 B状态变成选中
+             * 4. 移动到外部 -- 所有节点状态取消选中，隐藏列表
+             * 5. 移动之前的不是节点 -- B状态变成选中
+             * 在移动到的目标不明的情况下，无法判断该进行哪种处理。所以进行了一个延迟处理
+             */
+            var invokeImediately = function () {}, invokeLaterTimer = null;
+            scope.moveLeaf = function (parent, leaf) {
+                // 情况 5
+                leaf[scope.treeConfig.entityField].selected = true;
+                if (parent[scope.treeConfig.entityField]) { // 顶级节点不触发调用
+                    invokeImediately(parent, leaf);
+                }
+            };
+            scope.leaveLeaf = function (parent, leaf) {
+                invokeImediately = function (moveTargetParent, moveTarget) {
+                    $timeout.cancel(invokeLaterTimer);
+                    invokeLaterTimer = null;
+                    // 情况 4
+                    if (!moveTarget) {
+                        scope.treeConfig.isTreeShow = false;
+                        resetTreeSelected(scope.tree[scope.treeConfig.childrenField], function (leaf) {
+                            leaf.selected = false;
+                        });
+                        return;
+                    }
+                    if (!(leaf && moveTargetParent && parent)) {
+                        return;
+                    }
+
+                    if (leaf[scope.treeConfig.entityField].level === moveTarget[scope.treeConfig.entityField].level) {
+                        // 情况1
+                        leaf[scope.treeConfig.entityField].selected = false;
+                    } else if (leaf[scope.treeConfig.entityField].level > moveTarget[scope.treeConfig.entityField].level) {
+                        // 情况2
+                        leaf[scope.treeConfig.entityField].selected = false;
+                        // 此时parent和moveTarget可能是同一个节点
+                        parent[scope.treeConfig.entityField].selected = false;
+                        moveTarget[scope.treeConfig.entityField].selected = true;
+                    } else if (leaf[scope.treeConfig.entityField].level < moveTarget[scope.treeConfig.entityField].level) {
+                        // 情况3
+                        leaf[scope.treeConfig.entityField].selected = true;
+                    }
+                }
+                invokeLaterTimer = $timeout(invokeImediately, 200);
+            };
 
             scope.selectLeaf = bindSelect(function (leaf) {
-                this.leafPath = findPathInTree(scope.tree, 'selected', true, function (item) {
+                this.leafPath = findPathInTree(scope.tree[scope.treeConfig.childrenField], 'selected', true, function (item) {
                     item.selected = false;
                 });
-                this.avoidCycle = true;
+                if (scope.setValue !== leaf[this.entityField][this.valueField]) {
+                    this.avoidCycle = true;
+                }
                 scope.setValue = leaf[this.entityField][this.valueField];
+                // 隐藏列表
+                scope.treeConfig.isTreeShow = false;
+                invokeImediately = function () {};
             }, function (leaf) {
                 return leaf;
             }, scope.treeConfig);
@@ -111,7 +177,8 @@ main.directive("treeSelect", function ($compile) {
                     return;
                 }
 
-                var treePath = findPathInTreeLeaf(scope.tree, scope.treeConfig.valueField, newVal);
+                var treePath = findPathInTreeLeaf(scope.tree[scope.treeConfig.childrenField],
+                    scope.treeConfig.valueField, newVal);
                 this.leafPath = treePath;
             }, function (newVal, oldVal, sco) {
                 return this.leafPath[this.leafPath.length - 1];

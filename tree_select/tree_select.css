@@ -48,10 +48,6 @@
 }
 .tree-select-container .tree-select-list-wrap.first {
   left: 0;
-  display: none;
-}
-.tree-select-container .tree-select-list-wrap:hover {
-  display: block;
 }
 .tree-select-container .tree-select-list-wrap .tree-select-list {
   position: absolute;

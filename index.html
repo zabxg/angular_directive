@@ -23,9 +23,9 @@
         <input type="text" ng-model="regionCtrl.regionName">
         <button ng-click="regionCtrl.setLeaf(regionCtrl.regionName)">测试设置树的方法</button>
         <tree-select tree-config="regionCtrl.treeConfig" tree="regionCtrl.tree"
-            set-value="regionCtrl.regionSelected"></tree-select>
-            <!-- one-combine-mode='Y' set-value="regionCtrl.regionSelected"></tree-select> -->
-    </div>
+            one-combine-mode='Y' set-value="regionCtrl.regionSelected"></tree-select>
+            <!-- set-value="regionCtrl.regionSelected"></tree-select> -->
+        </div>
 
     <div>
         <input type="text" ng-model="name" placeholder="Enter name"/>
