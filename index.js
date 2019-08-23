@@ -35,6 +35,19 @@ main.controller("mainCtrl", function ($scope, $http) {
         }
     };
 
+    $scope.treeCtrl = {
+        treeConfig: {
+            isSearchOpen: true, // 是否开启搜索
+            isFreshOpen: true, // 是否开启刷新
+            isAutoFreshOpen: true, // 是否开启自动刷新
+            freshFrequency: true, // 刷新频率
+            isTopExtend: true, // 是否开启一级展开
+        },
+        liSelected: function (selectedLi) {
+            console.log(selectedLi);
+        }
+    };
+
     $http.get('tree_select/region.json').success(function(data) {
         $scope.regionCtrl.tree = {
             children: data.region

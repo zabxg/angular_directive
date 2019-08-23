@@ -7,6 +7,8 @@
     <title>Document</title>
     
     <script src="angular.js"></script>
+    <script src="jquery-1.4.4.min.js"></script>
+    <script src="jquery.ztree.all.min.js"></script>
     <script src="index.js" defer></script>
     <script src="tree_select/tree_select.js" defer></script>
     <script src="./ng_directive_test.js" defer></script>
@@ -32,6 +34,10 @@
         <br />
         {{ name }}
         <hello-world say="say()" name="{{name}}"></hello-world>
+    </div>
+
+    <div>
+        <tree-list tree-config="treeCtrl.treeConfig" li-selected="treeCtrl.liSelected"></tree-list>
     </div>
 
 </body>
