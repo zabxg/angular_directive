@@ -26,9 +26,9 @@ main.directive("treeSelect", function ($compile, $timeout) {
             scope.treeConfig = angular.extend(treeConfig, scope.treeConfig);
 
             // 找路径: 每个路径的上的节点均满足 obj[key] === value 的条件
-            var findPathInTree = function (tree, key, value, resetFn) {
-                if (!tree) {
-                    return [];
+            var findPathInTree = function (tree, key, value, resetFn, path) {
+                if (!tree || !tree.length) {
+                    return path;
                 }
 
                 var leaf = null;
@@ -36,10 +36,11 @@ main.directive("treeSelect", function ($compile, $timeout) {
                     leaf = tree[i][scope.treeConfig.entityField];
                     if (leaf[key] === value) {
                         resetFn(leaf);
-                        return [tree[i]].concat(findPathInTree(tree[i][scope.treeConfig.childrenField], key, value, resetFn));
+                        path.push(tree[i]);
+                        return findPathInTree(tree[i][scope.treeConfig.childrenField], key, value, resetFn, path);
                     }
                 }
-                return [];
+                return path;
             };
             var resetTreeSelected = function (tree, resetFn) {
                 if (!tree) { return; }
@@ -53,7 +54,7 @@ main.directive("treeSelect", function ($compile, $timeout) {
             };
             // 找路径: 最后的节点满足 obj[key] === value 的条件
             var findPathInTreeLeaf = function (tree, key, value) {
-                if (!tree) {
+                if (!tree || !tree.length) {
                     return [];
                 }
 
@@ -65,10 +66,9 @@ main.directive("treeSelect", function ($compile, $timeout) {
                         return [tree[i]];
                     } else if (tree[i][scope.treeConfig.childrenField] && tree[i][scope.treeConfig.childrenField].length > 0) {
                         path = findPathInTreeLeaf(tree[i][scope.treeConfig.childrenField], key, value);
-                        if (path.length === 0) {
-                            continue;
-                        } else {
-                            return [tree[i]].concat(path);
+                        if (path.length) {
+                            path.unshift(tree[i]);
+                            return path;
                         }
                     }
                 }
@@ -99,6 +99,17 @@ main.directive("treeSelect", function ($compile, $timeout) {
             scope.treeConfig.avoidCycle = false;
             scope.treeConfig.isTreeShow = false;
 
+            var hideTreeLaterTimer = null;
+            scope.enterPath = function (evt) {
+                $timeout.cancel(hideTreeLaterTimer);
+                scope.treeConfig.isTreeShow = true;
+            };
+            scope.leavePath = function (evt) {
+                hideTreeLaterTimer = $timeout(function () {
+                    scope.treeConfig.isTreeShow = false;
+                }, 300);
+            };
+
             /**
              * 假设A为移动前所在的节点，B为移动后所在的节点
              * 1. 移动到同级 -- A状态取消选中 B状态变成选中
@@ -106,12 +117,15 @@ main.directive("treeSelect", function ($compile, $timeout) {
              * 3. 移动到下级 -- A状态变成选中 B状态变成选中
              * 4. 移动到外部 -- 所有节点状态取消选中，隐藏列表
              * 5. 移动之前的不是节点 -- B状态变成选中
+             * 6. 子级的其他控件 -- A状态不变
              * 在移动到的目标不明的情况下，无法判断该进行哪种处理。所以进行了一个延迟处理
              */
             var invokeImediately = function () {}, invokeLaterTimer = null;
             scope.moveLeaf = function (parent, leaf) {
                 // 情况 5
-                leaf[scope.treeConfig.entityField].selected = true;
+                if (leaf) {
+                    leaf[scope.treeConfig.entityField].selected = true;
+                }
                 if (parent[scope.treeConfig.entityField]) { // 顶级节点不触发调用
                     invokeImediately(parent, leaf);
                 }
@@ -121,14 +135,14 @@ main.directive("treeSelect", function ($compile, $timeout) {
                     $timeout.cancel(invokeLaterTimer);
                     invokeLaterTimer = null;
                     // 情况 4
-                    if (!moveTarget) {
+                    if (!moveTarget && !moveTargetParent) {
                         scope.treeConfig.isTreeShow = false;
-                        resetTreeSelected(scope.tree[scope.treeConfig.childrenField], function (leaf) {
-                            leaf.selected = false;
+                        resetTreeSelected(scope.tree[scope.treeConfig.childrenField], function (item) {
+                            item.selected = false;
                         });
                         return;
                     }
-                    if (!(leaf && moveTargetParent && parent)) {
+                    if (!(leaf && moveTargetParent && parent && moveTarget)) {
                         return;
                     }
 
@@ -150,9 +164,12 @@ main.directive("treeSelect", function ($compile, $timeout) {
             };
 
             scope.selectLeaf = bindSelect(function (leaf) {
+                if (scope.oneCombineMode === 'Y') {
+                    scope.tree[scope.treeConfig.childrenField][0][scope.treeConfig.entityField].selected = true;
+                }
                 this.leafPath = findPathInTree(scope.tree[scope.treeConfig.childrenField], 'selected', true, function (item) {
                     item.selected = false;
-                });
+                }, []);
                 if (scope.setValue !== leaf[this.entityField][this.valueField]) {
                     this.avoidCycle = true;
                 }

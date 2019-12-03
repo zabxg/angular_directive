@@ -48,9 +48,10 @@ main.controller("mainCtrl", function ($scope, $http) {
         }
     };
 
-    $http.get('tree_select/region.json').success(function(data) {
+    $http.get('tree_select/region.json').success(function(ret) {
+        var tree = ret.data;
         $scope.regionCtrl.tree = {
-            children: data.region
+            children: tree
         };
     });
 });

@@ -1,252 +1,3206 @@
 {
-    "region": [{
-        "originEntity": {
-            "level": 1,
-            "regionCode": "440000",
-            "regionName": "广东省"
-        },
+    "id": 0,
+    "sid": "54050dee-46f3-4428-ba08-e0c95a2cf45c",
+    "state": {
+        "code": 200,
+        "msg": "操作成功"
+    },
+    "data": [{
+        "checked": false,
+        "open": false,
+        "isParent": true,
+        "id": "440000",
+        "parentId": "-1",
         "children": [{
-            "originEntity": {
-                "level": 2,
-                "regionCode": 440100,
-                "regionName": "广州市"
-            },
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440100",
+            "parentId": "440000",
             "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440103",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440103,
-                    "regionName": "荔湾区"
+                    "id": 1936,
+                    "magicId": "e2bf1d7e208b5073966b195db8499db5",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440103",
+                    "regionName": "荔湾区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440104",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440104,
-                    "regionName": "越秀区"
+                    "id": 1940,
+                    "magicId": "92bb6b2101d235e89f7a567cc37c3752",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440104",
+                    "regionName": "越秀区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440105",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440105,
-                    "regionName": "海珠区"
+                    "id": 1939,
+                    "magicId": "8382a894462548e95fd0c1799024bafb",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440105",
+                    "regionName": "海珠区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440106",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440106,
-                    "regionName": "天河区"
+                    "id": 1938,
+                    "magicId": "ad8fe24fb587ca08695ccbedcaee9239",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440106",
+                    "regionName": "天河区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440111",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440111,
-                    "regionName": "白云区"
+                    "id": 1937,
+                    "magicId": "ceae72283504313276ede88b0bc12a93",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440111",
+                    "regionName": "白云区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440112",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440112,
-                    "regionName": "黄埔区"
+                    "id": 1942,
+                    "magicId": "9b07275f0147adfc1149a7455809d475",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440112",
+                    "regionName": "黄埔区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440113",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440113,
-                    "regionName": "番禺区"
+                    "id": 1941,
+                    "magicId": "0283a1ea760631e533cfa0f378a3ec60",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440113",
+                    "regionName": "番禺区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440114",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440114,
-                    "regionName": "花都区"
+                    "id": 1944,
+                    "magicId": "7731d6d52a26d27f4e15a0c537462ef8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440114",
+                    "regionName": "花都区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440115",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440115,
-                    "regionName": "南沙区"
+                    "id": 1945,
+                    "magicId": "1b010740d1f2918dab6250bdc866be69",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440115",
+                    "regionName": "南沙区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440117",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440117,
-                    "regionName": "从化区"
+                    "id": 1946,
+                    "magicId": "29f54eccb8f6c232649734cf926ecc5d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440117",
+                    "regionName": "从化区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440118",
+                "parentId": "440100",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440118,
-                    "regionName": "增城区"
+                    "id": 1943,
+                    "magicId": "53f5ce247b0bd596f4725169090715e5",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440118",
+                    "regionName": "增城区",
+                    "parentRegionCode": "440100",
+                    "level": "3"
                 }
-            }]
-        }, {
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440200,
-                "regionName": "韶关市"
-            },
+                "id": 1935,
+                "magicId": "a6a62aad99191357e3271c36dd4c3df0",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440100",
+                "regionName": "广州市",
+                "parentRegionCode": "440000",
+                "level": "2"
+            }
+        }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440200",
+            "parentId": "440000",
             "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440203",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440203,
-                    "regionName": "武江区"
+                    "id": 1956,
+                    "magicId": "16c94679c6b4cce4da42eb9d8c558c03",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440203",
+                    "regionName": "武江区",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440204",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440204,
-                    "regionName": "浈江区"
+                    "id": 1952,
+                    "magicId": "2463f81c90db06c58be11a60ea5d6f3c",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440204",
+                    "regionName": "浈江区",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440205",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440205,
-                    "regionName": "曲江区"
+                    "id": 1954,
+                    "magicId": "e8000703715ad78b33e8b658c77e9c28",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440205",
+                    "regionName": "曲江区",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440222",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440222,
-                    "regionName": "始兴县"
+                    "id": 1951,
+                    "magicId": "790515bc3851708417d3b6de680b74be",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440222",
+                    "regionName": "始兴县",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440224",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440224,
-                    "regionName": "仁化县"
+                    "id": 1950,
+                    "magicId": "9c794a06a8f2087494aa6653f72be483",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440224",
+                    "regionName": "仁化县",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440229",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440229,
-                    "regionName": "翁源县"
+                    "id": 1955,
+                    "magicId": "d009a5635ae09bfb2ca517db540ee028",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440229",
+                    "regionName": "翁源县",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440232",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440232,
-                    "regionName": "乳源瑶族自治县"
+                    "id": 1953,
+                    "magicId": "787e06f2acd159af08dfe12359aa4961",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440232",
+                    "regionName": "乳源瑶族自治县",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440233",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440233,
-                    "regionName": "新丰县"
+                    "id": 1957,
+                    "magicId": "de23197cb411b11a4b192a332ac10a7f",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440233",
+                    "regionName": "新丰县",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440281",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440281,
-                    "regionName": "乐昌市"
+                    "id": 1949,
+                    "magicId": "a249567e68aa27a562213cb11b190f5f",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440281",
+                    "regionName": "乐昌市",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
             }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440282",
+                "parentId": "440200",
                 "originEntity": {
-                    "level": 3,
-                    "regionCode": 440282,
-                    "regionName": "南雄市"
+                    "id": 1948,
+                    "magicId": "283f08707a9281e394dee98ccbe98312",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440282",
+                    "regionName": "南雄市",
+                    "parentRegionCode": "440200",
+                    "level": "3"
                 }
-            }]
-        }, {
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440300,
-                "regionName": "深圳市"
+                "id": 1947,
+                "magicId": "a38376160bfce461853a2ba1f38164ac",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440200",
+                "regionName": "韶关市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440300",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440303",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1961,
+                    "magicId": "bc347a8df0dcddcd9177751f1c2f68b1",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440303",
+                    "regionName": "罗湖区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440304",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1960,
+                    "magicId": "2e938adfd531ffbf17af725adb1eeead",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440304",
+                    "regionName": "福田区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440305",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1962,
+                    "magicId": "d54250418647d131c3a68cf0d019ae8b",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440305",
+                    "regionName": "南山区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440306",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1963,
+                    "magicId": "c826f1df5ea516e9b80aebef3774d7ad",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440306",
+                    "regionName": "宝安区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440307",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1959,
+                    "magicId": "22c76453087328899611f8b45407f208",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440307",
+                    "regionName": "龙岗区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440308",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1966,
+                    "magicId": "c5c2d1ab93f413170dcbb1b1582d6b75",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440308",
+                    "regionName": "盐田区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440309",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1964,
+                    "magicId": "a9f92f02bcdf84555d3b27bb3f6f18b5",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440309",
+                    "regionName": "龙华区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440310",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1965,
+                    "magicId": "1d2fd3079d5e416706d9ee8f7dd1dca6",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440310",
+                    "regionName": "坪山区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440311",
+                "parentId": "440300",
+                "originEntity": {
+                    "id": 1967,
+                    "magicId": "e70464d70da21488e0521195153e959c",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-16 15:25:19",
+                    "updatedTime": "2019-07-16 15:25:49",
+                    "regionCode": "440311",
+                    "regionName": "光明区",
+                    "parentRegionCode": "440300",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440400,
-                "regionName": "珠海市"
+                "id": 1958,
+                "magicId": "8d835e984873e06176dae7dc33d7761d",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440300",
+                "regionName": "深圳市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440400",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440402",
+                "parentId": "440400",
+                "originEntity": {
+                    "id": 1969,
+                    "magicId": "ce3310d30470e1ca175bb7ba7a92ac79",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440402",
+                    "regionName": "香洲区",
+                    "parentRegionCode": "440400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440403",
+                "parentId": "440400",
+                "originEntity": {
+                    "id": 1970,
+                    "magicId": "a79cf8f4e9af29fc96c251ba7c489242",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440403",
+                    "regionName": "斗门区",
+                    "parentRegionCode": "440400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440404",
+                "parentId": "440400",
+                "originEntity": {
+                    "id": 1971,
+                    "magicId": "983f93828982dd9c20d532534f58d9f8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440404",
+                    "regionName": "金湾区",
+                    "parentRegionCode": "440400",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440500,
-                "regionName": "汕头市"
+                "id": 1968,
+                "magicId": "c71cbab2589dab7375967cda233c1833",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440400",
+                "regionName": "珠海市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440500",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440507",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1978,
+                    "magicId": "ea845b5398a0854a4eeb3ed8710d49f1",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440507",
+                    "regionName": "龙湖区",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440511",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1973,
+                    "magicId": "8839c48aa655c9f095ad002b3355187d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440511",
+                    "regionName": "金平区",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440512",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1977,
+                    "magicId": "24b728bc3a55760d4bd41930ec35a83c",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440512",
+                    "regionName": "濠江区",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440513",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1974,
+                    "magicId": "feca14c71fecd1e9e81b596ef8bd23a8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440513",
+                    "regionName": "潮阳区",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440514",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1976,
+                    "magicId": "14d33a9c4ebf05f8db79d34640d7e625",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440514",
+                    "regionName": "潮南区",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440515",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1975,
+                    "magicId": "0123895946b24ac36c29b79187a15079",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440515",
+                    "regionName": "澄海区",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440523",
+                "parentId": "440500",
+                "originEntity": {
+                    "id": 1979,
+                    "magicId": "86e62808f58b1eec67a37494710a2d30",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440523",
+                    "regionName": "南澳县",
+                    "parentRegionCode": "440500",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440600,
-                "regionName": "佛山市"
+                "id": 1972,
+                "magicId": "c239446c9484b8decbb55cc4a9ca2c3e",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440500",
+                "regionName": "汕头市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440600",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440604",
+                "parentId": "440600",
+                "originEntity": {
+                    "id": 1985,
+                    "magicId": "e47a144171c9b9ee0b8d6e74537e8f7d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440604",
+                    "regionName": "禅城区",
+                    "parentRegionCode": "440600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440605",
+                "parentId": "440600",
+                "originEntity": {
+                    "id": 1983,
+                    "magicId": "5fc0a1f22cdefc85ff1b97d577190a4d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440605",
+                    "regionName": "南海区",
+                    "parentRegionCode": "440600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440606",
+                "parentId": "440600",
+                "originEntity": {
+                    "id": 1981,
+                    "magicId": "919aa1de6b3aa226a74267b334fc386f",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440606",
+                    "regionName": "顺德区",
+                    "parentRegionCode": "440600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440607",
+                "parentId": "440600",
+                "originEntity": {
+                    "id": 1982,
+                    "magicId": "096fe0d9e6b3aa84085b074a4d423bfe",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440607",
+                    "regionName": "三水区",
+                    "parentRegionCode": "440600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440608",
+                "parentId": "440600",
+                "originEntity": {
+                    "id": 1984,
+                    "magicId": "c18c4eaa64e7982ea6715ad9b4262fc8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440608",
+                    "regionName": "高明区",
+                    "parentRegionCode": "440600",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440700,
-                "regionName": "江门市"
+                "id": 1980,
+                "magicId": "9d1b04e35c8e8db2256d5ed415724ba6",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440600",
+                "regionName": "佛山市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440700",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440703",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1992,
+                    "magicId": "0c52c733435de2a0446ffe728411aa99",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440703",
+                    "regionName": "蓬江区",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440704",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1993,
+                    "magicId": "39f37df5b2c9535476bc2609ea3a3a80",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440704",
+                    "regionName": "江海区",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440705",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1989,
+                    "magicId": "9b0a898ddbcd38d4881fe14bee69d220",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440705",
+                    "regionName": "新会区",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440781",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1987,
+                    "magicId": "5432f543444c16587ce0e9d573df595c",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440781",
+                    "regionName": "台山市",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440783",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1988,
+                    "magicId": "d6c683f39c06647a5d3b3a1cffb2c9bf",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440783",
+                    "regionName": "开平市",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440784",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1991,
+                    "magicId": "906cae9bef9fcdff1f24b7854f5d9f4a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440784",
+                    "regionName": "鹤山市",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440785",
+                "parentId": "440700",
+                "originEntity": {
+                    "id": 1990,
+                    "magicId": "80669face3540656f3f36557e2a93354",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440785",
+                    "regionName": "恩平市",
+                    "parentRegionCode": "440700",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440800,
-                "regionName": "湛江市"
+                "id": 1986,
+                "magicId": "5f49d055062a6c9c92fb253c32261e9c",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440700",
+                "regionName": "江门市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440800",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440802",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 2001,
+                    "magicId": "8eb73be1c9685731192a703965ff4318",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440802",
+                    "regionName": "赤坎区",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440803",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 2000,
+                    "magicId": "9ec300489074a3a5053ed22f4ba3d121",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440803",
+                    "regionName": "霞山区",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440804",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 2002,
+                    "magicId": "5290da1fe819f6a8a65ed652f96c9008",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440804",
+                    "regionName": "坡头区",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440811",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 2003,
+                    "magicId": "86ed4f46077ef817945e2812327a8bfb",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440811",
+                    "regionName": "麻章区",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440823",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 1999,
+                    "magicId": "bdaa555e5fbb5719710b1c63c7874c37",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440823",
+                    "regionName": "遂溪县",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440825",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 1997,
+                    "magicId": "496ad79c7d077921cb980aca9924548c",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440825",
+                    "regionName": "徐闻县",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440881",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 1996,
+                    "magicId": "041ad3057fe202ea0c75c452dfed83e2",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440881",
+                    "regionName": "廉江市",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440882",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 1995,
+                    "magicId": "5e9d86a9f42a7a8071c24a11d26f7286",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440882",
+                    "regionName": "雷州市",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440883",
+                "parentId": "440800",
+                "originEntity": {
+                    "id": 1998,
+                    "magicId": "ec03a470f02111408dc5a07c92938606",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440883",
+                    "regionName": "吴川市",
+                    "parentRegionCode": "440800",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 440900,
-                "regionName": "茂名市"
+                "id": 1994,
+                "magicId": "44e75dafb609f73dca3f615b5d9603a7",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440800",
+                "regionName": "湛江市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "440900",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440902",
+                "parentId": "440900",
+                "originEntity": {
+                    "id": 2009,
+                    "magicId": "0c71da3f31c82eeeddf12585719f8df2",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440902",
+                    "regionName": "茂南区",
+                    "parentRegionCode": "440900",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440904",
+                "parentId": "440900",
+                "originEntity": {
+                    "id": 2007,
+                    "magicId": "63173c98be4757995d13fcd1eac51dc6",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440904",
+                    "regionName": "电白区",
+                    "regionNameAlias": "电白县",
+                    "parentRegionCode": "440900",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440981",
+                "parentId": "440900",
+                "originEntity": {
+                    "id": 2006,
+                    "magicId": "b1154074a901deb839f686f66bffb260",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440981",
+                    "regionName": "高州市",
+                    "parentRegionCode": "440900",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440982",
+                "parentId": "440900",
+                "originEntity": {
+                    "id": 2005,
+                    "magicId": "0656a54a819b199cd8f3cdbf462001d9",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440982",
+                    "regionName": "化州市",
+                    "parentRegionCode": "440900",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "440983",
+                "parentId": "440900",
+                "originEntity": {
+                    "id": 2008,
+                    "magicId": "39938df33946389153330529f6650282",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "440983",
+                    "regionName": "信宜市",
+                    "parentRegionCode": "440900",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441200,
-                "regionName": "肇庆市"
+                "id": 2004,
+                "magicId": "fce974fdf6f6fa84cf30794b476416a1",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "440900",
+                "regionName": "茂名市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441200",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441202",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2018,
+                    "magicId": "cff85d246ad995a25768c5e789e6a7f4",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441202",
+                    "regionName": "端州区",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441203",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2017,
+                    "magicId": "fbb2a2753eba9e2b2fa522406f63722a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441203",
+                    "regionName": "鼎湖区",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441204",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2012,
+                    "magicId": "b9ddd9a255a47f464df4b6a3541386a2",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441204",
+                    "regionName": "高要区",
+                    "regionNameAlias": "高要市",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441223",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2014,
+                    "magicId": "934d54903ac186db8b62bf042c34f3fa",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441223",
+                    "regionName": "广宁县",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441224",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2011,
+                    "magicId": "1b0e128431d40648a8b0af10eb7fc3ea",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441224",
+                    "regionName": "怀集县",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441225",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2013,
+                    "magicId": "b3c5a0e955e7ddc36c22201c9a43238a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441225",
+                    "regionName": "封开县",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441226",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2015,
+                    "magicId": "45c3046a2e0cfa3052b3b8f643c7f909",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441226",
+                    "regionName": "德庆县",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441284",
+                "parentId": "441200",
+                "originEntity": {
+                    "id": 2016,
+                    "magicId": "b7a184bf4fd3573e41a72f923d5aba1e",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:30",
+                    "updatedTime": "2019-07-03 14:24:30",
+                    "regionCode": "441284",
+                    "regionName": "四会市",
+                    "parentRegionCode": "441200",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441300,
-                "regionName": "惠州市"
+                "id": 2010,
+                "magicId": "480fad7a9b5b17184c7dfb31dffef1fa",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:30",
+                "updatedTime": "2019-07-03 14:24:30",
+                "regionCode": "441200",
+                "regionName": "肇庆市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441300",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441302",
+                "parentId": "441300",
+                "originEntity": {
+                    "id": 2020,
+                    "magicId": "a2ed7ea165ef84aba7c544f1dec3bfd7",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441302",
+                    "regionName": "惠城区",
+                    "parentRegionCode": "441300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441303",
+                "parentId": "441300",
+                "originEntity": {
+                    "id": 2023,
+                    "magicId": "020af97e98680224d402d985eae3d740",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441303",
+                    "regionName": "惠阳区",
+                    "parentRegionCode": "441300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441322",
+                "parentId": "441300",
+                "originEntity": {
+                    "id": 2021,
+                    "magicId": "076d84eee442cf5f839af3800ed057f9",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441322",
+                    "regionName": "博罗县",
+                    "parentRegionCode": "441300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441323",
+                "parentId": "441300",
+                "originEntity": {
+                    "id": 2022,
+                    "magicId": "8be118ee15255cdf35a8d90847e47630",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441323",
+                    "regionName": "惠东县",
+                    "parentRegionCode": "441300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441324",
+                "parentId": "441300",
+                "originEntity": {
+                    "id": 2024,
+                    "magicId": "f3f14b6715b60317184808cb4332d9aa",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441324",
+                    "regionName": "龙门县",
+                    "parentRegionCode": "441300",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441400,
-                "regionName": "梅州市"
+                "id": 2019,
+                "magicId": "87fca1312aeb07963d6d1cfb149eb9ea",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "441300",
+                "regionName": "惠州市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441400",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441402",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2033,
+                    "magicId": "9368569a11d3fa86c870d4ddaad05770",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441402",
+                    "regionName": "梅江区",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441403",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2027,
+                    "magicId": "1b89a9ab7849e3b87cbaf71fb5e42cde",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441403",
+                    "regionName": "梅县区",
+                    "regionNameAlias": "梅县",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441422",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2029,
+                    "magicId": "194c4b7a9d26f8ab668a86b537942f9d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441422",
+                    "regionName": "大埔县",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441423",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2028,
+                    "magicId": "e848175581a7c2159fa503bfe2b7760e",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441423",
+                    "regionName": "丰顺县",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441424",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2030,
+                    "magicId": "764a3b7d81140a2ba9928d7a69319d81",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441424",
+                    "regionName": "五华县",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441426",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2031,
+                    "magicId": "5a5a1f8680a5bda442e23b172e365c71",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441426",
+                    "regionName": "平远县",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441427",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2032,
+                    "magicId": "ac17490915c423c87150a89d989705c2",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441427",
+                    "regionName": "蕉岭县",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441481",
+                "parentId": "441400",
+                "originEntity": {
+                    "id": 2026,
+                    "magicId": "1e00469fa8ce7068c3c022e879923e93",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441481",
+                    "regionName": "兴宁市",
+                    "parentRegionCode": "441400",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441500,
-                "regionName": "汕尾市"
+                "id": 2025,
+                "magicId": "76181634acdf7bdfc133a36353c8cb4b",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "441400",
+                "regionName": "梅州市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441500",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441502",
+                "parentId": "441500",
+                "originEntity": {
+                    "id": 2037,
+                    "magicId": "f311e14f891706bfa98b685b1dcb0908",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441502",
+                    "regionName": "城区",
+                    "parentRegionCode": "441500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441521",
+                "parentId": "441500",
+                "originEntity": {
+                    "id": 2036,
+                    "magicId": "f8a0f0f5320f4474ac66717d5192e918",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441521",
+                    "regionName": "海丰县",
+                    "parentRegionCode": "441500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441523",
+                "parentId": "441500",
+                "originEntity": {
+                    "id": 2038,
+                    "magicId": "528dff50de332fc46ce44ef056e08fd8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441523",
+                    "regionName": "陆河县",
+                    "parentRegionCode": "441500",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441581",
+                "parentId": "441500",
+                "originEntity": {
+                    "id": 2035,
+                    "magicId": "2d01d6d57949991bb5abf0b886d36869",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441581",
+                    "regionName": "陆丰市",
+                    "parentRegionCode": "441500",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441600,
-                "regionName": "河源市"
+                "id": 2034,
+                "magicId": "cc3d3709def730d855cbc7da6a8ec6da",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "441500",
+                "regionName": "汕尾市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441600",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441602",
+                "parentId": "441600",
+                "originEntity": {
+                    "id": 2045,
+                    "magicId": "2b5214eb63d79c1f2c4f14e19a4ce0c4",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441602",
+                    "regionName": "源城区",
+                    "parentRegionCode": "441600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441621",
+                "parentId": "441600",
+                "originEntity": {
+                    "id": 2042,
+                    "magicId": "1266138cb6cdab50b9aa9e57f9abe43d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441621",
+                    "regionName": "紫金县",
+                    "parentRegionCode": "441600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441622",
+                "parentId": "441600",
+                "originEntity": {
+                    "id": 2040,
+                    "magicId": "1ede3b50d8e9b67a77d8fcaf28481c83",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441622",
+                    "regionName": "龙川县",
+                    "parentRegionCode": "441600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441623",
+                "parentId": "441600",
+                "originEntity": {
+                    "id": 2044,
+                    "magicId": "c86bcce1a0499a9dc030542e92b9b2da",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441623",
+                    "regionName": "连平县",
+                    "parentRegionCode": "441600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441624",
+                "parentId": "441600",
+                "originEntity": {
+                    "id": 2043,
+                    "magicId": "6eaadb0be1c3165d9e8fda3510d14b6c",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441624",
+                    "regionName": "和平县",
+                    "parentRegionCode": "441600",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441625",
+                "parentId": "441600",
+                "originEntity": {
+                    "id": 2041,
+                    "magicId": "dc7fbafc4880197448d76dbf3bd24546",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441625",
+                    "regionName": "东源县",
+                    "parentRegionCode": "441600",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441700,
-                "regionName": "阳江市"
+                "id": 2039,
+                "magicId": "96b9e0b290f3667d2ceabec133fec1d0",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "441600",
+                "regionName": "河源市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441700",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441702",
+                "parentId": "441700",
+                "originEntity": {
+                    "id": 2048,
+                    "magicId": "5cd35e59c1c57fb9d14b08efc5df25cf",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441702",
+                    "regionName": "江城区",
+                    "parentRegionCode": "441700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441704",
+                "parentId": "441700",
+                "originEntity": {
+                    "id": 2049,
+                    "magicId": "69119c9f1ef5ca41c70497dbc4809515",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441704",
+                    "regionName": "阳东区",
+                    "regionNameAlias": "阳东县",
+                    "parentRegionCode": "441700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441721",
+                "parentId": "441700",
+                "originEntity": {
+                    "id": 2050,
+                    "magicId": "6e1e379a47acdb886ef3a1db3b8525b9",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441721",
+                    "regionName": "阳西县",
+                    "parentRegionCode": "441700",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441781",
+                "parentId": "441700",
+                "originEntity": {
+                    "id": 2047,
+                    "magicId": "1f0dc21b987ea2f52b8746dfa9d26c1d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441781",
+                    "regionName": "阳春市",
+                    "parentRegionCode": "441700",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 441800,
-                "regionName": "清远市"
+                "id": 2046,
+                "magicId": "d0a22eb9cfe207cb36f36b590e4e04d0",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "441700",
+                "regionName": "阳江市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441800",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441802",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2056,
+                    "magicId": "40b389bdc92649615268abc99795f9a8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441802",
+                    "regionName": "清城区",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441803",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2055,
+                    "magicId": "e26d52e81af9c3243438319098db6033",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441803",
+                    "regionName": "清新区",
+                    "regionNameAlias": "清新县",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441821",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2059,
+                    "magicId": "8dd9eaf553e4fcc4897989439e1e71ff",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441821",
+                    "regionName": "佛冈县",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441823",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2053,
+                    "magicId": "fa079e602338c6e9540b4c5d524161f8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441823",
+                    "regionName": "阳山县",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441825",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2057,
+                    "magicId": "687ab45108a8afab8c27261f8ca3fb2a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441825",
+                    "regionName": "连山壮族瑶族自治县",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441826",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2058,
+                    "magicId": "74cf2c925416a12ca873744a5f24f9be",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441826",
+                    "regionName": "连南瑶族自治县",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441881",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2052,
+                    "magicId": "8557969cf00780a26545f4b4b2ac5718",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441881",
+                    "regionName": "英德市",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441882",
+                "parentId": "441800",
+                "originEntity": {
+                    "id": 2054,
+                    "magicId": "7ebc77999cdc9ffa65e20ef6b68de2c2",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "441882",
+                    "regionName": "连州市",
+                    "parentRegionCode": "441800",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 445100,
-                "regionName": "潮州市"
+                "id": 2051,
+                "magicId": "c6ff23c2e4d741b1e76f907bdd044245",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "441800",
+                "regionName": "清远市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "441900",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441950",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3240,
+                    "magicId": "7054ec8a215cbc227014c1e3eab5122a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441950",
+                    "regionName": "莞城镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441951",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3227,
+                    "magicId": "6f795c0cd7ace094fb11e6632929de01",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441951",
+                    "regionName": "东城镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441952",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3231,
+                    "magicId": "ea541ffbae34e98d5ff2dafbd207eb3e",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441952",
+                    "regionName": "南城镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441953",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3245,
+                    "magicId": "99aa476be87580daed108dc37c1f453a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441953",
+                    "regionName": "万江镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441954",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3255,
+                    "magicId": "2c6aa9e0b7bb9825df8af66630204c07",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441954",
+                    "regionName": "石龙镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441955",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3225,
+                    "magicId": "3ea6d1c814e69edcf5b383b74734c477",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:20:59",
+                    "updatedTime": "2019-11-24 16:20:58",
+                    "regionCode": "441955",
+                    "regionName": "虎门镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441956",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3251,
+                    "magicId": "233728a642d4bb4604f7cbe7bb2c0231",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441956",
+                    "regionName": "中堂镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441957",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3253,
+                    "magicId": "1c71570a1171c688e05388c80f716753",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441957",
+                    "regionName": "望牛墩镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441958",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3242,
+                    "magicId": "7309d7ff8d4491671694b612663451c8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441958",
+                    "regionName": "石碣镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441959",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3243,
+                    "magicId": "5e142cb5e578837b550b791699ac89fb",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441959",
+                    "regionName": "高埗镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441960",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3238,
+                    "magicId": "2557e48b8b13f26b96116d051fcbfde6",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441960",
+                    "regionName": "麻涌镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441961",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3228,
+                    "magicId": "9acbf08a8fca034f5df4b20bd45efc68",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441961",
+                    "regionName": "长安镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441962",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3244,
+                    "magicId": "b933a91ddfc4af9d6fa098918597da38",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441962",
+                    "regionName": "沙田镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441963",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3250,
+                    "magicId": "05991a2aef0c69c175fc93e5222cb482",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441963",
+                    "regionName": "道滘镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441964",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3257,
+                    "magicId": "0dbbb164149cbca13a815c24c2c825ae",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441964",
+                    "regionName": "洪梅镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441965",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3230,
+                    "magicId": "d80c72075fa596059b26d90ae6513e87",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441965",
+                    "regionName": "厚街镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441966",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3234,
+                    "magicId": "cd5a1a219723f6d17897395c3290c89f",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441966",
+                    "regionName": "寮步镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441967",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3237,
+                    "magicId": "7342f870c24831a83e5ffe0a678993f0",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441967",
+                    "regionName": "大岭山镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441968",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3233,
+                    "magicId": "71edff8c7f8da56ae7fb2c1e187c02f8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441968",
+                    "regionName": "太朗镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441969",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3239,
+                    "magicId": "cb4e62308ccee52d4eaa8696b7761717",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441969",
+                    "regionName": "黄江镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441970",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3248,
+                    "magicId": "553f9fc77bb32af61c5725d1c16115f4",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441970",
+                    "regionName": "樟木头镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441971",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3235,
+                    "magicId": "2243790006d710f2e7693375c9cf703a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441971",
+                    "regionName": "清溪镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441972",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3226,
+                    "magicId": "e4a0e7e2d4ea5f9c08483d0b9562a4e1",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441972",
+                    "regionName": "塘厦镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441973",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3254,
+                    "magicId": "11285da6a97ca37db74be890f00bb6b7",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441973",
+                    "regionName": "谢岗镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441974",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3236,
+                    "magicId": "d508d841921aa9b0679a0f910e185197",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441974",
+                    "regionName": "风岗镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441975",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3232,
+                    "magicId": "c659b475c8a8474fa3f2249f524aeaf8",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441975",
+                    "regionName": "常平镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441976",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3241,
+                    "magicId": "d85285b0dc7a20c609a1a49768b53a5a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441976",
+                    "regionName": "桥头镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441977",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3246,
+                    "magicId": "66a4f22b8d68e2f8e8272d91bbe47583",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441977",
+                    "regionName": "横沥镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441978",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3247,
+                    "magicId": "f062e282b931c3be63f425d1889bdacd",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441978",
+                    "regionName": "东坑镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441979",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3256,
+                    "magicId": "cb40d4cc6e658624fa6bbdf480c22bca",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441979",
+                    "regionName": "企石镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441980",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3252,
+                    "magicId": "cc7beb7eeca9c71f4600aaa9c7e69f70",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:58",
+                    "regionCode": "441980",
+                    "regionName": "石排镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441981",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3249,
+                    "magicId": "477ce9ce3b956755c406ff2a17d0b230",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441981",
+                    "regionName": "茶山镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "441982",
+                "parentId": "441900",
+                "originEntity": {
+                    "id": 3229,
+                    "magicId": "b52710bb7a7ba472aeccdf7d428d0a8d",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-11-24 16:23:58",
+                    "updatedTime": "2019-11-24 16:23:57",
+                    "regionCode": "441982",
+                    "regionName": "松山湖镇",
+                    "parentRegionCode": "441900",
+                    "level": "0"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 445200,
-                "regionName": "揭阳市"
+                "id": 2060,
+                "magicId": "1db8ed3e4f393f1b0fe5e0a6731ca331",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-11-09 02:49:45",
+                "regionCode": "441900",
+                "regionName": "东莞市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
         }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "445100",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445102",
+                "parentId": "445100",
+                "originEntity": {
+                    "id": 2065,
+                    "magicId": "83ff31144349ff8cfeb56a97fc668912",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445102",
+                    "regionName": "湘桥区",
+                    "parentRegionCode": "445100",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445103",
+                "parentId": "445100",
+                "originEntity": {
+                    "id": 2064,
+                    "magicId": "93285f20050744c47a94a9798da38fb1",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445103",
+                    "regionName": "潮安区",
+                    "regionNameAlias": "潮安县",
+                    "parentRegionCode": "445100",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445122",
+                "parentId": "445100",
+                "originEntity": {
+                    "id": 2063,
+                    "magicId": "029c55ae608e608cf9afbf205ae8a0ce",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445122",
+                    "regionName": "饶平县",
+                    "parentRegionCode": "445100",
+                    "level": "3"
+                }
+            }],
             "originEntity": {
-                "level": 2,
-                "regionCode": 445300,
-                "regionName": "云浮市"
+                "id": 2062,
+                "magicId": "f6dd8095ef66545014ad6f4b14805f14",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "445100",
+                "regionName": "潮州市",
+                "parentRegionCode": "440000",
+                "level": "2"
             }
-        }]
+        }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "445200",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445202",
+                "parentId": "445200",
+                "originEntity": {
+                    "id": 2070,
+                    "magicId": "d77adac849065b9781dab04b5ad4d367",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445202",
+                    "regionName": "榕城区",
+                    "parentRegionCode": "445200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445203",
+                "parentId": "445200",
+                "originEntity": {
+                    "id": 2071,
+                    "magicId": "98ace9314acea3640e50b15b1e79bbc1",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445203",
+                    "regionName": "揭东区",
+                    "regionNameAlias": "揭东县",
+                    "parentRegionCode": "445200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445222",
+                "parentId": "445200",
+                "originEntity": {
+                    "id": 2069,
+                    "magicId": "a3317548ed224ea40f16c2a2047dfa14",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445222",
+                    "regionName": "揭西县",
+                    "parentRegionCode": "445200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445224",
+                "parentId": "445200",
+                "originEntity": {
+                    "id": 2068,
+                    "magicId": "26f8511eea8daf653d5acb601c7eb460",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445224",
+                    "regionName": "惠来县",
+                    "parentRegionCode": "445200",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445281",
+                "parentId": "445200",
+                "originEntity": {
+                    "id": 2067,
+                    "magicId": "66e8e9ce68f366b3aef17bf12759e61a",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445281",
+                    "regionName": "普宁市",
+                    "parentRegionCode": "445200",
+                    "level": "3"
+                }
+            }],
+            "originEntity": {
+                "id": 2066,
+                "magicId": "05b6ecd4b52c2577b29016522a1f0fed",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "445200",
+                "regionName": "揭阳市",
+                "parentRegionCode": "440000",
+                "level": "2"
+            }
+        }, {
+            "checked": false,
+            "open": false,
+            "isParent": true,
+            "id": "445300",
+            "parentId": "440000",
+            "children": [{
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445302",
+                "parentId": "445300",
+                "originEntity": {
+                    "id": 2076,
+                    "magicId": "da87b5a5a4bd1cccb8a204d5ab415626",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445302",
+                    "regionName": "云城区",
+                    "parentRegionCode": "445300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445303",
+                "parentId": "445300",
+                "originEntity": {
+                    "id": 2077,
+                    "magicId": "7c3e60d6c362dfbf702634955c256f60",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445303",
+                    "regionName": "云安区",
+                    "regionNameAlias": "云安县",
+                    "parentRegionCode": "445300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445321",
+                "parentId": "445300",
+                "originEntity": {
+                    "id": 2075,
+                    "magicId": "46604b977c0181cd71c26638866265bb",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445321",
+                    "regionName": "新兴县",
+                    "parentRegionCode": "445300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445322",
+                "parentId": "445300",
+                "originEntity": {
+                    "id": 2074,
+                    "magicId": "ca324d679804238d73ae143875b89a29",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445322",
+                    "regionName": "郁南县",
+                    "parentRegionCode": "445300",
+                    "level": "3"
+                }
+            }, {
+                "checked": false,
+                "open": false,
+                "isParent": false,
+                "id": "445381",
+                "parentId": "445300",
+                "originEntity": {
+                    "id": 2073,
+                    "magicId": "dfe66f517fb9d1328b0ae4206a3aa791",
+                    "createUser": "1",
+                    "isDeleted": "N",
+                    "createdTime": "2019-07-03 14:24:31",
+                    "updatedTime": "2019-07-03 14:24:31",
+                    "regionCode": "445381",
+                    "regionName": "罗定市",
+                    "parentRegionCode": "445300",
+                    "level": "3"
+                }
+            }],
+            "originEntity": {
+                "id": 2072,
+                "magicId": "09fe032ebf6002dcbbbafb6415176634",
+                "createUser": "1",
+                "isDeleted": "N",
+                "createdTime": "2019-07-03 14:24:31",
+                "updatedTime": "2019-07-03 14:24:31",
+                "regionCode": "445300",
+                "regionName": "云浮市",
+                "parentRegionCode": "440000",
+                "level": "2"
+            }
+        }],
+        "originEntity": {
+            "id": 1934,
+            "magicId": "c546a3df96f37cb56395e9429ab335ed",
+            "createUser": "1",
+            "isDeleted": "N",
+            "createdTime": "2019-07-03 14:24:30",
+            "updatedTime": "2019-07-03 14:24:30",
+            "regionCode": "440000",
+            "regionName": "广东省",
+            "parentRegionCode": "-1",
+            "level": "1"
+        }
     }]
 }

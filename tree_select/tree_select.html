@@ -1,9 +1,9 @@
 <script id="tree_list" type="text/ng-template">
-    <ul class="tree-select-list">
+    <ul class="tree-select-list" ng-mouseenter="moveLeaf(tree, null)">
         <li ng-repeat="leaf in tree[treeConfig.childrenField] track by $index" title="{{leaf[treeConfig.entityField][treeConfig.textField]}}"
             class="tree-select-cell" ng-class="{'active':leaf[treeConfig.entityField].selected}"
             ng-click="selectLeaf(leaf)"
-            ng-mouseenter="moveLeaf(tree, leaf)"
+            ng-mouseenter="$event.stopPropagation();moveLeaf(tree, leaf);"
             ng-mouseleave="leaveLeaf(tree, leaf)"
             >{{leaf[treeConfig.entityField][treeConfig.textField]}}</li>
     </ul>
@@ -14,17 +14,19 @@
 </script>
 
 <div class="tree-select-container">
-    <p class="tree-select-path" ng-mouseenter="treeConfig.isTreeShow=true;">
+    <p class="tree-select-path" ng-mouseenter="enterPath()" ng-mouseleave="leavePath()">
+        <span href="#" class="tree-select-node" ng-show="treeConfig.leafPath.length===0">_</span>
         <span href="#" ng-repeat="leaf in treeConfig.leafPath" ng-class="{'next':!$first}"
             class="tree-select-node" ng-click="selectPath($index)"
             >{{leaf[treeConfig.entityField][treeConfig.textField]}}</span>
-        <span href="#" class="tree-select-node" ng-show="treeConfig.leafPath.length===0">_</span>
     </p>
 
-    <div class="tree-select-list-wrap first" ng-include="'tree_list'"
-        ng-show="treeConfig.isTreeShow" ng-if="tree&&oneCombineMode!=='Y'"></div>
+    <div class="tree-select-list-wrap first" ng-include="'tree_list'" ng-show="treeConfig.isTreeShow" ng-mouseenter="enterPath()"
+        ng-if="tree&&!(oneCombineMode==='Y'&&tree[treeConfig.childrenField]&&tree[treeConfig.childrenField].length===1)"></div>
 
-    <div class="tree-select-list-wrap first" ng-show="treeConfig.isTreeShow" ng-if="tree&&oneCombineMode==='Y'">
+    <!-- 开启单点结合模式: 在顶级节点只有一个的时候 -->
+    <div class="tree-select-list-wrap first" ng-show="treeConfig.isTreeShow" ng-mouseenter="enterPath()"
+        ng-if="oneCombineMode==='Y'&&tree&&tree[treeConfig.childrenField]&&tree[treeConfig.childrenField].length===1">
         <ul class="tree-select-list">
             <li ng-repeat="leaf in tree[treeConfig.childrenField] track by $index" title="{{leaf[treeConfig.entityField][treeConfig.textField]}}"
                 class="tree-select-cell" ng-class="{'active':leaf[treeConfig.entityField].selected}"
