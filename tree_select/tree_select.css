@@ -16,6 +16,29 @@
   z-index: 200;
   color: #5591ED;
 }
+.tree-select-path {
+  line-height: 30px;
+  margin: 0;
+  padding-left: 10px;
+}
+.tree-select-path .tree-select-node {
+  color: #5591ED;
+  margin-right: 10px;
+  text-decoration: none;
+}
+.tree-select-path .tree-select-node:hover {
+  text-decoration: underline;
+}
+.tree-select-path .tree-select-node.next::before {
+  content: ">";
+  margin-right: 10px;
+}
+.tree-select-path .tree-select-node:last-child {
+  color: #ffffff;
+}
+.tree-select-path:hover + .tree-select-list-wrap {
+  display: block;
+}
 .tree-select-container {
   position: relative;
   border: 0;
@@ -29,29 +52,6 @@
   -o-transition: 0.5s all ease-in-out;
   /* Opera */
   z-index: 10;
-}
-.tree-select-container .tree-select-path {
-  line-height: 30px;
-  margin: 0;
-  padding-left: 10px;
-}
-.tree-select-container .tree-select-path .tree-select-node {
-  color: #5591ED;
-  margin-right: 10px;
-  text-decoration: none;
-}
-.tree-select-container .tree-select-path .tree-select-node:hover {
-  text-decoration: underline;
-}
-.tree-select-container .tree-select-path .tree-select-node.next::before {
-  content: ">";
-  margin-right: 10px;
-}
-.tree-select-container .tree-select-path .tree-select-node:last-child {
-  color: #ffffff;
-}
-.tree-select-container .tree-select-path:hover + .tree-select-list-wrap {
-  display: block;
 }
 .tree-select-container .tree-select-list-wrap {
   position: absolute;
@@ -70,39 +70,46 @@
 .tree-select-container .tree-select-list-wrap .tree-select-list {
   position: absolute;
   top: 0;
+  left: 134px;
+  height: 0;
   padding: 0;
   margin: 0;
-  height: 300px;
-  border: 1px solid #1a3a8c;
-  border-left: 1px solid #3673E430;
   background: #0E2266;
   overflow-y: auto;
-  transition: 0.5s all ease-in-out;
-  -moz-transition: 0.5s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  -moz-transition: 0.3s all ease-in-out;
   /* Firefox 4 */
-  -webkit-transition: 0.5s all ease-in-out;
+  -webkit-transition: 0.3s all ease-in-out;
   /* Safari 和 Chrome */
-  -o-transition: 0.5s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
   /* Opera */
 }
 .tree-select-container .tree-select-list-wrap .tree-select-list::-webkit-scrollbar {
   display: none;
 }
+.tree-select-container .tree-select-list-wrap .tree-select-list.show {
+  height: 300px;
+  border: 1px solid #1a3a8c;
+  border-left: 1px solid #3673E430;
+}
+.tree-select-container .tree-select-list-wrap .tree-select-list.show .tree-select-cell {
+  height: 40px;
+}
 .tree-select-container .tree-select-list-wrap .tree-select-cell {
   width: 134px;
-  height: 40px;
+  height: 0;
   line-height: 40px;
   font-size: 16px;
   text-align: center;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  transition: 0.5s all ease-in-out;
-  -moz-transition: 0.5s all ease-in-out;
+  transition: 0.3s all ease-in-out;
+  -moz-transition: 0.3s all ease-in-out;
   /* Firefox 4 */
-  -webkit-transition: 0.5s all ease-in-out;
+  -webkit-transition: 0.3s all ease-in-out;
   /* Safari 和 Chrome */
-  -o-transition: 0.5s all ease-in-out;
+  -o-transition: 0.3s all ease-in-out;
   /* Opera */
 }
 .tree-select-container .tree-select-list-wrap .tree-select-cell:hover,

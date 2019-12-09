@@ -22,7 +22,7 @@ main.controller("mainCtrl", function ($scope, $http) {
             childrenField: 'children',
             setLeaf: function () { },
             afterSelect: function (region) {
-                console.dir(region);
+                // console.dir(region);
             },
             beforeSelect: function (region) {
                 // console.dir(region);
@@ -50,8 +50,12 @@ main.controller("mainCtrl", function ($scope, $http) {
 
     $http.get('tree_select/region.json').success(function(ret) {
         var tree = ret.data;
+        var firstLevel = parseInt(tree[0].originEntity.level);
         $scope.regionCtrl.tree = {
-            children: tree
+            children: tree,
+            originEntity: {
+                level: (firstLevel - 1)
+            }
         };
     });
 });

@@ -9,9 +9,17 @@
     -webkit-transition: @delay @attr @slowFunc; /* Safari 和 Chrome */
     -o-transition: @delay @attr @slowFunc; /* Opera */
 }
+.text-overflow() {
+    & {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
 
 @select-width: 134px;
 @select-height: 40px;
+@select-list-height: 300px;
 .tree-select {
     display: block;
     padding-left: 20px;
@@ -28,6 +36,31 @@
     z-index: 200;
     color: #5591ED;
 }
+
+.tree-select-path {
+    line-height: 30px;
+    margin: 0;
+    padding-left: 10px;
+    .tree-select-node {
+        color: #5591ED;
+        margin-right: 10px;
+        text-decoration: none;
+        &:hover {
+            text-decoration: underline;
+        }
+        &.next::before {
+            content: ">";
+            margin-right: 10px;
+        }
+        &:last-child {
+            color: #ffffff;
+        }
+    }
+    &:hover + .tree-select-list-wrap {
+        display: block;
+    }
+}
+
 .tree-select-container {
     position: relative;
     // left: -@select-width;
@@ -36,30 +69,6 @@
     cursor: pointer;
     .compatiable-transition(.5s, all, ease-in-out);
     z-index: 10;
-
-    .tree-select-path {
-        line-height: 30px;
-        margin: 0;
-        padding-left: 10px;
-        .tree-select-node {
-            color: #5591ED;
-            margin-right: 10px;
-            text-decoration: none;
-            &:hover {
-                text-decoration: underline;
-            }
-            &.next::before {
-                content: ">";
-                margin-right: 10px;
-            }
-            &:last-child {
-                color: #ffffff;
-            }
-        }
-        &:hover + .tree-select-list-wrap {
-            display: block;
-        }
-    }
 
     .tree-select-list-wrap {
         position: absolute;
@@ -73,28 +82,35 @@
         .tree-select-list {
             position: absolute;
             top: 0;
+            left: @select-width;
+            height: 0;
             padding: 0;
             margin: 0;
-            height: 300px;
-            border: 1px solid #1a3a8c;
-            border-left: 1px solid #3673E430;
             background: #0E2266;
-            // overflow-x: hidden;
             overflow-y: auto;
             .hide-scrollbar;
-            .compatiable-transition(.5s, all, ease-in-out);
+            .compatiable-transition(.3s, all, ease-in-out);
+
+            &.show {
+                // height: auto;
+                // max-height: @select-list-height;
+                height: @select-list-height;
+                border: 1px solid #1a3a8c;
+                border-left: 1px solid #3673E430;
+                .tree-select-cell {
+                    height: @select-height;
+                }
+            }
         }
         
         .tree-select-cell {
             width: @select-width;
-            height: @select-height;
+            height: 0;
             line-height: @select-height;
             font-size: 16px;
             text-align: center;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            .compatiable-transition(.5s, all, ease-in-out);
+            .text-overflow();
+            .compatiable-transition(.3s, all, ease-in-out);
 
             &:hover, &.active {
                 color: #FEB13A;

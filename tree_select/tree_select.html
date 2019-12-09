@@ -1,48 +1,27 @@
 <script id="tree_list" type="text/ng-template">
-    <ul class="tree-select-list" ng-mouseenter="moveLeaf(tree, null)">
-        <li ng-repeat="leaf in tree[treeConfig.childrenField] track by $index" title="{{leaf[treeConfig.entityField][treeConfig.textField]}}"
-            class="tree-select-cell" ng-class="{'active':leaf[treeConfig.entityField].selected}"
-            ng-click="selectLeaf(leaf)"
-            ng-mouseenter="$event.stopPropagation();moveLeaf(tree, leaf);"
-            ng-mouseleave="leaveLeaf(tree, leaf)"
+    <ul class="tree-select-list"
+        ng-class="{'show':!!tree[treeConfig.entityField].open}"
+        ng-mouseover="showTreeNode($event,tree)"
+        ng-mouseout="hideTreeNode($event,tree)">
+        <li ng-repeat="leaf in tree[treeConfig.childrenField] track by $index"
+            title="{{leaf[treeConfig.entityField][treeConfig.textField]}}"
+            class="tree-select-cell"
+            ng-class="{'active':!!leaf[treeConfig.entityField].open}"
+            ng-click="selectNode(leaf)"
+            ng-mouseover="showTreeNode($event,tree,leaf)"
+            ng-mouseout="hideTreeNode($event,tree,leaf)"
             >{{leaf[treeConfig.entityField][treeConfig.textField]}}</li>
     </ul>
-    <div ng-repeat="leaf in tree[treeConfig.childrenField] track by $index" ng-include="'tree_list'"
-        ng-show="leaf[treeConfig.entityField].selected"
+    <div ng-repeat="leaf in tree[treeConfig.childrenField] track by $index"
+        ng-include="'tree_list'"
         ng-init="tree=leaf" class="tree-select-list-wrap"
         ng-if="leaf[treeConfig.childrenField]&&leaf[treeConfig.childrenField].length>0"></div>
 </script>
 
 <div class="tree-select-container">
-    <p class="tree-select-path" ng-mouseenter="enterPath()" ng-mouseleave="leavePath()">
-        <span href="#" class="tree-select-node" ng-show="treeConfig.leafPath.length===0">_</span>
-        <span href="#" ng-repeat="leaf in treeConfig.leafPath" ng-class="{'next':!$first}"
-            class="tree-select-node" ng-click="selectPath($index)"
-            >{{leaf[treeConfig.entityField][treeConfig.textField]}}</span>
-    </p>
-
-    <div class="tree-select-list-wrap first" ng-include="'tree_list'" ng-show="treeConfig.isTreeShow" ng-mouseenter="enterPath()"
-        ng-if="tree&&!(oneCombineMode==='Y'&&tree[treeConfig.childrenField]&&tree[treeConfig.childrenField].length===1)"></div>
-
-    <!-- 开启单点结合模式: 在顶级节点只有一个的时候 -->
-    <div class="tree-select-list-wrap first" ng-show="treeConfig.isTreeShow" ng-mouseenter="enterPath()"
-        ng-if="oneCombineMode==='Y'&&tree&&tree[treeConfig.childrenField]&&tree[treeConfig.childrenField].length===1">
-        <ul class="tree-select-list">
-            <li ng-repeat="leaf in tree[treeConfig.childrenField] track by $index" title="{{leaf[treeConfig.entityField][treeConfig.textField]}}"
-                class="tree-select-cell" ng-class="{'active':leaf[treeConfig.entityField].selected}"
-                ng-click="selectLeaf(leaf)"
-                ng-mouseenter="moveLeaf(tree, leaf)" ng-mouseleave="leaveLeaf(tree, leaf)"
-                >{{leaf[treeConfig.entityField][treeConfig.textField]}}</li>
-            <li ng-repeat="leaf in tree[treeConfig.childrenField][0][treeConfig.childrenField] track by $index"
-                title="{{leaf[treeConfig.entityField][treeConfig.textField]}}"
-                class="tree-select-cell" ng-class="{'active':leaf[treeConfig.entityField].selected}"
-                ng-click="selectLeaf(leaf)"
-                ng-mouseenter="moveLeaf(tree[treeConfig.childrenField][0], leaf)" ng-mouseleave="leaveLeaf(tree[treeConfig.childrenField][0], leaf)"
-                >{{leaf[treeConfig.entityField][treeConfig.textField]}}</li>
-        </ul>
-        <div ng-repeat="leaf in tree[treeConfig.childrenField][0][treeConfig.childrenField] track by $index" ng-include="'tree_list'"
-            ng-show="leaf[treeConfig.entityField].selected"
-            ng-init="tree=leaf" class="tree-select-list-wrap"
-            ng-if="leaf[treeConfig.childrenField]&&leaf[treeConfig.childrenField].length>0"></div>
-    </div>
+    <!-- ng-class="{'tree-show':treeConfig.isShow}" -->
+    <div class="tree-select-list-wrap first"
+        ng-include="'tree_list'"
+        ng-if="tree&&tree[treeConfig.childrenField]&&[treeConfig.childrenField].length"
+        ></div>
 </div>
