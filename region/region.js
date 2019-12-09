@@ -1,129 +1,204 @@
-define(['jquery'], function($) {
-    /**
-     * @use <region-select tree="" set-value="" tree-config=""></region-select>
-     * @param {Object} scope
-     * @param {Function} scope.regionChanged 区域选择回调事件，参数为`regionCode`
-     * @param {Object} scope.regionConfig 
-     * @param {String} scope.regionConfig.userMagicId 必须，用户magicId，获取权限内的区域树
-     * @param {Function} scope.regionConfig.setSelectedRegion 必须，显式设置区域
-     * @param {Function} scope.regionConfig.getSelectedRegion 必须，获取区域实体
-     * @param {Function} scope.regionConfig.setSelectedRegionParent 显式设置区域为其父级
-     */
-    var directives = angular.module('components.regionSelect', ['services']);
-    directives.directive("regionSelect", function (Models, $timeout, $document, $rootScope, $compile) {
-        return {
-            restrict: "E",
-            scope: {
-                regionChanged: '&',
-                regionConfig: '='
-            },
-            template: '<p class="tree-select-path"\
-                    ng-mouseover="showTree()"\
-                    ng-mouseout="hideTree()">\
-                    <span class="tree-select-node" ng-show="regionCtrl.regionPath.length===0">_</span>\
-                    <span ng-repeat="leaf in regionCtrl.regionPath" ng-class="{\'next\':!$first}"\
-                        class="tree-select-node" ng-click="regionCtrl.selectPath($index)"\
-                        >{{leaf.originEntity.regionName}}</span>\
-                </p>',
-            compile: function (ele, attrs) {
-                var treeSelectTemplate = "<tree-select tree-config='regionConfig' tree='regionCtrl.tree'\
-                    one-combine-mode='Y' class='tree-select'></tree-select>";
-                var scope = $rootScope.$new();
-                scope.regionConfig = {
-                    tree: [],
+var directives = angular.module('directives');
+directives.directive("regionSelect", function ($timeout, $document, $http, $rootScope, $compile) {
+    return {
+        restrict: "E",
+        scope: {
+            regionConfig: '='
+        },
+        template: '<p class="tree-select-path"\
+                ng-mouseover="regionCtrl.showTree()"\
+                ng-mouseout="regionCtrl.hideTree()">\
+                <span class="tree-select-node" ng-show="regionCtrl.regionPath.length===0">_</span>\
+                <span ng-repeat="leaf in regionCtrl.regionPath track by $index"\
+                    ng-class="{\'next\':!$first}"\
+                    class="tree-select-node" ng-click="regionCtrl.selectPath($index)"\
+                    >{{leaf.originEntity.regionName}}</span>\
+            </p>',
+        compile: function (ele, attrs) {
+            var valueField = 'regionCode';
+            var getPos = function (element) {
+                var eleOffset = $(element).offset();
+                eleOffset.height = $(element).height();
+                return eleOffset;
+            };
+
+            var initScope = function (scope, regionScope) {
+                scope.treeConfig = {
+                    tree: null,
+                    isShow: false,
                     entityField: 'originEntity',
-                    valueField: 'regionCode',
+                    valueField: valueField,
                     textField: 'regionName',
                     childrenField: 'children',
-                    setValue: null,
-                    setLeaf: function () { },
                     afterSelect: function (region) {
                         if (region) {
-                            scope.regionCtrl.regionSelected = region;
-                            scope.regionChanged();
+                            regionScope.regionScope.regionCtrl.selectRegion(region.originEntity[valueField]);
                         }
                     }
                 };
-                var treeSelectDom = $compile($(treeSelectTemplate))(scope);
-                $document.append(treeSelectDom);
+                var pos = getPos(ele);
+                scope.treeStyle = {
+                    left: pos.left + "px",
+                    top: pos.top + pos.height + "px"
+                };
+            };
 
-                return function link($scope, $element, $attrs) {
-                    $scope.regionCtrl = {
-                        tree: [],
-                        regionPath: [],
-                        init: function () {
-                            var self = this;
-                            self.getRegion().then(function (regionTree) {
-                                if (regionTree[0] && regionTree[0].originEntity && regionTree[0].originEntity.regionCode) {
-                                    $timeout(function () {
-                                        scope.regionConfig.setValue = regionTree[0].originEntity.regionCode;
-                                        self.regionSelected = regionTree[0];
-                                        self.regionSelectedCode = regionTree[0].originEntity.regionCode;
-                                        self.tree = {
-                                            children: regionTree,
-                                            entityField: {}
-                                        };
-                                    });
-                                }
-                            });
-                        },
+            var compileTree = function (scope, regionScope) {
+                var template = "<tree-select tree-config='treeConfig'\
+                    tree='treeConfig.tree' class='tree-select' ng-style='treeStyle'></tree-select>";
+                initScope(scope, regionScope);
+                var dom = $(template);
+                var linkFn = $compile(dom);
+                var lDom = linkFn(scope);
+                $(document.body).append(lDom);
+                return {
+                    linkFn: linkFn,
+                    $destroy: function () {
+                        dom.remove();
+                        treeScope.$destroy();
+                    }
+                };
+            };
 
-                        getRegion: function () {
-                            // var deferred = $.Deferred();
-                            // Models.Province.one("config/region/tree", scope.regionConfig.userMagicId).get("").then(function (ret) {
-                            //     deferred.resolve(ret.data || []);
-                            // }, function () {
-                            //     deferred.resolve([]);
-                            // });
-                            // return deferred.promise();
+            var invokerScope = {
+                regionScope: {}
+            };
+            var treeScope = $rootScope.$new();
+            var compileRes = compileTree(treeScope, invokerScope);
+            var treeSelectLinkFn = compileRes.linkFn;
+            var treeSelectDestroy = compileRes.$destroy;
 
-                            $.ajax({
-                                type: 'GET',
-                                url: "/tree_select/region.json",
-                                dataType: 'json',
-                                success: function (data) {
-                                    console.dir(data);
-                                }
-                            });
-                        },
+            return function link(regionScope, $element, $attrs) {
+                invokerScope.regionScope = regionScope;
+                
+                var defaultConfig = {
+                    userMagicId: '11',
+                    setSelectedRegion: function () { },
+                    getSelectedRegion: function () { },
+                    setSelectedRegionParent: function () { },
+                    regionChanged: function (region) {
+                        console.dir(region);
+                    }
+                };
+                // 找路径: 最后的节点满足 obj[key] === value 的条件
+                var findPathInTreeLeaf = function (tree, path, key, value, entityField, childrenField) {
+                    if (!tree) {
+                        return;
+                    }
+    
+                    if (tree[entityField][key] === value) {
+                        path.unshift(tree);
+                        return true;
+                    }
 
-                        showTree: function () {
-                            
-                        },
-                        hideTree: function () {
-                            
-                        },
-
-                        selectPath: function (index) {
-                            
-                        }
-                    };
-
-                    // 暴露给外部的方法: setRegion | getRegion | setRegionParent
-                    $scope.regionConfig.setRegion = function (regionCode) {
-                        scope.regionConfig.setValue = regionCode;
-                        $scope.regionCtrl.regionSelectedCode = regionCode;
-                    };
-                    $scope.regionConfig.getRegion = function () {
-                        return $scope.regionCtrl.regionSelected.originEntity;
-                    };
-                    /**
-                     * 显式设置区域为其父级
-                     * @param {Number} index 传-1为上一级，-2为上两级
-                     */
-                    $scope.regionConfig.setRegionParent = function (index) {
-                        if ($scope.regionCtrl.regionPath) {
-                            var regionIndex = $scope.regionCtrl.regionPath.length - 1 + index;
-                            if (regionIndex >= 0) {
-                                $scope.regionCtrl.regionSelectedCode = 
-                                    $scope.regionCtrl.regionPath[regionIndex].originEntity.regionCode;
+                    if (tree[childrenField]) {
+                        var correctNode = false;
+                        for (var i = 0; i < tree[childrenField].length; i++) {
+                            correctNode = findPathInTreeLeaf(tree[childrenField][i], 
+                                path, key, value, entityField, childrenField);
+                            if (correctNode) {
+                                path.unshift(tree);
+                                return true;
                             }
                         }
-                    };
+                    }
+                    return false;
+                };
 
-                    $scope.regionCtrl.init();
-                }
+                regionScope.regionCtrl = {
+                    tree: null,
+                    regionPath: [],
+                    regionSelected: null,
+                    init: function () {
+                        var self = this;
+                        // default: select first one; refresh tree data;
+                        self.getRegion().then(function (regionTree) {
+                            self.regionSelected = regionTree.children[0];
+                            var path = [self.regionSelected];
+                            self.regionPath = path;
+                            
+                            self.tree = regionTree;
+                            treeScope.treeConfig.tree = regionTree;
+                            treeSelectLinkFn(treeScope);
+                        });
+                    },
+
+                    getRegion: function () {
+                        // var deferred = $.Deferred();
+                        // Models.Province.one("config/region/tree", scope.regionConfig.userMagicId).get("").then(function (ret) {
+                        //     deferred.resolve(ret.data || []);
+                        // }, function () {
+                        //     deferred.resolve([]);
+                        // });
+                        // return deferred.promise();
+                        return $http.get('tree_select/region.json').then(function(ret) {
+                            var tree = ret.data.data;
+                            var firstLevel = parseInt(tree[0].originEntity.level);
+                            return {
+                                children: tree,
+                                originEntity: {
+                                    level: (firstLevel - 1)
+                                }
+                            };
+                        });
+                    },
+
+                    showTree: function () {
+                        treeScope.treeConfig.isShow = true;
+                    },
+                    hideTree: function () {
+                        treeScope.treeConfig.isShow = false;
+                    },
+
+                    selectRegion: function (regionCode) {
+                        var path = [];
+                        findPathInTreeLeaf(this.tree.children[0], path, valueField,
+                            regionCode, "originEntity", "children");
+                        this.regionPath = path;
+                        this.regionSelected = path[path.length - 1];
+                        regionScope.regionConfig.regionChanged(this.regionSelected);
+                    },
+                    selectPath: function (index) {
+                        var regionLevel = this.regionPath.length;
+                        if (index < 0) {
+                            index += regionLevel;
+                        }
+                        if (index <= 0) {
+                            this.regionPath = this.regionPath.slice(0, 1);
+                        } else {
+                            this.regionPath = this.regionPath.slice(0, index + 1);
+                        }
+                    }
+                };
+
+                // 暴露给外部的方法: setRegion | getRegion | setRegionParent
+                regionScope.regionConfig.setRegion = function (regionCode) {
+                    regionScope.regionCtrl.selectRegion(regionCode);
+                };
+                regionScope.regionConfig.getRegion = function () {
+                    return regionScope.regionCtrl.regionSelected.originEntity;
+                };
+                /**
+                 * 显式设置区域为其父级
+                 * @param {Number} index 传-1为上一级，-2为上两级
+                 */
+                regionScope.regionConfig.setRegionParent = function (index) {
+                    if (regionScope.regionCtrl.regionPath) {
+                        var regionIndex = regionScope.regionCtrl.regionPath.length - 1 + index;
+                        if (regionIndex >= 0) {
+                            regionScope.regionCtrl.regionSelected = 
+                                regionScope.regionCtrl.regionPath[regionIndex];
+                        }
+                    }
+                };
+                
+                regionScope.$on("$destroy", function () {
+                    treeSelectDestroy();
+                    unbind();
+                });
+
+                regionScope.regionCtrl.init();
             }
-        };
-    });
+        }
+    };
 });

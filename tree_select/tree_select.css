@@ -2,19 +2,7 @@
   display: none;
 }
 .tree-select {
-  display: block;
-  padding-left: 20px;
-  background: url(../images/address.png) no-repeat;
-  background-position: left center;
-  cursor: pointer;
   position: absolute;
-  left: 18px;
-  top: 46px;
-  height: 30px;
-  line-height: 30px;
-  transition: 0.2s all ease-in-out;
-  z-index: 200;
-  color: #5591ED;
 }
 .tree-select-path {
   line-height: 30px;
@@ -25,6 +13,7 @@
   color: #5591ED;
   margin-right: 10px;
   text-decoration: none;
+  cursor: pointer;
 }
 .tree-select-path .tree-select-node:hover {
   text-decoration: underline;
@@ -41,6 +30,7 @@
 }
 .tree-select-container {
   position: relative;
+  left: -134px;
   border: 0;
   color: #ffffff;
   cursor: pointer;

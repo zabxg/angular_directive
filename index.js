@@ -22,16 +22,32 @@ main.controller("mainCtrl", function ($scope, $http) {
             childrenField: 'children',
             setLeaf: function () { },
             afterSelect: function (region) {
-                // console.dir(region);
+                region && console.log("after: " + region.originEntity.regionName);
             },
             beforeSelect: function (region) {
-                // console.dir(region);
+                region && console.log("before: " + region.originEntity.regionName);
                 return true;
             }
         },
         
-        setLeaf: function (regionName) {
-            this.regionSelected = regionName;
+
+        regionConfig: {
+            userMagicId: '11',
+            setRegion: function () {
+                
+            },
+            getSelectedRegion: function () {
+                
+            },
+            setRegionParent: function () {
+                
+            },
+            regionChanged: function (region) {
+                console.log(region.originEntity.regionName);
+            }
+        },
+        setLeaf: function (regionCode) {
+            this.regionConfig.setRegion(regionCode);
         }
     };
 

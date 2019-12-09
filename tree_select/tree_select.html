@@ -19,9 +19,8 @@
 </script>
 
 <div class="tree-select-container">
-    <!-- ng-class="{'tree-show':treeConfig.isShow}" -->
     <div class="tree-select-list-wrap first"
         ng-include="'tree_list'"
-        ng-if="tree&&tree[treeConfig.childrenField]&&[treeConfig.childrenField].length"
+        ng-if="tree&&tree[treeConfig.childrenField]&&tree[treeConfig.childrenField].length"
         ></div>
 </div>

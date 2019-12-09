@@ -4,8 +4,8 @@ main.directive("treeSelect", function ($compile, $timeout) {
     return {
         restrict: "E",
         scope: {
-            treeConfig: '=',
-            tree: '='
+            tree: '=',
+            treeConfig: '='
             // oneCombineMode: '@',
         },
         templateUrl: "./tree_select/tree_select.html",
@@ -16,7 +16,6 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 valueField: '',
                 textField: '',
                 childrenField: '',
-                selectedNode: null,
                 beforeSelect: function () {
                     return true;
                 },
@@ -55,28 +54,6 @@ main.directive("treeSelect", function ($compile, $timeout) {
                     resetFn(tree[entityField]);
                 }
             };
-            // 找路径: 最后的节点满足 obj[key] === value 的条件
-            var findPathInTreeLeaf = function (tree, key, value, entityField, childrenField) {
-                if (!tree || !tree.length) {
-                    return [];
-                }
-
-                var path = [],
-                    leaf = null;
-                for (var i = 0; i < tree.length; i++) {
-                    leaf = tree[i][entityField];
-                    if (leaf[key] === value) {
-                        return [tree[i]];
-                    } else if (tree[i][childrenField] && tree[i][childrenField].length > 0) {
-                        path = findPathInTreeLeaf(tree[i][childrenField], key, value, entityField, childrenField);
-                        if (path.length) {
-                            path.unshift(tree[i]);
-                            return path;
-                        }
-                    }
-                }
-                return [];
-            };
             var resetPathInTreeLeaf = function (tree, key, value, resetFn, entityField, childrenField) {
                 if (!tree) { return false; }
 
@@ -98,28 +75,27 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 return false;
             };
 
-            var unbind = scope.$watchCollection("tree", function (newVal) {
-                console.dir(newVal)
-                if (newVal && newVal[scope.treeConfig.entityField]) {
-                    newVal[scope.treeConfig.entityField].open = true;
-                }
-            });
-            var unbind2 = scope.$watchCollection("treeConfig.setValue", function (newVal) {
-                var selectNodes = findPathInTreeLeaf(scope.tree, scope.treeConfig.valueField, newVal, 
-                    scope.treeConfig.entityField, scope.treeConfig.childrenField);
-                var selectedNode;
-                if (selectNodes.length) {
-                    selectedNode = selectNodes[selectNodes.length - 1];
-                    scope.selectNode(selectedNode);
-                } else {
-                    scope.selectNode(null);
+            var unbind = scope.$watch("treeConfig.isShow", function (newVal) {
+                var tree = scope.tree;
+                if (tree) {
+                    if (newVal) {
+                        scope.showTreeNode(null, null, tree);
+                        // if (tree && tree[scope.treeConfig.entityField]) {
+                        //     tree[scope.treeConfig.entityField].open = true;
+                        // }
+                    } else {
+                        scope.hideTreeNode(null, null, tree);
+                        // if (tree && tree[scope.treeConfig.entityField]) {
+                        //     tree[scope.treeConfig.entityField].open = false;
+                        // }
+                    }
                 }
             });
 
             var lastParentNode = null, lastNode = null;
             var invokeLater = null;
             scope.showTreeNode = function (event, parentNode, node) {
-                event.stopPropagation();
+                event && event.stopPropagation();
                 invokeLater && $timeout.cancel(invokeLater);
                 var entityField = scope.treeConfig.entityField;
                 if (lastParentNode && node && lastParentNode !== node &&
@@ -127,7 +103,9 @@ main.directive("treeSelect", function ($compile, $timeout) {
                     lastParentNode[entityField].open = false;
                 }
 
-                parentNode[entityField].open = true;
+                if (parentNode) {
+                    parentNode[entityField].open = true;
+                }
                 if (node) {
                     node[entityField].open = true;
                     resetPathInTreeLeaf(scope.tree, "magicId", node[entityField].magicId, function (nodeData) {
@@ -139,7 +117,7 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 lastNode = null;
             };
             scope.hideTreeNode = function (event, parentNode, node) {
-                event.stopPropagation();
+                event && event.stopPropagation();
                 lastParentNode = parentNode;
                 if (node) {
                     node[scope.treeConfig.entityField].open = false;
@@ -159,7 +137,6 @@ main.directive("treeSelect", function ($compile, $timeout) {
                         return;
                     }
                 }
-                scope.treeConfig.selectedNode = node || null;
                 if (scope.treeConfig.afterSelect) {
                     scope.treeConfig.afterSelect(node);
                 }
