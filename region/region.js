@@ -1,4 +1,9 @@
 var directives = angular.module('directives');
+var getPos = function (element) {
+    var eleOffset = $(element).offset();
+    eleOffset.height = $(element).height();
+    return eleOffset;
+};
 directives.directive("regionSelect", function ($timeout, $document, $http, $rootScope, $compile) {
     return {
         restrict: "E",
@@ -16,11 +21,6 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
             </p>',
         compile: function (ele, attrs) {
             var valueField = 'regionCode';
-            var getPos = function (element) {
-                var eleOffset = $(element).offset();
-                eleOffset.height = $(element).height();
-                return eleOffset;
-            };
 
             var initScope = function (scope, regionScope) {
                 scope.treeConfig = {
@@ -49,8 +49,7 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                 initScope(scope, regionScope);
                 var dom = $(template);
                 var linkFn = $compile(dom);
-                var lDom = linkFn(scope);
-                $(document.body).append(lDom);
+                $(document.body).append(linkFn(scope));
                 return {
                     linkFn: linkFn,
                     $destroy: function () {
@@ -60,26 +59,17 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                 };
             };
 
+            var treeScope = $rootScope.$new();
             var invokerScope = {
                 regionScope: {}
             };
-            var treeScope = $rootScope.$new();
             var compileRes = compileTree(treeScope, invokerScope);
-            var treeSelectLinkFn = compileRes.linkFn;
+            var treeSelectLinkFn  = compileRes.linkFn;
             var treeSelectDestroy = compileRes.$destroy;
 
             return function link(regionScope, $element, $attrs) {
                 invokerScope.regionScope = regionScope;
                 
-                var defaultConfig = {
-                    userMagicId: '11',
-                    setSelectedRegion: function () { },
-                    getSelectedRegion: function () { },
-                    setSelectedRegionParent: function () { },
-                    regionChanged: function (region) {
-                        console.dir(region);
-                    }
-                };
                 // 找路径: 最后的节点满足 obj[key] === value 的条件
                 var findPathInTreeLeaf = function (tree, path, key, value, entityField, childrenField) {
                     if (!tree) {
@@ -114,8 +104,7 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                         // default: select first one; refresh tree data;
                         self.getRegion().then(function (regionTree) {
                             self.regionSelected = regionTree.children[0];
-                            var path = [self.regionSelected];
-                            self.regionPath = path;
+                            self.regionPath = [self.regionSelected];
                             
                             self.tree = regionTree;
                             treeScope.treeConfig.tree = regionTree;
