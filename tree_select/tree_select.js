@@ -1,23 +1,5 @@
 var main = angular.module('directives');
-
-// 找路径: 每个路径的上的节点均满足 obj[key] === value 的条件
-var findPathInTree = function (tree, key, value, resetFn, path, entityField, childrenField) {
-    if (!tree || !tree.length) {
-        return path;
-    }
-
-    var leaf = null;
-    for (var i = 0; i < tree.length; i++) {
-        leaf = tree[i][entityField];
-        if (leaf[key] === value) {
-            resetFn(leaf);
-            path.push(tree[i]);
-            return findPathInTree(tree[i][childrenField], key, value,
-                resetFn, path, entityField, childrenField);
-        }
-    }
-    return path;
-};
+// DFS 对每一个节点调用reset方法
 var resetTree = function (tree, resetFn, entityField, childrenField) {
     if (!tree) {
         return;
@@ -31,6 +13,7 @@ var resetTree = function (tree, resetFn, entityField, childrenField) {
         resetFn(tree[entityField]);
     }
 };
+// DFS 对每一个满足条件的节点调用reset方法
 var resetPathInTreeLeaf = function (tree, key, value, resetFn, entityField, childrenField) {
     if (!tree) {
         return false;
@@ -87,37 +70,38 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 }
             });
 
-            var lastParentNode = null,
-                lastNode = null;
+            var lastParentNode = null;
             var invokeLater = null;
             scope.showTreeNode = function (event, parentNode, node) {
+                var entityField = scope.treeConfig.entityField,
+                    valueField  = scope.treeConfig.valueField;
+                
                 event && event.stopPropagation();
                 invokeLater && $timeout.cancel(invokeLater);
-                var entityField = scope.treeConfig.entityField;
+
                 if (lastParentNode && node && lastParentNode !== node &&
                     lastParentNode[entityField].level === node[entityField].level) {
                     lastParentNode[entityField].open = false;
                 }
+                lastParentNode = null;
 
                 if (parentNode) {
                     parentNode[entityField].open = true;
                 }
                 if (node) {
                     node[entityField].open = true;
-                    resetPathInTreeLeaf(scope.tree, "magicId", node[entityField].magicId, function (nodeData) {
-                        nodeData.open = true;
-                    }, entityField, scope.treeConfig.childrenField);
+                    resetPathInTreeLeaf(scope.tree, valueField, node[entityField][valueField],
+                        function (nodeData) {
+                            nodeData.open = true;
+                        }, entityField, scope.treeConfig.childrenField);
                 }
-
-                lastParentNode = null;
-                lastNode = null;
             };
             scope.hideTreeNode = function (event, parentNode, node) {
                 event && event.stopPropagation();
+                
                 lastParentNode = parentNode;
                 if (node) {
                     node[scope.treeConfig.entityField].open = false;
-                    lastNode = node;
                 }
 
                 invokeLater && $timeout.cancel(invokeLater);
@@ -125,7 +109,7 @@ main.directive("treeSelect", function ($compile, $timeout) {
                     resetTree(scope.tree, function (nodeData) {
                         nodeData.open = false;
                     }, scope.treeConfig.entityField, scope.treeConfig.childrenField);
-                }, 100);
+                }, 300);
             };
             scope.selectNode = function (node) {
                 if (scope.treeConfig.afterSelect) {

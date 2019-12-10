@@ -4,6 +4,30 @@ var getPos = function (element) {
     eleOffset.height = $(element).height();
     return eleOffset;
 };
+
+// 找路径: 最后的节点满足 obj[key] === value 的条件
+var findPathInTreeLeaf = function (tree, path, key, value, entityField, childrenField) {
+    if (!tree) { return false; }
+
+    if (tree[entityField][key] === value) {
+        path.unshift(tree);
+        return true;
+    }
+
+    if (tree[childrenField]) {
+        var correctNode = false;
+        for (var i = 0; i < tree[childrenField].length; i++) {
+            correctNode = findPathInTreeLeaf(tree[childrenField][i], 
+                path, key, value, entityField, childrenField);
+            if (correctNode) {
+                path.unshift(tree);
+                return true;
+            }
+        }
+    }
+    return false;
+};
+
 directives.directive("regionSelect", function ($timeout, $document, $http, $rootScope, $compile) {
     return {
         restrict: "E",
@@ -11,8 +35,8 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
             regionConfig: '='
         },
         template: '<p class="tree-select-path"\
-                ng-mouseover="regionCtrl.showTree()"\
-                ng-mouseout="regionCtrl.hideTree()">\
+                ng-mouseover="regionCtrl.toggleTree(true)"\
+                ng-mouseout="regionCtrl.toggleTree(false)">\
                 <span class="tree-select-node" ng-show="regionCtrl.regionPath.length===0">_</span>\
                 <span ng-repeat="leaf in regionCtrl.regionPath track by $index"\
                     ng-class="{\'next\':!$first}"\
@@ -22,19 +46,14 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
         compile: function (ele, attrs) {
             var valueField = 'regionCode';
 
-            var initScope = function (scope, regionScope) {
+            var initScope = function (scope) {
                 scope.treeConfig = {
                     tree: null,
                     isShow: false,
                     entityField: 'originEntity',
                     valueField: valueField,
                     textField: 'regionName',
-                    childrenField: 'children',
-                    afterSelect: function (region) {
-                        if (region) {
-                            regionScope.regionScope.regionCtrl.selectRegion(region.originEntity[valueField]);
-                        }
-                    }
+                    childrenField: 'children'
                 };
                 var pos = getPos(ele);
                 scope.treeStyle = {
@@ -43,72 +62,56 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                 };
             };
 
-            var compileTree = function (scope, regionScope) {
+            var compileTree = function () {
                 var template = "<tree-select tree-config='treeConfig'\
                     tree='treeConfig.tree' class='tree-select' ng-style='treeStyle'></tree-select>";
-                initScope(scope, regionScope);
+                var scope = $rootScope.$new();
+                initScope(scope);
                 var dom = $(template);
                 var linkFn = $compile(dom);
                 $(document.body).append(linkFn(scope));
+
                 return {
+                    scope: scope,
                     linkFn: linkFn,
-                    $destroy: function () {
+                    destroy: function () {
                         dom.remove();
-                        treeScope.$destroy();
+                        scope.$destroy();
                     }
                 };
             };
 
-            var treeScope = $rootScope.$new();
-            var invokerScope = {
-                regionScope: {}
-            };
-            var compileRes = compileTree(treeScope, invokerScope);
-            var treeSelectLinkFn  = compileRes.linkFn;
-            var treeSelectDestroy = compileRes.$destroy;
+            var compileRes = compileTree(treeScope);
+            var treeScope   = compileRes.scope;
+            var treeLinkFn  = compileRes.linkFn;
+            var treeDestroy = compileRes.destroy;
 
             return function link(regionScope, $element, $attrs) {
-                invokerScope.regionScope = regionScope;
                 
-                // 找路径: 最后的节点满足 obj[key] === value 的条件
-                var findPathInTreeLeaf = function (tree, path, key, value, entityField, childrenField) {
-                    if (!tree) {
-                        return;
-                    }
-    
-                    if (tree[entityField][key] === value) {
-                        path.unshift(tree);
-                        return true;
-                    }
-
-                    if (tree[childrenField]) {
-                        var correctNode = false;
-                        for (var i = 0; i < tree[childrenField].length; i++) {
-                            correctNode = findPathInTreeLeaf(tree[childrenField][i], 
-                                path, key, value, entityField, childrenField);
-                            if (correctNode) {
-                                path.unshift(tree);
-                                return true;
-                            }
-                        }
-                    }
-                    return false;
-                };
-
                 regionScope.regionCtrl = {
                     tree: null,
                     regionPath: [],
                     regionSelected: null,
+
                     init: function () {
                         var self = this;
-                        // default: select first one; refresh tree data;
+
+                        treeScope.treeConfig.afterSelect = function (region) {
+                            if (region) {
+                                self.selectRegion(region.originEntity[valueField]);
+                            }
+                        };
+
                         self.getRegion().then(function (regionTree) {
-                            self.regionSelected = regionTree.children[0];
-                            self.regionPath = [self.regionSelected];
+                            // select first one
+                            var firstRegion = regionTree.children[0];
+                            self.regionPath = [firstRegion];
+                            self.regionSelected = firstRegion;
                             
+                            // refresh tree data
                             self.tree = regionTree;
                             treeScope.treeConfig.tree = regionTree;
-                            treeSelectLinkFn(treeScope);
+                            treeLinkFn(treeScope);
                         });
                     },
 
@@ -132,31 +135,36 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                         });
                     },
 
-                    showTree: function () {
-                        treeScope.treeConfig.isShow = true;
-                    },
-                    hideTree: function () {
-                        treeScope.treeConfig.isShow = false;
+                    toggleTree: function (isShow) {
+                        treeScope.treeConfig.isShow = isShow;
                     },
 
-                    selectRegion: function (regionCode) {
+                    /**
+                     * 设置选中区域
+                     * @param {String} regionValue 区域的字段值
+                     */
+                    selectRegion: function (regionValue) {
                         var path = [];
-                        findPathInTreeLeaf(this.tree.children[0], path, valueField,
-                            regionCode, "originEntity", "children");
+                        findPathInTreeLeaf(this.tree.children[0], path, valueField, regionValue,
+                            "originEntity", "children");
                         this.regionPath = path;
                         this.regionSelected = path[path.length - 1];
+
                         regionScope.regionConfig.regionChanged(this.regionSelected);
                     },
+                    /**
+                     * 设置区域为其父级
+                     * @param {Number} index 传-1为上一级，-2为上两级
+                     */
                     selectPath: function (index) {
-                        var regionLevel = this.regionPath.length;
                         if (index < 0) {
-                            index += regionLevel;
+                            index += this.regionPath.length;
                         }
-                        if (index <= 0) {
-                            this.regionPath = this.regionPath.slice(0, 1);
-                        } else {
-                            this.regionPath = this.regionPath.slice(0, index + 1);
-                        }
+                        index = Math.max(1, index + 1);
+                        this.regionPath = this.regionPath.slice(0, index);
+                        this.regionSelected = this.regionPath[index];
+
+                        regionScope.regionConfig.regionChanged(this.regionSelected);
                     }
                 };
 
@@ -167,22 +175,12 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                 regionScope.regionConfig.getRegion = function () {
                     return regionScope.regionCtrl.regionSelected.originEntity;
                 };
-                /**
-                 * 显式设置区域为其父级
-                 * @param {Number} index 传-1为上一级，-2为上两级
-                 */
                 regionScope.regionConfig.setRegionParent = function (index) {
-                    if (regionScope.regionCtrl.regionPath) {
-                        var regionIndex = regionScope.regionCtrl.regionPath.length - 1 + index;
-                        if (regionIndex >= 0) {
-                            regionScope.regionCtrl.regionSelected = 
-                                regionScope.regionCtrl.regionPath[regionIndex];
-                        }
-                    }
+                    regionScope.regionCtrl.selectPath(index);
                 };
                 
                 regionScope.$on("$destroy", function () {
-                    treeSelectDestroy();
+                    treeDestroy();
                     unbind();
                 });
 
