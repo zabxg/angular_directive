@@ -9,12 +9,15 @@
     <script src="angular.js"></script>
     <script src="jquery-1.4.4.min.js"></script>
     <script src="jquery.ztree.all.min.js"></script>
+    <script src="./carousel/carousel.js"></script>
     <script src="index.js" defer></script>
     <script src="tree_select/tree_select.js" defer></script>
     <script src="region/region.js" defer></script>
     <script src="./ng_directive_test.js" defer></script>
 
     <link rel="stylesheet" href="./tree_select/tree_select.css">
+    <link rel="stylesheet" href="carousel/carousel.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body ng-controller="mainCtrl">
 
@@ -38,6 +41,19 @@
 
     <div>
         <tree-list tree-config="treeCtrl.treeConfig" li-selected="treeCtrl.liSelected"></tree-list>
+    </div>
+
+    <div class="carousel-testing">
+        <div gx-carousel="carouselExt.wrapperConfig" class="carousel-container">
+            <div gx-slide="carouselExt.slideConfig"
+                ng-repeat="item in carouselExt.data">
+                <div class="test-item">
+                    <div class="img-wrap small">
+                        <img ng-src="{{item.imageUrl}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </body>

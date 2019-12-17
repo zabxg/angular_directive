@@ -1,4 +1,4 @@
-var main = angular.module("directives", []);
+var main = angular.module("directives", ["directives.carouselExt"]);
 
 main.controller("mainCtrl", function ($scope, $http) {
     $scope.txt = "angular loaded";
@@ -74,4 +74,27 @@ main.controller("mainCtrl", function ($scope, $http) {
             }
         };
     });
+
+    $scope.carouselExt = {
+        data: [{
+            imageUrl: "images/v10.jpg"
+        }, {
+            imageUrl: "images/v11.jpg"
+        }, {
+            imageUrl: "images/v12.jpg"
+        }, {
+            imageUrl: "images/v13.jpg"
+        }, {
+            imageUrl: "images/v14.jpg"
+        }],
+        wrapperConfig: {
+            viewCount: 1,
+            isAutoPlay: 'r',
+            indicator: 'lr'
+        },
+        slideConfig: {
+            height: 200,
+            width: 400
+        }
+    };
 });
