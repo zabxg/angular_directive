@@ -3,17 +3,17 @@
     <ol class="gx-carousel-indicator">
         <li ng-repeat="item in slides track by $index"
             ng-class="{'active':item.active}"
-            ng-click="" class="indicator-icon">
+            ng-click="select(item)" class="indicator-icon">
             <span class="indicator-inner"></span>
         </li>
     </ol>
 
-    <div class="gx-carousel-control left" ng-click="pre()">
+    <a href role="button" class="gx-carousel-control left" ng-click="pre()">
         <i class="control-icon">&lt;</i>
-    </div>
-    <div class="gx-carousel-control right" ng-click="next()">
+    </a>
+    <a href role="button" class="gx-carousel-control right" ng-click="next()">
         <i class="control-icon">&gt;</i>
-    </div>
+    </a>
 
     <div class="gx-carousel-main">
         <div class="gx-carousel-wrapper" ng-transclude></div>
