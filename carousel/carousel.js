@@ -23,6 +23,7 @@ directives.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q,
                 deferred.resolve(element);
             });
         };
+
         if (endEventName) {
             element.bind(endEventName, transitionEndHandler);
         }
@@ -82,7 +83,6 @@ directives.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q,
     return $transition;
 }]);
 
-
 /**
  *                                                                         pre
  *  ┌--------- item left  active animation ←----- item active animation ←-----------┐
@@ -94,11 +94,11 @@ directives.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q,
  *  └--------- item right active animation ←----- item active animation ←-----------┘
  */
 directives.controller("carouselController", [
-    "$scope", "$timeout", "$q", "$transition",
-    function ($scope, $timeout, $q, $transition) {
+    "$scope", "$timeout", "$q", "$interval", "$transition",
+    function ($scope, $timeout, $q, $interval, $transition) {
         var slides = $scope.slides = [];
         var self = this;
-        var lastTransition;
+        var lastTransition, autoInterval;
 
         /** direction: "left" | "right" */
         self.setSelect = function (slide, direction) {
@@ -112,33 +112,61 @@ directives.controller("carouselController", [
             if (!direction) {
                 direction = slideIndex > curActiveIndex ? 'left' : 'right';
             }
+
             if (lastTransition) {
+                console.log("busy");
                 lastTransition.cancel();
-                lastTransition = null;
+                $timeout(goSlide);
+            } else {
+                console.log("free")
+                goSlide();
             }
-            for (var i = 0; i < slides.length; i++) {
-                if (slides[i] !== curActiveSlide && slides[i] !== slide) {
-                    angular.extend(slides[i], { animation: false, direction: false, active: false });
-                }
-            }
-            goSlide();
 
             function goSlide() {
+                for (var i = 0; i < slides.length; i++) {
+                    if (slides[i] !== curActiveSlide && slides[i] !== slide) {
+                        angular.extend(slides[i], {
+                            animation: false,
+                            direction: false,
+                            active: false
+                        });
+                    }
+                }
                 var revertDirection = direction === 'left' ? 'right' : 'left';
-                var fromDirection = ['', direction], toDirection = [revertDirection, ''];
+                var fromDirection = ['', direction],
+                    toDirection   = [revertDirection, ''];
+
+                angular.extend(curActiveSlide, { animation: true, direction: fromDirection[0], active: true });
+                angular.extend(slide, { animation: true, direction: fromDirection[1], active: true });
+                // angular.extend(preSlide, { animation: true, direction: fromDirection[0], active: true });
+                // angular.extend(nextSlide, { animation: true, direction: fromDirection[1], active: true });
+
+                var reflow2 = curActiveSlide.$element[0].offsetWidth; //force reflow
+                var reflow = slide.$element[0].offsetWidth; //force reflow
+
                 (function (preSlide, nextSlide) {
-                    angular.extend(preSlide, { animation: true, direction: fromDirection[0], active: true });
-                    angular.extend(nextSlide, { animation: true, direction: fromDirection[1], active: true });
                     lastTransition = $transition(nextSlide.$element, function () {
                         angular.extend(preSlide, { direction: toDirection[0] });
                         angular.extend(nextSlide, { direction: toDirection[1] });
                     });
+                    // lastTransition = $transition([preSlide.$element, nextSlide.$element], [function () {
+                    //     angular.extend(preSlide, { direction: toDirection[0] });
+                    // }, function () {
+                    //     angular.extend(nextSlide, { direction: toDirection[1] });
+                    // }]);
                     lastTransition.then(function () {
                         angular.extend(preSlide, { animation: false, direction: "", active: false });
                         angular.extend(nextSlide, { animation: false, direction: "", active: true });
                         lastTransition = null;
+                        console.log("after resolve");
+                    }, function () {
+                        angular.extend(preSlide, { animation: false, direction: "", active: false });
+                        angular.extend(nextSlide, { animation: false, direction: "", active: true });
+                        lastTransition = null;
+                        console.log("after reject");
                     });
                 })(curActiveSlide, slide);
+                // self.restart();
             }
         };
 
@@ -147,6 +175,7 @@ directives.controller("carouselController", [
             slides.push(slide);
             if (slides.length === 1) {
                 self.setSelect(slide);
+                // self.restart();
             }
         };
         self.removeSlide = function (slide) {
@@ -155,6 +184,9 @@ directives.controller("carouselController", [
                     slides.splice(i, 1);
                     break;
                 }
+            }
+            if (slides.length > 1) {
+                self.restart();
             }
         };
 
@@ -166,6 +198,18 @@ directives.controller("carouselController", [
             }
         };
 
+        self.restart = function () {
+            self.pause();
+            autoInterval = $timeout(function () {
+                $scope.next();
+            }, 1600, this);
+        };
+        self.pause = function () {
+            if (autoInterval) {
+                $timeout.cancel(autoInterval);
+            }
+        };
+
         $scope.pre = function () {
             var slideIndex = self.getActiveIndex();
             if (slideIndex === 0) {
@@ -173,7 +217,9 @@ directives.controller("carouselController", [
             } else {
                 slideIndex--;
             }
-            self.setSelect(slides[slideIndex], 'left');
+            if (!lastTransition) {
+                self.setSelect(slides[slideIndex], 'left');
+            }
         };
         $scope.next = function () {
             var slideIndex = self.getActiveIndex();
@@ -182,7 +228,9 @@ directives.controller("carouselController", [
             } else {
                 slideIndex++;
             }
-            self.setSelect(slides[slideIndex], 'right');
+            if (!lastTransition) {
+                self.setSelect(slides[slideIndex], 'right');
+            }
         };
         $scope.select = self.setSelect;
     }
@@ -205,6 +253,10 @@ directives.directive("gxCarousel", function () {
                 indicator: 'lr'
             };
             scope.carouselConfig = angular.extend(config, scope.carouselConfig);
+
+            scope.$on("$destroy", function () {
+                carouselController.pause();
+            });
         }
     };
 });
@@ -231,6 +283,7 @@ directives.directive("gxSlide", function () {
             carouselCtrl.addSlide(scope, ele);
 
             scope.$on("$destroy", function () {
+                ele.unbind(transitionEndEventName, transitionEndHandler);
                 carouselCtrl.removeSlide(scope);
             });
         }

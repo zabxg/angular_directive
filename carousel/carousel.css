@@ -31,7 +31,7 @@
   height: 100%;
   margin-top: 100%;
   background: #fff;
-  transition: 0.2s margin ease-in-out;
+  transition: 0.1s margin ease-in-out;
 }
 .gx-carousel-container .gx-carousel-indicator .indicator-icon.active .indicator-inner {
   margin-top: 0;
@@ -43,6 +43,7 @@
   width: 40px;
   height: 100%;
   align-items: center;
+  justify-content: center;
   text-decoration: none;
   color: #2b3646;
   cursor: pointer;
