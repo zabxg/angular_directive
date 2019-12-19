@@ -76,8 +76,12 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 var entityField = scope.treeConfig.entityField,
                     valueField  = scope.treeConfig.valueField;
                 
-                event && event.stopPropagation();
-                invokeLater && $timeout.cancel(invokeLater);
+                if (event) {
+                    event.stopPropagation();
+                }
+                if (invokeLater) {
+                    $timeout.cancel(invokeLater);
+                }
 
                 if (lastParentNode && node && lastParentNode !== node &&
                     lastParentNode[entityField].level === node[entityField].level) {
@@ -97,14 +101,18 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 }
             };
             scope.hideTreeNode = function (event, parentNode, node) {
-                event && event.stopPropagation();
+                if (event) {
+                    event.stopPropagation();
+                }
                 
                 lastParentNode = parentNode;
                 if (node) {
                     node[scope.treeConfig.entityField].open = false;
                 }
 
-                invokeLater && $timeout.cancel(invokeLater);
+                if (invokeLater) {
+                    $timeout.cancel(invokeLater);
+                }
                 invokeLater = $timeout(function () {
                     resetTree(scope.tree, function (nodeData) {
                         nodeData.open = false;
@@ -121,5 +129,5 @@ main.directive("treeSelect", function ($compile, $timeout) {
                 unbind();
             });
         }
-    }
+    };
 });

@@ -34,15 +34,15 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
         scope: {
             regionConfig: '='
         },
-        template: '<p class="tree-select-path"\
-                ng-mouseover="regionCtrl.toggleTree(true)"\
-                ng-mouseout="regionCtrl.toggleTree(false)">\
-                <span class="tree-select-node" ng-show="regionCtrl.regionPath.length===0">_</span>\
-                <span ng-repeat="leaf in regionCtrl.regionPath track by $index"\
-                    ng-class="{\'next\':!$first}"\
-                    class="tree-select-node" ng-click="regionCtrl.selectPath($index)"\
-                    >{{leaf.originEntity.regionName}}</span>\
-            </p>',
+        template: '<p class="tree-select-path"' +
+                'ng-mouseover="regionCtrl.toggleTree(true)"' +
+                'ng-mouseout="regionCtrl.toggleTree(false)">' +
+                '<span class="tree-select-node" ng-show="regionCtrl.regionPath.length===0">_</span>' +
+                '<span ng-repeat="leaf in regionCtrl.regionPath track by $index"' +
+                    'ng-class="{\'next\':!$first}"' +
+                    'class="tree-select-node" ng-click="regionCtrl.selectPath($index)"' +
+                    '>{{leaf.originEntity.regionName}}</span>' +
+            '</p>',
         compile: function (ele, attrs) {
             var valueField = 'regionCode';
 
@@ -63,8 +63,8 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
             };
 
             var compileTree = function () {
-                var template = "<tree-select tree-config='treeConfig'\
-                    tree='treeConfig.tree' class='tree-select' ng-style='treeStyle'></tree-select>";
+                var template = "<tree-select tree-config='treeConfig'"+
+                    "tree='treeConfig.tree' class='tree-select' ng-style='treeStyle'></tree-select>";
                 var scope = $rootScope.$new();
                 initScope(scope);
                 var dom = $(template);
@@ -185,7 +185,7 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                 });
 
                 regionScope.regionCtrl.init();
-            }
+            };
         }
     };
 });

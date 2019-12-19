@@ -277,14 +277,14 @@ directives.directive("gxSlide", function () {
             animation: '=?'
         },
         replace: true,
-        template: "<div class='gx-slide' ng-transclude\
-            ng-class='{\
-                \"active\":active,\
-                \"left\":direction===\"left\",\
-                \"right\":direction===\"right\",\
-                \"animation\":animation\
-            }'\
-            ></div>",
+        template: "<div class='gx-slide' ng-transclude" +
+            "ng-class='{" +
+                "\"active\":active," +
+                "\"left\":direction===\"left\"," +
+                "\"right\":direction===\"right\"," +
+                "\"animation\":animation" +
+            "}'" +
+        "></div>",
         link: function (scope, ele, attrs, carouselCtrl) {
             carouselCtrl.addSlide(scope, ele);
 
@@ -293,5 +293,5 @@ directives.directive("gxSlide", function () {
                 carouselCtrl.removeSlide(scope);
             });
         }
-    }
+    };
 });
