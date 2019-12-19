@@ -1,13 +1,4 @@
-var main = angular.module("directives", ["directives.carouselExt"]);
-
-main.controller("mainCtrl", function ($scope, $http) {
-    $scope.txt = "angular loaded";
-
-    $scope.name = "yangbo";
-    $scope.say = function() {
-        // alert('hello!');
-    };
-
+angular.module("directives").controller("mainCtrl", function ($scope, $http) {
 
     $scope.regionCtrl = {
         tree: [],

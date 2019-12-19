@@ -1,5 +1,4 @@
-var directives = angular.module('directives.carouselExt', []);
-
+var directives = angular.module('directives');
 
 /**
  * $transition service provides a consistent interface to trigger CSS 3 transitions and to be informed when they complete.

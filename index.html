@@ -6,42 +6,29 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     
-    <link rel="stylesheet" href="./font-awesome-4.7.0/css/font-awesome.css">
-    <link rel="stylesheet" href="./tree_select/tree_select.css">
+    <link rel="stylesheet" href="font-awesome-4.7.0/css/font-awesome.css">
+    <link rel="stylesheet" href="tree_select/tree_select.css">
     <link rel="stylesheet" href="carousel/carousel.css">
     <link rel="stylesheet" href="index.css">
 
-    <script src="angular.js"></script>
-    <script src="jquery-1.4.4.min.js"></script>
-    <script src="jquery.ztree.all.min.js"></script>
-    <script src="./carousel/carousel.js"></script>
-    <script src="index.js" defer></script>
-    <script src="tree_select/tree_select.js" defer></script>
-    <script src="region/region.js" defer></script>
-    <script src="./ng_directive_test.js" defer></script>
+    <script src="lib/angular.js"></script>
+    <script src="lib/jquery-1.4.4.min.js"></script>
+    <script src="lib/jquery.ztree.all.min.js"></script>
+    <script>
+        angular.module("directives", []);
+    </script>
+    <script src="carousel/carousel.js"></script>
+    <script src="tree_select/tree_select.js"></script>
+    <script src="region/region.js"></script>
+    <script src="index.js"></script>
 </head>
 <body ng-controller="mainCtrl">
-
-    <div id="app">
-        <p>{{txt}}</p>
-    </div>
 
     <div class="container" style="background-color: #0f214a;">
         <input type="text" ng-model="regionCtrl.regionName">
         <button ng-click="regionCtrl.setLeaf(regionCtrl.regionName)">测试设置树的方法</button>
         <!-- <tree-select tree-config="regionCtrl.treeConfig" tree="regionCtrl.tree"></tree-select> -->
         <region-select region-config="regionCtrl.regionConfig"></region-select>
-    </div>
-
-    <div>
-        <input type="text" ng-model="name" placeholder="Enter name"/>
-        <br />
-        {{ name }}
-        <hello-world say="say()" name="{{name}}"></hello-world>
-    </div>
-
-    <div>
-        <tree-list tree-config="treeCtrl.treeConfig" li-selected="treeCtrl.liSelected"></tree-list>
     </div>
 
     <div class="carousel-testing">
