@@ -26,6 +26,7 @@ directives.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q,
 
         if (endEventName) {
             element.bind(endEventName, transitionEndHandler);
+            var reflow = element[0].offsetWidth; //force reflow
         }
 
         // Wrap in a timeout to allow the browser time to update the DOM before the transition is to occur
@@ -99,74 +100,61 @@ directives.controller("carouselController", [
         var slides = $scope.slides = [];
         var self = this;
         var lastTransition, autoInterval;
+        var activeSlide = null, activeSlideIndex;
 
         /** direction: "left" | "right" */
         self.setSelect = function (slide, direction) {
-            var curActiveIndex = self.getActiveIndex();
             var slideIndex = slides.indexOf(slide);
-            var curActiveSlide = slides[curActiveIndex];
-            if (slide === curActiveSlide || !curActiveSlide) {
+            if (slide === activeSlide || !activeSlide) {
                 slide.active = true;
+                activeSlide = slide;
                 return;
             }
             if (!direction) {
+                var curActiveIndex = self.getActiveIndex();
                 direction = slideIndex > curActiveIndex ? 'left' : 'right';
             }
 
             if (lastTransition) {
-                console.log("busy");
                 lastTransition.cancel();
                 $timeout(goSlide);
             } else {
-                console.log("free")
                 goSlide();
             }
 
             function goSlide() {
                 for (var i = 0; i < slides.length; i++) {
-                    if (slides[i] !== curActiveSlide && slides[i] !== slide) {
-                        angular.extend(slides[i], {
-                            animation: false,
-                            direction: false,
-                            active: false
-                        });
+                    if (slides[i] !== activeSlide && slides[i] !== slide) {
+                        angular.extend(slides[i], { animation: false, direction: false, active: false });
                     }
                 }
                 var revertDirection = direction === 'left' ? 'right' : 'left';
                 var fromDirection = ['', direction],
                     toDirection   = [revertDirection, ''];
 
-                angular.extend(curActiveSlide, { animation: true, direction: fromDirection[0], active: true });
+                angular.extend(activeSlide, { animation: true, direction: fromDirection[0], active: true });
                 angular.extend(slide, { animation: true, direction: fromDirection[1], active: true });
-                // angular.extend(preSlide, { animation: true, direction: fromDirection[0], active: true });
-                // angular.extend(nextSlide, { animation: true, direction: fromDirection[1], active: true });
-
-                var reflow2 = curActiveSlide.$element[0].offsetWidth; //force reflow
-                var reflow = slide.$element[0].offsetWidth; //force reflow
 
                 (function (preSlide, nextSlide) {
-                    lastTransition = $transition(nextSlide.$element, function () {
-                        angular.extend(preSlide, { direction: toDirection[0] });
-                        angular.extend(nextSlide, { direction: toDirection[1] });
+                    $scope.$$postDigest(function () {
+                        lastTransition = $transition(nextSlide.$element, function () {
+                            angular.extend(preSlide, { direction: toDirection[0] });
+                            angular.extend(nextSlide, { direction: toDirection[1] });
+                        });
+                        lastTransition.then(function () {
+                            transitionDone(preSlide, nextSlide);
+                        }, function () {
+                            transitionDone(preSlide, nextSlide);
+                        });
                     });
-                    // lastTransition = $transition([preSlide.$element, nextSlide.$element], [function () {
-                    //     angular.extend(preSlide, { direction: toDirection[0] });
-                    // }, function () {
-                    //     angular.extend(nextSlide, { direction: toDirection[1] });
-                    // }]);
-                    lastTransition.then(function () {
-                        angular.extend(preSlide, { animation: false, direction: "", active: false });
-                        angular.extend(nextSlide, { animation: false, direction: "", active: true });
-                        lastTransition = null;
-                        console.log("after resolve");
-                    }, function () {
-                        angular.extend(preSlide, { animation: false, direction: "", active: false });
-                        angular.extend(nextSlide, { animation: false, direction: "", active: true });
-                        lastTransition = null;
-                        console.log("after reject");
-                    });
-                })(curActiveSlide, slide);
+                })(activeSlide, slide);
+                activeSlide = slide;
                 // self.restart();
+            }
+            function transitionDone(preSlide, nextSlide) {
+                angular.extend(preSlide, { animation: false, direction: "", active: false });
+                angular.extend(nextSlide, { animation: false, direction: "", active: true });
+                lastTransition = null;
             }
         };
 
