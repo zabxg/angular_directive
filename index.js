@@ -88,13 +88,9 @@ main.controller("mainCtrl", function ($scope, $http) {
             imageUrl: "images/v14.jpg"
         }],
         wrapperConfig: {
-            viewCount: 1,
-            isAutoPlay: 'r',
-            indicator: 'lr'
+            isPlay: false
         },
         slideConfig: {
-            height: 200,
-            width: 400
         }
     };
 });

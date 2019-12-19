@@ -149,7 +149,7 @@ directives.controller("carouselController", [
                     });
                 })(activeSlide, slide);
                 activeSlide = slide;
-                // self.restart();
+                self.restart();
             }
             function transitionDone(preSlide, nextSlide) {
                 angular.extend(preSlide, { animation: false, direction: "", active: false });
@@ -163,7 +163,7 @@ directives.controller("carouselController", [
             slides.push(slide);
             if (slides.length === 1) {
                 self.setSelect(slide);
-                // self.restart();
+                self.restart();
             }
         };
         self.removeSlide = function (slide) {
@@ -188,9 +188,11 @@ directives.controller("carouselController", [
 
         self.restart = function () {
             self.pause();
-            autoInterval = $timeout(function () {
-                $scope.next();
-            }, 1600, this);
+            if ($scope.carouselConfig.isPlay) {
+                autoInterval = $timeout(function () {
+                    $scope.next();
+                }, $scope.carouselConfig.playInterval, this);
+            }
         };
         self.pause = function () {
             if (autoInterval) {
@@ -236,10 +238,27 @@ directives.directive("gxCarousel", function () {
         link: function (scope, ele, attrs, carouselController) {
 
             var config = {
-                viewCount: 1,
-                isAutoPlay: 'r',
-                indicator: 'lr'
+                viewSize: 1,
+                slideSize: 1,
+
+                layout: 'h', // 'v' 'h' 卡片布局
+                
+                indicator: true,
+                onClickIndicator: null,
+
+                isPlay: true,
+                playMode: '', // 'one'一次 / 'loop'无缝循环 / 'back'回到第一 / 'cycle'往复循环
+                playInterval: 1500,
+                playAnimation: 'linear' // 'linear'
             };
+            var checkConfig = function () {
+                var carouselConfig = scope.carouselConfig;
+                if (!angular.isNumber(carouselConfig.playInterval) || 
+                    carouselConfig.playInterval !== carouselConfig.playInterval) {
+                    delete carouselConfig.playInterval;
+                }
+            };
+            checkConfig();
             scope.carouselConfig = angular.extend(config, scope.carouselConfig);
 
             scope.$on("$destroy", function () {
