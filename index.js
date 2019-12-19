@@ -55,7 +55,7 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
         }
     };
 
-    $http.get('tree_select/region.json').success(function(ret) {
+    $http.get('src/tree_select/region.json').success(function(ret) {
         var tree = ret.data;
         var firstLevel = parseInt(tree[0].originEntity.level);
         $scope.regionCtrl.tree = {

@@ -45,7 +45,7 @@ main.directive("treeSelect", function ($compile, $timeout) {
             treeConfig: '='
             // oneCombineMode: '@',
         },
-        templateUrl: "./tree_select/tree_select.html",
+        templateUrl: "./src/tree_select/tree_select.html",
         link: function (scope, ele, attrs) {
             var treeConfig = {
                 isShow: true,

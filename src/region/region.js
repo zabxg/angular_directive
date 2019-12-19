@@ -123,7 +123,7 @@ directives.directive("regionSelect", function ($timeout, $document, $http, $root
                         //     deferred.resolve([]);
                         // });
                         // return deferred.promise();
-                        return $http.get('tree_select/region.json').then(function(ret) {
+                        return $http.get('src/tree_select/region.json').then(function(ret) {
                             var tree = ret.data.data;
                             var firstLevel = parseInt(tree[0].originEntity.level);
                             return {

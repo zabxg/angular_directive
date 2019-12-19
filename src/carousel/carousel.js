@@ -233,9 +233,10 @@ directives.directive("gxCarousel", function () {
         },
         controller: 'carouselController',
         controllerAs: 'carouselCtrl',
-        templateUrl: './carousel/carousel.html',
+        templateUrl: './src/carousel/carousel.html',
         link: function (scope, ele, attrs, carouselController) {
 
+            console.log(scope.carouselConfig);
             var config = {
                 viewSize: 1,
                 slideSize: 1,
@@ -277,7 +278,7 @@ directives.directive("gxSlide", function () {
             animation: '=?'
         },
         replace: true,
-        template: "<div class='gx-slide' ng-transclude" +
+        template: "<div class='gx-slide' ng-transclude " +
             "ng-class='{" +
                 "\"active\":active," +
                 "\"left\":direction===\"left\"," +
