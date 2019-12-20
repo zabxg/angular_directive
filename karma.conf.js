@@ -7,6 +7,9 @@ module.exports = function (config) {
         frameworks: ['jasmine'],
         // list of files / patterns to load in the browser
         files: [
+            'node_modules/lodash/index.js',
+            'node_modules/jquery/dist/jquery.js',
+            'node_modules/sinon/pkg/sinon.js',
             "node_modules/angular/angular.js",
             "node_modules/angular-mocks/angular-mocks.js",
             "src/index.js",

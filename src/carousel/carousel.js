@@ -130,23 +130,27 @@ directives.controller("carouselController", [
                 var revertDirection = direction === 'left' ? 'right' : 'left';
                 var fromDirection = ['', direction],
                     toDirection   = [revertDirection, ''];
+                
+                if ($scope.carouselConfig.playAnimation === 'none') {
+                    transitionDone(activeSlide, slide);
+                } else {
+                    angular.extend(activeSlide, { animation: true, direction: fromDirection[0], active: true });
+                    angular.extend(slide, { animation: true, direction: fromDirection[1], active: true });
 
-                angular.extend(activeSlide, { animation: true, direction: fromDirection[0], active: true });
-                angular.extend(slide, { animation: true, direction: fromDirection[1], active: true });
-
-                (function (preSlide, nextSlide) {
-                    $scope.$$postDigest(function () {
-                        lastTransition = $transition(nextSlide.$element, function () {
-                            angular.extend(preSlide, { direction: toDirection[0] });
-                            angular.extend(nextSlide, { direction: toDirection[1] });
+                    (function (preSlide, nextSlide) {
+                        $scope.$$postDigest(function () {
+                            lastTransition = $transition(nextSlide.$element, function () {
+                                angular.extend(preSlide, { direction: toDirection[0] });
+                                angular.extend(nextSlide, { direction: toDirection[1] });
+                            });
+                            lastTransition.then(function () {
+                                transitionDone(preSlide, nextSlide);
+                            }, function () {
+                                transitionDone(preSlide, nextSlide);
+                            });
                         });
-                        lastTransition.then(function () {
-                            transitionDone(preSlide, nextSlide);
-                        }, function () {
-                            transitionDone(preSlide, nextSlide);
-                        });
-                    });
-                })(activeSlide, slide);
+                    })(activeSlide, slide);
+                }
                 activeSlide = slide;
                 self.restart();
             }
@@ -206,7 +210,7 @@ directives.controller("carouselController", [
             } else {
                 slideIndex--;
             }
-            if (!lastTransition) {
+            if (!lastTransition && slides[slideIndex]) {
                 self.setSelect(slides[slideIndex], 'left');
             }
         };
@@ -217,7 +221,7 @@ directives.controller("carouselController", [
             } else {
                 slideIndex++;
             }
-            if (!lastTransition) {
+            if (!lastTransition && slides[slideIndex]) {
                 self.setSelect(slides[slideIndex], 'right');
             }
         };
@@ -233,10 +237,9 @@ directives.directive("gxCarousel", function () {
         },
         controller: 'carouselController',
         controllerAs: 'carouselCtrl',
-        templateUrl: './src/carousel/carousel.html',
+        templateUrl: 'src/carousel/carousel.html',
         link: function (scope, ele, attrs, carouselController) {
 
-            console.log(scope.carouselConfig);
             var config = {
                 viewSize: 1,
                 slideSize: 1,
@@ -246,13 +249,13 @@ directives.directive("gxCarousel", function () {
                 indicator: true,
                 onClickIndicator: null,
 
-                isPlay: true,
+                isPlay: false,
                 playMode: '', // 'one'一次 / 'loop'无缝循环 / 'back'回到第一 / 'cycle'往复循环
                 playInterval: 1500,
-                playAnimation: 'linear' // 'linear'
+                playAnimation: 'none' // 'linear' 'none'
             };
             var checkConfig = function () {
-                var carouselConfig = scope.carouselConfig;
+                var carouselConfig = scope.carouselConfig || {};
                 if (!angular.isNumber(carouselConfig.playInterval) || 
                     carouselConfig.playInterval !== carouselConfig.playInterval) {
                     delete carouselConfig.playInterval;
@@ -290,7 +293,6 @@ directives.directive("gxSlide", function () {
             carouselCtrl.addSlide(scope, ele);
 
             scope.$on("$destroy", function () {
-                ele.unbind(transitionEndEventName, transitionEndHandler);
                 carouselCtrl.removeSlide(scope);
             });
         }

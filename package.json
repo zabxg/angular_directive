@@ -1,7 +1,10 @@
 {
     "name": "angular-directive",
     "version": "0.1.0",
-    "dependencies": {},
+    "dependencies": {
+        "jquery": "^3.4.1",
+        "lodash": "^3.10.1"
+    },
     "devDependencies": {
         "angular": "^1.2.32",
         "angular-mocks": "^1.2.32",
