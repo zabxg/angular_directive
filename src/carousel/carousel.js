@@ -100,6 +100,12 @@ directives.controller("carouselController", [
         var self = this;
         var lastTransition, autoInterval;
         var activeSlide = null;
+        var revertDirectionMap = {
+            "left": "right",
+            "right": "left",
+            "top": "bottom",
+            "bottom": "top"
+        };
 
         /** direction: "left" | "right" */
         self.setSelect = function (slide, direction) {
@@ -111,7 +117,11 @@ directives.controller("carouselController", [
             }
             if (!direction) {
                 var curActiveIndex = self.getActiveIndex();
-                direction = slideIndex > curActiveIndex ? 'left' : 'right';
+                if ($scope.carouselConfig.layout === 'v') {
+                    direction = slideIndex > curActiveIndex ? 'bottom' : 'top';
+                } else {
+                    direction = slideIndex > curActiveIndex ? 'right' : 'left';
+                }
             }
 
             if (lastTransition) {
@@ -127,7 +137,7 @@ directives.controller("carouselController", [
                         angular.extend(slides[i], { animation: false, direction: false, active: false });
                     }
                 }
-                var revertDirection = direction === 'left' ? 'right' : 'left';
+                var revertDirection = revertDirectionMap[direction];
                 var fromDirection = ['', direction],
                     toDirection   = [revertDirection, ''];
                 
@@ -211,7 +221,8 @@ directives.controller("carouselController", [
                 slideIndex--;
             }
             if (!lastTransition && slides[slideIndex]) {
-                self.setSelect(slides[slideIndex], 'left');
+                self.setSelect(slides[slideIndex], 
+                    $scope.carouselConfig.layout === 'v' ? 'top' : 'left');
             }
         };
         $scope.next = function () {
@@ -222,7 +233,8 @@ directives.controller("carouselController", [
                 slideIndex++;
             }
             if (!lastTransition && slides[slideIndex]) {
-                self.setSelect(slides[slideIndex], 'right');
+                self.setSelect(slides[slideIndex], 
+                    $scope.carouselConfig.layout === 'v' ? 'bottom' : 'right');
             }
         };
         $scope.select = self.setSelect;
@@ -286,6 +298,8 @@ directives.directive("gxSlide", function () {
                 "\"active\":active," +
                 "\"left\":direction===\"left\"," +
                 "\"right\":direction===\"right\"," +
+                "\"top\":direction===\"top\"," +
+                "\"bottom\":direction===\"bottom\"," +
                 "\"animation\":animation" +
             "}'" +
         "></div>",

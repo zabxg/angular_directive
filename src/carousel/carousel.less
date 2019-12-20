@@ -6,7 +6,7 @@
     
     .gx-carousel-indicator {
         position: absolute;
-        bottom: 0px;
+        bottom: @control-width;
         width: 100%;
         height: 30px;
         margin: 0;
@@ -118,6 +118,7 @@
         position: absolute;
         display: block;
         left: 0;
+        top: 0;
         overflow: hidden;
         &.left {
             left: -100%;
@@ -125,8 +126,15 @@
         &.right {
             left: 100%;
         }
+        &.top {
+            top: -100%;
+        }
+        &.bottom {
+            top: 100%;
+        }
     }
     &.animation {
-        transition: .3s left ease-in-out;
+        transition: .3s left ease-in-out,
+            .3s top ease-in-out;
     }
 }
