@@ -99,7 +99,7 @@ directives.controller("carouselController", [
         var slides = $scope.slides = [];
         var self = this;
         var lastTransition, autoInterval;
-        var activeSlide = null, activeSlideIndex;
+        var activeSlide = null;
 
         /** direction: "left" | "right" */
         self.setSelect = function (slide, direction) {

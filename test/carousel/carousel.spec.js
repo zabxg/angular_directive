@@ -20,6 +20,11 @@ describe("Testing Carousel", function () {
             }
         }
     };
+    var controlBtnClick = function (element, type) {
+        var indicator = findControl(element);
+        var btn = indicator.filter("." + type);
+        btn.click();
+    };
 
     beforeEach(angular.mock.module('directives'));
     beforeEach(inject(
@@ -89,20 +94,6 @@ describe("Testing Carousel", function () {
             expect(element.hasClass("carousel-container")).toBe(true);
         });
 
-        it("should compile the indicators", function () {
-            myScope.carouselData = [{text: "one"}];
-
-            var element = $compile(myTemplate)(myScope);
-            $httpBackend.flush();
-
-            var indicator = findIndicator(element);
-            expect(indicator.length).toBe(1);
-
-            myScope.carouselData.push({text: "two"});
-            myScope.$apply();
-            indicator = findIndicator(element);
-            expect(indicator.length).toBe(2);
-        });
         it("should set the first slide element active", function () {
             myScope.carouselData = [{text: "one"}];
 
@@ -116,8 +107,45 @@ describe("Testing Carousel", function () {
             expect(myScope.carouselData[0].active).toBe(true);
         });
 
+        describe("indicator button", function () {
+            it("should compile the indicators", function () {
+                myScope.carouselData = [{text: "one"}];
+
+                var element = $compile(myTemplate)(myScope);
+                $httpBackend.flush();
+
+                var indicator = findIndicator(element);
+                expect(indicator.length).toBe(1);
+
+                myScope.carouselData.push({text: "two"});
+                myScope.$apply();
+                indicator = findIndicator(element);
+                expect(indicator.length).toBe(2);
+            });
+
+            it("jump to corresponding page after clicking indicator button", function () {
+                myScope.carouselData = [{text: "one"}];
+
+                var element = $compile(myTemplate)(myScope);
+                $httpBackend.flush();
+
+                findIndicator(element).eq(0).click();
+                expectSlideActive(0);
+
+                myScope.carouselData.push({text: "two"});
+                myScope.carouselData.push({text: "three"});
+                myScope.$apply();
+                findIndicator(element).eq(1).click();
+                expectSlideActive(1);
+                findIndicator(element).eq(0).click();
+                expectSlideActive(0);
+                findIndicator(element).eq(2).click();
+                expectSlideActive(2);
+            });
+        });
+
         describe("control button", function () {
-            it("should only exist left and right when layout is set empty or 'h'", function () {
+            it("should only exist left and right button when layout is set empty or 'h'", function () {
                 var element = $compile(myTemplate)(myScope);
                 $httpBackend.flush();
                 
@@ -135,7 +163,7 @@ describe("Testing Carousel", function () {
                 expect(indicator.is(".top")).toBe(false);
                 expect(indicator.is(".bottom")).toBe(false);
             });
-            it("should only exist left and right when layout is set 'v'", function () {
+            it("should only exist top and bottom button when layout is set 'v'", function () {
                 myScope.carouselConfig.layout = 'v';
                 var element = $compile(myTemplate)(myScope);
                 $httpBackend.flush();
@@ -146,27 +174,67 @@ describe("Testing Carousel", function () {
                 expect(indicator.is(".top")).toBe(true);
                 expect(indicator.is(".bottom")).toBe(true);
             });
-            it("should jump to next page after clicking right button", function () {
-                myScope.carouselData = [{text: "one"}, {text: "two"}];
-                var element = $compile(myTemplate)(myScope);
-                $httpBackend.flush();
-                
-                var indicator = findControl(element);
-                var rightButton = indicator.filter(".right");
-                rightButton.click();
-                expectSlideActive(1);
-            });
-            it("should stay current page when only one page exists after clicking right button", function () {
+            it("jump to next page after clicking right button", function () {
                 myScope.carouselData = [{text: "one"}];
                 var element = $compile(myTemplate)(myScope);
                 $httpBackend.flush();
                 
-                var indicator = findControl(element);
-                var rightButton = indicator.filter(".right");
-                rightButton.click();
+                controlBtnClick(element, "right");
+                expectSlideActive(0);
+
+                myScope.carouselData.push({text: "two"});
+                myScope.$apply();
+                controlBtnClick(element, "right");
+                expectSlideActive(1);
+            });
+            it("jump to previous page after clicking left button", function () {
+                myScope.carouselData = [{text: "one"}];
+                var element = $compile(myTemplate)(myScope);
+                $httpBackend.flush();
+                
+                controlBtnClick(element, "left");
+                expectSlideActive(0);
+
+                myScope.carouselData.unshift({text: "two"});
+                myScope.$apply();
+                controlBtnClick(element, "left");
+                expectSlideActive(0);
+            });
+            it("jump to next page after clicking bottom button", function () {
+                myScope.carouselConfig.layout = 'v';
+                myScope.carouselData = [{text: "one"}];
+                var element = $compile(myTemplate)(myScope);
+                $httpBackend.flush();
+                
+                controlBtnClick(element, "bottom");
+                expectSlideActive(0);
+
+                myScope.carouselData.push({text: "two"});
+                myScope.$apply();
+                controlBtnClick(element, "bottom");
+                expectSlideActive(1);
+            });
+            it("jump to previous page after clicking top button", function () {
+                myScope.carouselConfig.layout = 'v';
+                myScope.carouselData = [{text: "one"}];
+                var element = $compile(myTemplate)(myScope);
+                $httpBackend.flush();
+                
+                controlBtnClick(element, "top");
+                expectSlideActive(0);
+
+                myScope.carouselData.unshift({text: "two"});
+                myScope.$apply();
+                controlBtnClick(element, "top");
                 expectSlideActive(0);
             });
         });
     });
+
+    describe("transition", function () {
+        
+    });
+
+    // describe("interval");
 
 });

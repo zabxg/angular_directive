@@ -79,7 +79,8 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
             imageUrl: "images/v14.jpg"
         }],
         wrapperConfig: {
-            isPlay: false
+            isPlay: false,
+            layout: 'v'
         },
         slideConfig: {
         }
