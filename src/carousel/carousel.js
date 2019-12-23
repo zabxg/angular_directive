@@ -100,16 +100,11 @@ directives.controller("carouselController", [
         var self = this;
         var lastTransition, autoInterval;
         var activeSlide = null;
-        var revertDirectionMap = {
-            "left": "right",
-            "right": "left",
-            "top": "bottom",
-            "bottom": "top"
-        };
 
         /** direction: "left" | "right" */
         self.setSelect = function (slide, direction) {
             var slideIndex = slides.indexOf(slide);
+            var positionAttrName;
             if (slide === activeSlide || !activeSlide) {
                 slide.active = true;
                 activeSlide = slide;
@@ -123,50 +118,55 @@ directives.controller("carouselController", [
                     direction = slideIndex > curActiveIndex ? 'right' : 'left';
                 }
             }
+            
+            if ($scope.carouselConfig.layout === 'v') {
+                positionAttrName = "top";
+            } else {
+                positionAttrName = "left";
+            }
 
             if (lastTransition) {
                 lastTransition.cancel();
-                $timeout(goSlide);
+                $timeout(goNext);
             } else {
-                goSlide();
+                goNext();
             }
 
-            function goSlide() {
-                for (var i = 0; i < slides.length; i++) {
-                    if (slides[i] !== activeSlide && slides[i] !== slide) {
-                        angular.extend(slides[i], { animation: false, direction: false, active: false });
-                    }
+            function goNext() {
+                var beforePosition = $scope.layoutSize[positionAttrName], afterPosition;
+                if (direction === 'bottom' || direction === 'right') {
+                    afterPosition = parseFloat(beforePosition) - 100 + "%";
+                } else {
+                    afterPosition = parseFloat(beforePosition) + 100 + "%";
                 }
-                var revertDirection = revertDirectionMap[direction];
-                var fromDirection = ['', direction],
-                    toDirection   = [revertDirection, ''];
+                slide.active = true;
+                activeSlide.active = false;
                 
                 if ($scope.carouselConfig.playAnimation === 'none') {
-                    transitionDone(activeSlide, slide);
+                    transitionDone();
                 } else {
-                    angular.extend(activeSlide, { animation: true, direction: fromDirection[0], active: true });
-                    angular.extend(slide, { animation: true, direction: fromDirection[1], active: true });
-
-                    (function (preSlide, nextSlide) {
+                    $scope.layoutClass.push("animation");
+                    
+                    (function (el) {
                         $scope.$$postDigest(function () {
-                            lastTransition = $transition(nextSlide.$element, function () {
-                                angular.extend(preSlide, { direction: toDirection[0] });
-                                angular.extend(nextSlide, { direction: toDirection[1] });
+                            lastTransition = $transition(el, function () {
+                                $scope.layoutSize[positionAttrName] = afterPosition;
                             });
                             lastTransition.then(function () {
-                                transitionDone(preSlide, nextSlide);
+                                $scope.layoutClass.pop();
+                                lastTransition = null;
                             }, function () {
-                                transitionDone(preSlide, nextSlide);
+                                $scope.layoutClass.pop();
+                                lastTransition = null;
                             });
                         });
-                    })(activeSlide, slide);
+                    })($scope.$transcludeElement);
                 }
                 activeSlide = slide;
                 self.restart();
             }
-            function transitionDone(preSlide, nextSlide) {
-                angular.extend(preSlide, { animation: false, direction: "", active: false });
-                angular.extend(nextSlide, { animation: false, direction: "", active: true });
+            function transitionDone() {
+                $scope.layoutSize[positionAttrName] = afterPosition;
                 lastTransition = null;
             }
         };
@@ -177,6 +177,12 @@ directives.controller("carouselController", [
             if (slides.length === 1) {
                 self.setSelect(slide);
                 self.restart();
+            } else {
+                if ($scope.carouselConfig.layout === 'v') {
+                    $scope.layoutSize.height = parseFloat($scope.layoutSize.height) + 100 + "%";
+                } else {
+                    $scope.layoutSize.width  = parseFloat($scope.layoutSize.width)  + 100 + "%";
+                }
             }
         };
         self.removeSlide = function (slide) {
@@ -187,6 +193,11 @@ directives.controller("carouselController", [
                 }
             }
             if (slides.length > 1) {
+                if ($scope.carouselConfig.layout === 'v') {
+                    $scope.layoutSize.height = parseFloat($scope.layoutSize.height) - 100 + "%";
+                } else {
+                    $scope.layoutSize.width  = parseFloat($scope.layoutSize.width)  - 100 + "%";
+                }
                 self.restart();
             }
         };
@@ -253,6 +264,7 @@ directives.directive("gxCarousel", function () {
         link: function (scope, ele, attrs, carouselController) {
 
             var config = {
+                viewSize: 1,
                 layout: 'h', // 'v' 'h' 卡片布局
                 indicator: true,
                 isPlay: false,
@@ -265,9 +277,37 @@ directives.directive("gxCarousel", function () {
                     carouselConfig.playInterval !== carouselConfig.playInterval) {
                     delete carouselConfig.playInterval;
                 }
+                if (!angular.isNumber(carouselConfig.viewSize) || 
+                    carouselConfig.viewSize === 0 ||
+                    carouselConfig.viewSize !== carouselConfig.viewSize) {
+                    delete carouselConfig.viewSize;
+                }
+                if (!angular.isString(carouselConfig.layout) ||
+                    carouselConfig.layout !== 'v' || carouselConfig.layout !== 'h') {
+                    delete carouselConfig.playInterval;
+                }
             };
             checkConfig();
             scope.carouselConfig = angular.extend(config, scope.carouselConfig);
+            if (scope.carouselConfig.layout === 'v') {
+                scope.layoutClass = ['column'];
+            } else {
+                scope.layoutClass = ['row'];
+            }
+            scope.layoutSize = {
+                left: '0%',
+                top:  '0%',
+                width:  '100%',
+                height: '100%'
+            };
+            scope.$transcludeElement = (function () {
+                var transcludeElement;
+                transcludeElement = ele.children().eq(0).children().eq(0).children().eq(0);
+                if (transcludeElement.hasClass("gx-carousel-wrapper")) {
+                    return transcludeElement;
+                }
+                return ele;
+            })();
 
             scope.$on("$destroy", function () {
                 carouselController.pause();
@@ -281,21 +321,10 @@ directives.directive("gxSlide", function () {
         restrict: 'A',
         transclude: true,
         scope: {
-            active: '=?',
-            direction: '=?',
-            animation: '=?'
+            active: '=?'
         },
         replace: true,
-        template: "<div class='gx-slide' ng-transclude " +
-            "ng-class='{" +
-                "\"active\":active," +
-                "\"left\":direction===\"left\"," +
-                "\"right\":direction===\"right\"," +
-                "\"top\":direction===\"top\"," +
-                "\"bottom\":direction===\"bottom\"," +
-                "\"animation\":animation" +
-            "}'" +
-        "></div>",
+        template: "<div class='gx-slide' ng-transclude></div>",
         link: function (scope, ele, attrs, carouselCtrl) {
             carouselCtrl.addSlide(scope, ele);
 

@@ -80,19 +80,29 @@
   background: linear-gradient(to top, #b7b8b9, transparent);
 }
 .gx-carousel-container .gx-carousel-main {
+  position: relative;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
-}
-.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
   overflow: hidden;
 }
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper {
+  position: absolute;
+  display: flex;
+  overflow: hidden;
+}
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper.row {
+  flex-direction: row;
+}
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper.column {
+  flex-direction: column;
+}
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper.animation {
+  transition: 0.3s left ease-in-out, 0.3s top ease-in-out;
+}
 .gx-slide {
-  display: none;
   width: 100%;
+  height: 100%;
 }
 .gx-slide.active {
   position: absolute;
@@ -112,7 +122,4 @@
 }
 .gx-slide.active.bottom {
   top: 100%;
-}
-.gx-slide.animation {
-  transition: 0.3s left ease-in-out, 0.3s top ease-in-out;
 }
