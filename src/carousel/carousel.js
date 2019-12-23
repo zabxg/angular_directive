@@ -253,16 +253,9 @@ directives.directive("gxCarousel", function () {
         link: function (scope, ele, attrs, carouselController) {
 
             var config = {
-                viewSize: 1,
-                slideSize: 1,
-
                 layout: 'h', // 'v' 'h' 卡片布局
-                
                 indicator: true,
-                onClickIndicator: null,
-
                 isPlay: false,
-                playMode: '', // 'one'一次 / 'loop'无缝循环 / 'back'回到第一 / 'cycle'往复循环
                 playInterval: 1500,
                 playAnimation: 'none' // 'linear' 'none'
             };

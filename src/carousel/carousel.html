@@ -1,6 +1,6 @@
 <div class="gx-carousel-container">
 
-    <ol class="gx-carousel-indicator">
+    <ol class="gx-carousel-indicator" ng-if="carouselConfig.indicator">
         <li ng-repeat="item in slides track by $index"
             ng-class="{'active':item.active}"
             ng-click="select(item)" class="indicator-icon">

@@ -80,7 +80,8 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
         }],
         wrapperConfig: {
             isPlay: false,
-            layout: 'v',
+            // layout: 'v',
+            indicator: false,
             playAnimation: 'linear'
         },
         slideConfig: {
