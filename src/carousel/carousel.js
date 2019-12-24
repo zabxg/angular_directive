@@ -99,7 +99,7 @@ directives.controller("carouselController", [
         var slides = $scope.slides = [];
         var self = this;
         var lastTransition, autoInterval;
-        var hasFirstElement = false, hasLastElement = false;
+        var hasLastElement = false;
         var activeSlide = null;
 
         /** direction: "left" | "right" */
@@ -107,16 +107,17 @@ directives.controller("carouselController", [
             var curActiveIndex = self.getActiveIndex();
             var slideIndex = slides.indexOf(slide);
             var positionAttrName;
-            if (slide === activeSlide || !activeSlide) {
-                slide.active = true;
-                activeSlide = slide;
-                return;
-            }
-            
             if ($scope.carouselConfig.layout === 'v') {
                 positionAttrName = "top";
             } else {
                 positionAttrName = "left";
+            }
+
+            if (slide === activeSlide || !activeSlide) {
+                slide.active = true;
+                activeSlide = slide;
+                $scope.layoutSize[positionAttrName] = "-100%";
+                return;
             }
 
             if (lastTransition) {
@@ -128,26 +129,32 @@ directives.controller("carouselController", [
 
             function goNext() {
                 var beforeLayoutClassLength = $scope.layoutClass.length;
-                var beforePosition = $scope.layoutSize[positionAttrName], afterPosition;
+                var beforePosition = $scope.layoutSize[positionAttrName], 
+                    middlePosition, afterPosition;
 
-                if (direction) {
-                    if ((slideIndex === 0 && curActiveIndex === slides.length - 1) || 
-                        (curActiveIndex === 0 && slideIndex === slides.length - 1)) {
-                        if (!hasLastElement) {
-                            slides[0].appendAgain(true);
-                            hasLastElement = true;
-                        }
-                        if (!hasFirstElement) {
-                            slides[slides.length - 1].appendAgain();
-                            hasFirstElement = true;
-                        }
-                    }
-                }
-
-                afterPosition = parseFloat(beforePosition) - 100 * (slideIndex - curActiveIndex) + "%";
                 slide.active = true;
                 activeSlide.active = false;
-                
+
+                if (direction && (
+                    (slideIndex === 0 && curActiveIndex === slides.length - 1) || 
+                    (curActiveIndex === 0 && slideIndex === slides.length - 1))) {
+                    if (!hasLastElement) {
+                        $scope.$transcludeElement.append(slides[0].$element.clone());
+                        hasLastElement = true;
+                        self.extendWrapperSize();
+                    }
+                    if (slideIndex === 0 && curActiveIndex === slides.length - 1) {
+                        middlePosition = -(slides.length + 1) * 100 + "%";
+                        afterPosition = "-100%";
+                    } else if (curActiveIndex === 0 && slideIndex === slides.length - 1) {
+                        middlePosition = "0%";
+                        afterPosition = -slides.length * 100 + "%";
+                    }
+                } else {
+                    afterPosition = parseFloat(beforePosition) - 100 * (slideIndex - curActiveIndex) + "%";
+                    middlePosition = afterPosition;
+                }
+                    
                 if ($scope.carouselConfig.playAnimation === 'none') {
                     transitionDone();
                 } else {
@@ -156,7 +163,7 @@ directives.controller("carouselController", [
                     (function (el) {
                         $scope.$$postDigest(function () {
                             lastTransition = $transition(el, function () {
-                                $scope.layoutSize[positionAttrName] = afterPosition;
+                                $scope.layoutSize[positionAttrName] = middlePosition;
                             });
                             lastTransition.then(transitionDone, transitionDone);
                         });
@@ -177,17 +184,12 @@ directives.controller("carouselController", [
             slide.$element = element;
             slides.push(slide);
             if (slides.length === 1) {
-                hasFirstElement = false;
                 hasLastElement = false;
+                $scope.$transcludeElement.prepend(slide.$element.clone());
                 self.setSelect(slide);
                 self.restart();
-            } else {
-                if ($scope.carouselConfig.layout === 'v') {
-                    $scope.layoutSize.height = parseFloat($scope.layoutSize.height) + 100 + "%";
-                } else {
-                    $scope.layoutSize.width  = parseFloat($scope.layoutSize.width)  + 100 + "%";
-                }
             }
+            self.extendWrapperSize();
         };
         self.removeSlide = function (slide) {
             for (var i = 0; i < slides.length; i++) {
@@ -203,6 +205,13 @@ directives.controller("carouselController", [
                     $scope.layoutSize.width  = parseFloat($scope.layoutSize.width)  - 100 + "%";
                 }
                 self.restart();
+            }
+        };
+        self.extendWrapperSize = function () {
+            if ($scope.carouselConfig.layout === 'v') {
+                $scope.layoutSize.height = parseFloat($scope.layoutSize.height) + 100 + "%";
+            } else {
+                $scope.layoutSize.width  = parseFloat($scope.layoutSize.width)  + 100 + "%";
             }
         };
 
@@ -293,6 +302,7 @@ directives.directive("gxCarousel", function () {
             };
             checkConfig();
             scope.carouselConfig = angular.extend(config, scope.carouselConfig);
+            
             if (scope.carouselConfig.layout === 'v') {
                 scope.layoutClass = ['column'];
             } else {
@@ -330,15 +340,6 @@ directives.directive("gxSlide", ['$compile', function ($compile) {
         replace: true,
         template: "<div class='gx-slide' ng-transclude></div>",
         link: function (scope, ele, attrs, carouselCtrl, transclude) {
-            scope.appendAgain = function (isLast) {
-                var element = ele.clone();
-                var resEle = $compile(element)(scope.$parent);
-                if (isLast) {
-                    ele.after(resEle);
-                } else {
-                    ele.prepend(resEle);
-                }
-            };
             
             carouselCtrl.addSlide(scope, ele);
 
