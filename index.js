@@ -112,6 +112,14 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
                     imageUrl: "images/v5_s.png"
                 }];
             }
+        },
+        add: function () {
+            this.data.push({
+                imageUrl: "images/v7_s.png"
+            });
+        },
+        remove: function () {
+            this.data.pop();
         }
     };
 });

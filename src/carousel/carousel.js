@@ -184,6 +184,10 @@ directives.controller("carouselController", [
                 self.extendWrapperSize(1);
                 self.setSelect(slide);
                 self.restart();
+            } else if (hasLastElement) {
+                self.removeSlideDOM(-1);
+                hasLastElement = false;
+                self.extendWrapperSize(-1);
             }
             self.extendWrapperSize(1);
         };
