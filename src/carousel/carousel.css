@@ -104,22 +104,3 @@
   width: 100%;
   height: 100%;
 }
-.gx-slide.active {
-  position: absolute;
-  display: block;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-}
-.gx-slide.active.left {
-  left: -100%;
-}
-.gx-slide.active.right {
-  left: 100%;
-}
-.gx-slide.active.top {
-  top: -100%;
-}
-.gx-slide.active.bottom {
-  top: 100%;
-}
