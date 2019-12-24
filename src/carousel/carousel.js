@@ -99,24 +99,18 @@ directives.controller("carouselController", [
         var slides = $scope.slides = [];
         var self = this;
         var lastTransition, autoInterval;
+        var hasFirstElement = false, hasLastElement = false;
         var activeSlide = null;
 
         /** direction: "left" | "right" */
         self.setSelect = function (slide, direction) {
+            var curActiveIndex = self.getActiveIndex();
             var slideIndex = slides.indexOf(slide);
             var positionAttrName;
             if (slide === activeSlide || !activeSlide) {
                 slide.active = true;
                 activeSlide = slide;
                 return;
-            }
-            if (!direction) {
-                var curActiveIndex = self.getActiveIndex();
-                if ($scope.carouselConfig.layout === 'v') {
-                    direction = slideIndex > curActiveIndex ? 'bottom' : 'top';
-                } else {
-                    direction = slideIndex > curActiveIndex ? 'right' : 'left';
-                }
             }
             
             if ($scope.carouselConfig.layout === 'v') {
@@ -133,12 +127,24 @@ directives.controller("carouselController", [
             }
 
             function goNext() {
+                var beforeLayoutClassLength = $scope.layoutClass.length;
                 var beforePosition = $scope.layoutSize[positionAttrName], afterPosition;
-                if (direction === 'bottom' || direction === 'right') {
-                    afterPosition = parseFloat(beforePosition) - 100 + "%";
-                } else {
-                    afterPosition = parseFloat(beforePosition) + 100 + "%";
+
+                if (direction) {
+                    if ((slideIndex === 0 && curActiveIndex === slides.length - 1) || 
+                        (curActiveIndex === 0 && slideIndex === slides.length - 1)) {
+                        if (!hasLastElement) {
+                            slides[0].appendAgain(true);
+                            hasLastElement = true;
+                        }
+                        if (!hasFirstElement) {
+                            slides[slides.length - 1].appendAgain();
+                            hasFirstElement = true;
+                        }
+                    }
                 }
+
+                afterPosition = parseFloat(beforePosition) - 100 * (slideIndex - curActiveIndex) + "%";
                 slide.active = true;
                 activeSlide.active = false;
                 
@@ -152,22 +158,18 @@ directives.controller("carouselController", [
                             lastTransition = $transition(el, function () {
                                 $scope.layoutSize[positionAttrName] = afterPosition;
                             });
-                            lastTransition.then(function () {
-                                $scope.layoutClass.pop();
-                                lastTransition = null;
-                            }, function () {
-                                $scope.layoutClass.pop();
-                                lastTransition = null;
-                            });
+                            lastTransition.then(transitionDone, transitionDone);
                         });
                     })($scope.$transcludeElement);
                 }
                 activeSlide = slide;
                 self.restart();
-            }
-            function transitionDone() {
-                $scope.layoutSize[positionAttrName] = afterPosition;
-                lastTransition = null;
+
+                function transitionDone() {
+                    $scope.layoutClass.length = beforeLayoutClassLength;
+                    $scope.layoutSize[positionAttrName] = afterPosition;
+                    lastTransition = null;
+                }
             }
         };
 
@@ -175,6 +177,8 @@ directives.controller("carouselController", [
             slide.$element = element;
             slides.push(slide);
             if (slides.length === 1) {
+                hasFirstElement = false;
+                hasLastElement = false;
                 self.setSelect(slide);
                 self.restart();
             } else {
@@ -261,7 +265,7 @@ directives.directive("gxCarousel", function () {
         controller: 'carouselController',
         controllerAs: 'carouselCtrl',
         templateUrl: 'src/carousel/carousel.html',
-        link: function (scope, ele, attrs, carouselController) {
+        link: function (scope, ele, attrs, carouselController, transcludeFn) {
 
             var config = {
                 viewSize: 1,
@@ -315,7 +319,7 @@ directives.directive("gxCarousel", function () {
         }
     };
 });
-directives.directive("gxSlide", function () {
+directives.directive("gxSlide", ['$compile', function ($compile) {
     return {
         require: '^gxCarousel',
         restrict: 'A',
@@ -325,7 +329,17 @@ directives.directive("gxSlide", function () {
         },
         replace: true,
         template: "<div class='gx-slide' ng-transclude></div>",
-        link: function (scope, ele, attrs, carouselCtrl) {
+        link: function (scope, ele, attrs, carouselCtrl, transclude) {
+            scope.appendAgain = function (isLast) {
+                var element = ele.clone();
+                var resEle = $compile(element)(scope.$parent);
+                if (isLast) {
+                    ele.after(resEle);
+                } else {
+                    ele.prepend(resEle);
+                }
+            };
+            
             carouselCtrl.addSlide(scope, ele);
 
             scope.$on("$destroy", function () {
@@ -333,4 +347,4 @@ directives.directive("gxSlide", function () {
             });
         }
     };
-});
+}]);
