@@ -83,63 +83,65 @@ directives.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q,
     return $transition;
 }]);
 
-/**
- *                                                                         pre
- *  ┌--------- item left  active animation ←----- item active animation ←-----------┐
- *  |    next                                                                       |
- *  ↓ ┌------→ item right active animation -----→ item active animation ------→ item active
- * item  pre                                          ↑                             |
- *  ↑ └------→ item left  active animation -----------┘                             |
- *  |                                                                      next     |
- *  └--------- item right active animation ←----- item active animation ←-----------┘
- */
 directives.controller("carouselController", [
-    "$scope", "$timeout", "$q", "$interval", "$transition",
-    function ($scope, $timeout, $q, $interval, $transition) {
+    "$scope", "$timeout", "$interval", "$transition",
+    function ($scope, $timeout, $interval, $transition) {
         var self = this;
         var slides = $scope.slides = [];
         var lastTransition, autoInterval;
         var cloneNodeAtFront = 0, cloneNodeAtEnd = 0;
         var activeSlide = null;
 
-        /** direction: "left" | "right" */
+        /**
+         * 设为选中元素
+         * @param {Scope} slide 设为选中的元素
+         * @param {undefined|"left"|"right"|"top"|"bottom"} direction 不传时不触发无限滚动，
+         * 此时最后一位到第一位向左方向滑动。
+         * @returns
+         */
         self.setSelect = function (slide, direction) {
             var curActiveIndex = self.getActiveIndex();
             var slideIndex = slides.indexOf(slide);
             var positionAttrName = $scope.carouselConfig.layout === 'v' ? 'top' : 'left';
 
-            if (slide === activeSlide || !activeSlide || (slides.length <= $scope.carouselConfig.viewSize)) {
+            // 仅有一个元素 或 当前页面不可滚动
+            if (slide === activeSlide || !activeSlide || 
+                (slides.length <= $scope.carouselConfig.viewSize)) {
                 slide.active = true;
                 activeSlide = slide;
                 $scope.layoutSize[positionAttrName] = "0%";
                 return;
             }
 
-            var beforeLayoutClassLength = $scope.layoutClass.length;
-            var beforePosition, middlePosition, afterPosition;
-            var viewSize = $scope.carouselConfig.viewSize;
             var slideSize = slides.length;
+            var viewSize = $scope.carouselConfig.viewSize;
+            var beforeLayoutClassLength = $scope.layoutClass.length;
             var moveUnit;
+            var beforePosition, middlePosition, afterPosition;
 
-            beforePosition = parseFloat($scope.layoutSize[positionAttrName]);
+            // 添加前后节点，方便做无限滚动。
+            // 这里的节点不进行编译和链接，所以不触发`gx-slide`的`addSlide`
             if (!cloneNodeAtFront) {
                 for (var i = 0; i < viewSize; i++) {
-                    $scope.$transcludeElement.prepend(slides[slideSize - i - 1].$element.clone());
+                    self.appendSlideDOM(0, -i - 1);
                     cloneNodeAtFront++;
                 }
             }
             if (!cloneNodeAtEnd) {
                 for (var i = 0; i < viewSize; i++) {
-                    $scope.$transcludeElement.append(slides[i].$element.clone());
+                    self.appendSlideDOM(-1, i);
                     cloneNodeAtEnd++;
                 }
             }
-            self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront, $scope.carouselConfig.viewSize);
+            self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront,
+                $scope.carouselConfig.viewSize);
+
             moveUnit = 100 / viewSize;
             beforePosition = -(curActiveIndex + viewSize) * moveUnit;
             $scope.layoutSize[positionAttrName] = beforePosition + "%";
 
             $scope.$$postDigest(function () {
+                // 确保上一次操作完成
                 if (lastTransition) {
                     lastTransition.cancel();
                     $timeout(goNext);
@@ -154,7 +156,7 @@ directives.controller("carouselController", [
 
                 afterPosition = beforePosition + (moveUnit * (curActiveIndex - slideIndex)) + "%";
                 middlePosition = afterPosition;
-                if (direction) {
+                if (direction) { // 传入`direction`表示开启某一方向的无限滚动
                     if (slideIndex === 0 && curActiveIndex === slideSize - 1) {
                         middlePosition = beforePosition - moveUnit + "%";
                         afterPosition = -viewSize * moveUnit + "%";
@@ -169,27 +171,27 @@ directives.controller("carouselController", [
                     transitionDone();
                 } else {
                     $scope.layoutClass.push("animation");
-                    
-                    (function (el) {
-                        $scope.$$postDigest(function () {
-                            lastTransition = $transition(el, function () {
-                                $scope.layoutSize[positionAttrName] = middlePosition;
-                            });
-                            lastTransition.then(transitionDone, transitionDone);
-                        });
-                    })($scope.$transcludeElement);
+                    lastTransition = $transition($scope.$transcludeElement, function () {
+                        $scope.layoutSize[positionAttrName] = middlePosition;
+                    });
+                    lastTransition.then(transitionDone, transitionDone);
                 }
                 activeSlide = slide;
                 self.restart();
 
                 function transitionDone() {
-                    $scope.layoutClass.length = beforeLayoutClassLength; // remove animation
+                    $scope.layoutClass.length = beforeLayoutClassLength;
                     $scope.layoutSize[positionAttrName] = afterPosition;
                     lastTransition = null;
                 }
             }
         };
 
+        /**
+         * 添加轮播元素，会同时更新因为无限滚动而添加的节点副本
+         * @param {Scope} slide 
+         * @param {DOMElement} element 
+         */
         self.addSlide = function (slide, element) {
             var viewSize = $scope.carouselConfig.viewSize;
             slide.$element = element;
@@ -208,6 +210,10 @@ directives.controller("carouselController", [
                 self.resetSliderDOM();
             }
         };
+        /**
+         * 移除轮播元素，会同时更新因为无限滚动而添加的节点副本
+         * @param {Scope} slide
+         */
         self.removeSlide = function (slide) {
             var viewSize = $scope.carouselConfig.viewSize;
             for (var i = 0; i < slides.length; i++) {
@@ -219,6 +225,7 @@ directives.controller("carouselController", [
                     break;
                 }
             }
+
             if (cloneNodeAtFront > 0 && slides.length > viewSize) {
                 self.removeSlideDOM(viewSize - 1);
                 self.appendSlideDOM(0, -1);
@@ -227,12 +234,16 @@ directives.controller("carouselController", [
             } else {
                 self.resetSliderDOM();
             }
+
             if (!activeSlide && slides[0]) {
                 self.setSelect(slides[0]);
             }
 
             self.restart();
         };
+        /**
+         * 移除因为无限滚动而额外添加的DOM节点
+         */
         self.resetSliderDOM = function () {
             while (cloneNodeAtEnd > 0) {
                 self.removeSlideDOM(-1);
@@ -244,11 +255,27 @@ directives.controller("carouselController", [
             }
             self.updateLayout(slides.length, $scope.carouselConfig.viewSize);
         };
+        /**
+         * 添加已有滑动元素的副本
+         * @param {Number} archorIndex 插入的位置，支持-1
+         * @param {Number} copyIndex 需要复制的元素，支持负值
+         */
         self.appendSlideDOM = function (archorIndex, copyIndex) {
-            var archorElement = $scope.$transcludeElement.children().eq(archorIndex);
             copyIndex = copyIndex + (copyIndex >= 0 ? 0 : slides.length);
-            archorElement.after(slides[copyIndex].$element.clone());
+            var slideCopyElement = slides[copyIndex].$element.clone();
+            if (archorIndex === 0) {
+                $scope.$transcludeElement.prepend(slideCopyElement);
+            } else if (archorIndex === -1) {
+                $scope.$transcludeElement.append(slideCopyElement);
+            } else {
+                var archorElement = $scope.$transcludeElement.children().eq(archorIndex);
+                archorElement.after(slideCopyElement);
+            }
         };
+        /**
+         * 移除节点
+         * @param {Number} index 需要删除的元素位置，支持负值
+         */
         self.removeSlideDOM = function (index) {
             var slideDOMs = $scope.$transcludeElement.children();
             var slideIndex = index + (index >= 0 ? 0 : slideDOMs.length);
@@ -257,6 +284,12 @@ directives.controller("carouselController", [
                 lastSlideDOM.remove();
             }
         };
+        /**
+         * 更新父元素及子元素的大小
+         * @param {Number} slideNum 所有子元素的数量（包括副本）
+         * @param {Number} viewNum 单窗口可视子元素的数量
+         * @returns
+         */
         self.updateLayout = function (slideNum, viewNum) {
             var positionAttrName = $scope.carouselConfig.layout === "v" ? "height" : "width";
             var slideSize = 100 / slideNum + "%";
@@ -335,6 +368,14 @@ directives.directive("gxCarousel", function () {
         templateUrl: 'src/carousel/carousel.html',
         link: function (scope, ele, attrs, carouselController, transcludeFn) {
 
+            /**
+             * @property {Number} viewSize 每个视图可见的元素数量
+             * @property {"v"|"h"} layout 布局，"v"为竖直布局; "h"为水平布局
+             * @property {Boolean} indicator 是否显示指示器
+             * @property {Boolean} isPlay 是否自动轮播
+             * @property {Number} playInterval 自动轮播的间隔
+             * @property {"none"|"linear"} playAnimation 轮播时的动画效果
+             */
             var config = {
                 viewSize: 1,
                 layout: 'h', // 'v' 'h' 卡片布局
@@ -343,8 +384,9 @@ directives.directive("gxCarousel", function () {
                 playInterval: 1500,
                 playAnimation: 'none' // 'linear' 'none'
             };
-            var checkConfig = function () {
-                var carouselConfig = scope.carouselConfig || {};
+
+            scope.checkConfig = function () {
+                var carouselConfig = this.carouselConfig || {};
                 if (!angular.isNumber(carouselConfig.playInterval) || 
                     carouselConfig.playInterval !== carouselConfig.playInterval) {
                     delete carouselConfig.playInterval;
@@ -359,26 +401,31 @@ directives.directive("gxCarousel", function () {
                     delete carouselConfig.playInterval;
                 }
             };
-            checkConfig();
-            scope.carouselConfig = angular.extend(config, scope.carouselConfig);
+            scope.extend = function () {
+                this.carouselConfig = angular.extend(config, this.carouselConfig);
 
-            scope.layoutSize = {
-                top:  '0%',
-                left: '0%'
-            };
-            if (scope.carouselConfig.layout === 'v') {
-                scope.layoutClass = ['column'];
-            } else {
-                scope.layoutClass = ['row'];
-            }
-            scope.$transcludeElement = (function () {
+                this.layoutSize = {
+                    top:  '0%',
+                    left: '0%'
+                };
+
+                if (this.carouselConfig.layout === 'v') {
+                    this.layoutClass = ['column'];
+                } else {
+                    this.layoutClass = ['row'];
+                }
+
                 var transcludeElement;
                 transcludeElement = ele.children().eq(0).children().eq(0).children().eq(0);
                 if (transcludeElement.hasClass("gx-carousel-wrapper")) {
-                    return transcludeElement;
+                    this.$transcludeElement = transcludeElement;
+                } else {
+                    this.$transcludeElement = ele;
                 }
-                return ele;
-            })();
+            };
+
+            scope.checkConfig();
+            scope.extend();
 
             scope.$on("$destroy", function () {
                 carouselController.pause();
