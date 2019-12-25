@@ -277,14 +277,14 @@ directives.controller("carouselController", [
         self.restart = function () {
             self.pause();
             if ($scope.carouselConfig.isPlay) {
-                autoInterval = $timeout(function () {
+                autoInterval = $interval(function () {
                     $scope.next();
                 }, $scope.carouselConfig.playInterval, this);
             }
         };
         self.pause = function () {
             if (autoInterval) {
-                $timeout.cancel(autoInterval);
+                $interval.cancel(autoInterval);
             }
         };
 
