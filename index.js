@@ -68,15 +68,15 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
 
     $scope.carouselExt = {
         data: [{
-            imageUrl: "images/v10.jpg"
+            imageUrl: "images/num_1.png"
         }, {
-            imageUrl: "images/v11.jpg"
+            imageUrl: "images/num_2.png"
         }, {
-            imageUrl: "images/v12.jpg"
+            imageUrl: "images/num_3.png"
         }, {
-            imageUrl: "images/v13.jpg"
+            imageUrl: "images/num_4.png"
         }, {
-            imageUrl: "images/v14.jpg"
+            imageUrl: "images/num_5.png"
         }],
         wrapperConfig: {
             viewSize: 2,
@@ -88,29 +88,29 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
         slideConfig: {
         },
         change: function () {
-            if (this.data[0].imageUrl !== "images/v10.jpg") {
+            if (this.data[0].imageUrl !== "images/num_1.png") {
                 this.data = [{
-                    imageUrl: "images/v10.jpg"
+                    imageUrl: "images/num_1.png"
                 }, {
-                    imageUrl: "images/v11.jpg"
+                    imageUrl: "images/num_2.png"
                 }, {
-                    imageUrl: "images/v12.jpg"
+                    imageUrl: "images/num_3.png"
                 }, {
-                    imageUrl: "images/v13.jpg"
+                    imageUrl: "images/num_4.png"
                 }, {
-                    imageUrl: "images/v14.jpg"
+                    imageUrl: "images/num_5.png"
                 }];
             } else {
                 this.data = [{
-                    imageUrl: "images/v1_s.png"
+                    imageUrl: "images/num_6.png"
                 }, {
-                    imageUrl: "images/v2_s.png"
+                    imageUrl: "images/num_7.png"
                 }, {
-                    imageUrl: "images/v3_s.png"
+                    imageUrl: "images/num_8.png"
                 }, {
-                    imageUrl: "images/v4_s.png"
+                    imageUrl: "images/num_9.png"
                 }, {
-                    imageUrl: "images/v5_s.png"
+                    imageUrl: "images/num_10.png"
                 }];
             }
         },
