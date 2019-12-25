@@ -79,6 +79,7 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
             imageUrl: "images/v14.jpg"
         }],
         wrapperConfig: {
+            viewSize: 2,
             isPlay: false,
             // layout: 'v',
             // indicator: false,

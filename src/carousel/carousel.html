@@ -14,19 +14,23 @@
     </ol>
 
     <a href role="button" class="gx-carousel-control left"
+        ng-class="{'disabled':slides.length>carouselConfig.viewSize}"
         ng-if="carouselConfig.layout==='h'" ng-click="pre()">
         <i class="fa fa-angle-left control-icon" aria-hidden="true"></i>
     </a>
     <a href role="button" class="gx-carousel-control right"
+        ng-class="{'disabled':slides.length>carouselConfig.viewSize}"
         ng-if="carouselConfig.layout==='h'" ng-click="next()">
         <i class="fa fa-angle-right control-icon" aria-hidden="true"></i>
     </a>
 
     <a href role="button" class="gx-carousel-control top" 
+        ng-class="{'disabled':slides.length>carouselConfig.viewSize}"
         ng-if="carouselConfig.layout==='v'" ng-click="pre()">
         <i class="fa fa-angle-up control-icon" aria-hidden="true"></i>
     </a>
     <a href role="button" class="gx-carousel-control bottom"
+        ng-class="{'disabled':slides.length>carouselConfig.viewSize}"
         ng-if="carouselConfig.layout==='v'" ng-click="next()">
         <i class="fa fa-angle-down control-icon" aria-hidden="true"></i>
     </a>
