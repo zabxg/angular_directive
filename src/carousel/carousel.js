@@ -99,7 +99,6 @@ directives.controller("carouselController", [
         var self = this;
         var slides = $scope.slides = [];
         var lastTransition, autoInterval;
-        var hasLastSlide = false;
         var cloneNodeAtFront = 0, cloneNodeAtEnd = 0;
         var activeSlide = null;
 
@@ -109,7 +108,7 @@ directives.controller("carouselController", [
             var slideIndex = slides.indexOf(slide);
             var positionAttrName = $scope.carouselConfig.layout === 'v' ? 'top' : 'left';
 
-            if (slide === activeSlide || !activeSlide) {
+            if (slide === activeSlide || !activeSlide || (slides.length <= $scope.carouselConfig.viewSize)) {
                 slide.active = true;
                 activeSlide = slide;
                 $scope.layoutSize[positionAttrName] = "0%";
@@ -202,7 +201,7 @@ directives.controller("carouselController", [
             }
             if (cloneNodeAtFront > 0 && slides.length > viewSize) {
                 self.removeSlideDOM(0);
-                self.appendSlideDOM(Math.max(0, viewSize - 2), slides.length - 1);
+                self.appendSlideDOM(Math.max(0, viewSize - 2), -1);
                 self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront,
                     $scope.carouselConfig.viewSize);
             } else {
@@ -210,6 +209,7 @@ directives.controller("carouselController", [
             }
         };
         self.removeSlide = function (slide) {
+            var viewSize = $scope.carouselConfig.viewSize;
             for (var i = 0; i < slides.length; i++) {
                 if (slides[i] === slide) {
                     if (slide.active) {
@@ -219,11 +219,18 @@ directives.controller("carouselController", [
                     break;
                 }
             }
+            if (cloneNodeAtFront > 0 && slides.length > viewSize) {
+                self.removeSlideDOM(viewSize - 1);
+                self.appendSlideDOM(0, -1);
+                self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront,
+                    $scope.carouselConfig.viewSize);
+            } else {
+                self.resetSliderDOM();
+            }
             if (!activeSlide && slides[0]) {
                 self.setSelect(slides[0]);
             }
 
-            self.resetSliderDOM();
             self.restart();
         };
         self.resetSliderDOM = function () {
