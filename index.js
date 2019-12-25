@@ -68,15 +68,15 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
 
     $scope.carouselExt = {
         data: [{
-            imageUrl: "images/v10.jpg"
+            imageUrl: "images/num_1.png"
         }, {
-            imageUrl: "images/v11.jpg"
+            imageUrl: "images/num_2.png"
         }, {
-            imageUrl: "images/v12.jpg"
+            imageUrl: "images/num_3.png"
         }, {
-            imageUrl: "images/v13.jpg"
+            imageUrl: "images/num_4.png"
         }, {
-            imageUrl: "images/v14.jpg"
+            imageUrl: "images/num_5.png"
         }],
         wrapperConfig: {
             isPlay: true,
@@ -85,6 +85,44 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
             playAnimation: 'linear'
         },
         slideConfig: {
+        },
+        change: function () {
+            if (this.data[0].imageUrl !== "images/num_1.png") {
+                this.data = [{
+                    imageUrl: "images/num_1.png"
+                }, {
+                    imageUrl: "images/num_2.png"
+                }, {
+                    imageUrl: "images/num_3.png"
+                }, {
+                    imageUrl: "images/num_4.png"
+                }, {
+                    imageUrl: "images/num_5.png"
+                }];
+            } else {
+                this.data = [{
+                    imageUrl: "images/num_6.png"
+                }, {
+                    imageUrl: "images/num_7.png"
+                }, {
+                    imageUrl: "images/num_8.png"
+                }, {
+                    imageUrl: "images/num_9.png"
+                }, {
+                    imageUrl: "images/num_10.png"
+                }];
+            }
+        },
+        add: function () {
+            this.data.push({
+                imageUrl: "images/num_infinite.png"
+            });
+        },
+        remove: function () {
+            this.data.pop();
+        },
+        alert: function (msg) {
+            alert("This is: " + msg);
         }
     };
 });

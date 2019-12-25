@@ -6,24 +6,19 @@
     
     .gx-carousel-indicator {
         position: absolute;
+        left: 50%;
         bottom: @control-width;
-        width: 100%;
         height: 30px;
-        margin: 0;
-        padding: 0;
+        line-height: 30px;
+        padding: 0 20px;
         text-align: center;
+        transform: translateX(-50%);
         z-index: 1;
-        // &::after {
-        //     content: '';
-        //     position: absolute;
-        //     left: 0;
-        //     top: 0;
-        //     width: 100%;
-        //     height: 100%;
-        //     background-color: #eeeeee;
-        //     filter:blur(20px);
-        // }
 
+        .gx-carousel-indicator-inner {
+            margin: 0;
+            padding: 0;
+        }
         .indicator-icon {
             display: inline-block;
             height: 10px;
@@ -49,6 +44,16 @@
                     margin-top: 0;
                 }
             }
+        }
+        .gx-carousel-indicator-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            filter: blur(10px);
+            z-index: -1;
         }
     }
     
@@ -98,43 +103,33 @@
     }
     
     .gx-carousel-main {
+        position: relative;
         height: 100%;
         width: 100%;
         box-sizing: border-box;
+        overflow: hidden;
         
         .gx-carousel-wrapper {
-            position: relative;
-            width: 100%;
+            position: absolute;
+            display: flex;
             height: 100%;
+            width: 100%;
             overflow: hidden;
+            &.row {
+                flex-direction: row;
+            }
+            &.column {
+                flex-direction: column;
+            }
+            &.animation {
+                transition: .3s left ease-in-out,
+                    .3s top ease-in-out;
+            }
         }
     }
 }
 
 .gx-slide {
-    display: none;
     width: 100%;
-    &.active {
-        position: absolute;
-        display: block;
-        left: 0;
-        top: 0;
-        overflow: hidden;
-        &.left {
-            left: -100%;
-        }
-        &.right {
-            left: 100%;
-        }
-        &.top {
-            top: -100%;
-        }
-        &.bottom {
-            top: 100%;
-        }
-    }
-    &.animation {
-        transition: .3s left ease-in-out,
-            .3s top ease-in-out;
-    }
+    height: 100%;
 }

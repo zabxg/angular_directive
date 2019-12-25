@@ -5,13 +5,18 @@
 }
 .gx-carousel-container .gx-carousel-indicator {
   position: absolute;
+  left: 50%;
   bottom: 40px;
-  width: 100%;
   height: 30px;
+  line-height: 30px;
+  padding: 0 20px;
+  text-align: center;
+  transform: translateX(-50%);
+  z-index: 1;
+}
+.gx-carousel-container .gx-carousel-indicator .gx-carousel-indicator-inner {
   margin: 0;
   padding: 0;
-  text-align: center;
-  z-index: 1;
 }
 .gx-carousel-container .gx-carousel-indicator .indicator-icon {
   display: inline-block;
@@ -35,6 +40,16 @@
 }
 .gx-carousel-container .gx-carousel-indicator .indicator-icon.active .indicator-inner {
   margin-top: 0;
+}
+.gx-carousel-container .gx-carousel-indicator .gx-carousel-indicator-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.3);
+  filter: blur(10px);
+  z-index: -1;
 }
 .gx-carousel-container .gx-carousel-control {
   position: absolute;
@@ -80,39 +95,29 @@
   background: linear-gradient(to top, #b7b8b9, transparent);
 }
 .gx-carousel-container .gx-carousel-main {
+  position: relative;
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .gx-carousel-container .gx-carousel-main .gx-carousel-wrapper {
-  position: relative;
-  width: 100%;
+  position: absolute;
+  display: flex;
   height: 100%;
+  width: 100%;
   overflow: hidden;
+}
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper.row {
+  flex-direction: row;
+}
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper.column {
+  flex-direction: column;
+}
+.gx-carousel-container .gx-carousel-main .gx-carousel-wrapper.animation {
+  transition: 0.3s left ease-in-out, 0.3s top ease-in-out;
 }
 .gx-slide {
-  display: none;
   width: 100%;
-}
-.gx-slide.active {
-  position: absolute;
-  display: block;
-  left: 0;
-  top: 0;
-  overflow: hidden;
-}
-.gx-slide.active.left {
-  left: -100%;
-}
-.gx-slide.active.right {
-  left: 100%;
-}
-.gx-slide.active.top {
-  top: -100%;
-}
-.gx-slide.active.bottom {
-  top: 100%;
-}
-.gx-slide.animation {
-  transition: 0.3s left ease-in-out, 0.3s top ease-in-out;
+  height: 100%;
 }
