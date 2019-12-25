@@ -84,8 +84,8 @@ directives.factory('$transition', ['$q', '$timeout', '$rootScope', function ($q,
 }]);
 
 directives.controller("carouselController", [
-    "$scope", "$timeout", "$interval", "$transition",
-    function ($scope, $timeout, $interval, $transition) {
+    "$scope", "$timeout", "$interval", "$transition", "$compile",
+    function ($scope, $timeout, $interval, $transition, $compile) {
         var self = this;
         var slides = $scope.slides = [];
         var lastTransition, autoInterval;
@@ -262,7 +262,14 @@ directives.controller("carouselController", [
          */
         self.appendSlideDOM = function (archorIndex, copyIndex) {
             copyIndex = copyIndex + (copyIndex >= 0 ? 0 : slides.length);
+            
+            // compile again
             var slideCopyElement = slides[copyIndex].$element.clone();
+            slideCopyElement[0].removeAttribute("gx-slide");
+            slideCopyElement[0].removeAttribute("ng-repeat");
+            slideCopyElement[0].removeAttribute("ng-transclude");
+            $compile(slideCopyElement)(slides[copyIndex].$parent);
+            
             if (archorIndex === 0) {
                 $scope.$transcludeElement.prepend(slideCopyElement);
             } else if (archorIndex === -1) {

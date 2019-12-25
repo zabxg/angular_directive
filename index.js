@@ -121,6 +121,9 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
         },
         remove: function () {
             this.data.pop();
+        },
+        alert: function (msg) {
+            alert("This is: " + msg);
         }
     };
 });
