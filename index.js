@@ -81,6 +81,7 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
         wrapperConfig: {
             viewSize: 3,
             isPlay: false,
+            control: false,
             // layout: 'v',
             // indicator: false,
             playAnimation: 'linear'
