@@ -153,7 +153,7 @@ directives.controller("carouselController", [
                 slide.active = true;
                 activeSlide.active = false;
 
-                afterPosition = beforePosition + (moveUnit * (slideIndex > curActiveIndex ? -1 : 1)) + "%";
+                afterPosition = beforePosition + (moveUnit * (curActiveIndex - slideIndex)) + "%";
                 middlePosition = afterPosition;
                 if (direction) {
                     if (slideIndex === 0 && curActiveIndex === slideSize - 1) {
@@ -192,6 +192,7 @@ directives.controller("carouselController", [
         };
 
         self.addSlide = function (slide, element) {
+            var viewSize = $scope.carouselConfig.viewSize;
             slide.$element = element;
             slides.push(slide);
 
@@ -199,7 +200,14 @@ directives.controller("carouselController", [
                 self.setSelect(slide);
                 self.restart();
             }
-            self.updateLayout(slides.length, $scope.carouselConfig.viewSize);
+            if (cloneNodeAtFront > 0 && slides.length > viewSize) {
+                self.removeSlideDOM(0);
+                self.appendSlideDOM(Math.max(0, viewSize - 2), slides.length - 1);
+                self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront,
+                    $scope.carouselConfig.viewSize);
+            } else {
+                self.resetSliderDOM();
+            }
         };
         self.removeSlide = function (slide) {
             for (var i = 0; i < slides.length; i++) {
@@ -211,21 +219,28 @@ directives.controller("carouselController", [
                     break;
                 }
             }
-            if (slides.length === 0) {
-                // 移除之前克隆的DOM节点
+            if (!activeSlide && slides[0]) {
+                self.setSelect(slides[0]);
+            }
+
+            self.resetSliderDOM();
+            self.restart();
+        };
+        self.resetSliderDOM = function () {
+            while (cloneNodeAtEnd > 0) {
+                self.removeSlideDOM(-1);
+                cloneNodeAtEnd--;
+            }
+            while (cloneNodeAtFront > 0) {
                 self.removeSlideDOM(0);
-            } else {
-                if (hasLastSlide) {
-                    self.removeSlideDOM(-1);
-                    hasLastSlide = false;
-                }
-                if (!activeSlide) {
-                    self.setSelect(slides[0]);
-                }
+                cloneNodeAtFront--;
             }
-            if (slides.length > 1) {
-                self.restart();
-            }
+            self.updateLayout(slides.length, $scope.carouselConfig.viewSize);
+        };
+        self.appendSlideDOM = function (archorIndex, copyIndex) {
+            var archorElement = $scope.$transcludeElement.children().eq(archorIndex);
+            copyIndex = copyIndex + (copyIndex >= 0 ? 0 : slides.length);
+            archorElement.after(slides[copyIndex].$element.clone());
         };
         self.removeSlideDOM = function (index) {
             var slideDOMs = $scope.$transcludeElement.children();

@@ -6,14 +6,19 @@
     
     .gx-carousel-indicator {
         position: absolute;
+        left: 50%;
         bottom: @control-width;
-        width: 100%;
         height: 30px;
-        margin: 0;
-        padding: 0;
+        line-height: 30px;
+        padding: 0 20px;
         text-align: center;
+        transform: translateX(-50%);
         z-index: 1;
 
+        .gx-carousel-indicator-inner {
+            margin: 0;
+            padding: 0;
+        }
         .indicator-icon {
             display: inline-block;
             height: 10px;
@@ -39,6 +44,16 @@
                     margin-top: 0;
                 }
             }
+        }
+        .gx-carousel-indicator-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            filter: blur(10px);
+            z-index: -1;
         }
     }
     

@@ -79,7 +79,7 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
             imageUrl: "images/num_5.png"
         }],
         wrapperConfig: {
-            viewSize: 2,
+            viewSize: 3,
             isPlay: false,
             // layout: 'v',
             // indicator: false,
@@ -116,7 +116,7 @@ angular.module("directives").controller("mainCtrl", function ($scope, $http) {
         },
         add: function () {
             this.data.push({
-                imageUrl: "images/v7_s.png"
+                imageUrl: "images/num_infinite.png"
             });
         },
         remove: function () {

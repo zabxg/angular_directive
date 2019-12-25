@@ -5,13 +5,17 @@
             ng-class="layoutClass" ng-style="layoutSize"></div>
     </div>
     
-    <ol class="gx-carousel-indicator" ng-if="carouselConfig.indicator">
-        <li ng-repeat="item in slides track by $index"
-            ng-class="{'active':item.active}"
-            ng-click="select(item)" class="indicator-icon">
-            <span class="indicator-inner"></span>
-        </li>
-    </ol>
+        
+    <div class="gx-carousel-indicator" ng-if="carouselConfig.indicator">
+        <ol class="gx-carousel-indicator-inner">
+            <li ng-repeat="item in slides track by $index"
+                ng-class="{'active':item.active}"
+                ng-click="select(item)" class="indicator-icon">
+                <span class="indicator-inner"></span>
+            </li>
+        </ol>
+        <div class="gx-carousel-indicator-bg"></div>
+    </div>
 
     <a href role="button" class="gx-carousel-control left"
         ng-class="{'disabled':slides.length>carouselConfig.viewSize}"
