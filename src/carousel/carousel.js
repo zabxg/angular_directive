@@ -107,8 +107,7 @@
                 // 仅有一个元素 或 当前页面不可滚动
                 if (slide === activeSlide || !activeSlide || 
                     (slides.length <= viewSize)) {
-                    slide.active = true;
-                    activeSlide = slide;
+                    self.setSelectSlide(slide);
                     $scope.layoutSize[positionAttrName] = "0%";
                     return;
                 }
@@ -117,7 +116,9 @@
                 var beforeLayoutClassLength = $scope.layoutClass.length;
                 var beforePosition, middlePosition, afterPosition;
                 var moveUnit = 100 / viewSize;
-                beforePosition = self.adjustPosition(true);
+                self.updateCloneNode();
+                self.updateCarouselSize(slides.length + cloneNodeAtEnd + cloneNodeAtFront, viewSize);
+                beforePosition = self.adjustPosition();
 
                 $scope.$$postDigest(function () {
                     // 确保上一次操作完成
@@ -130,8 +131,7 @@
                 });
 
                 function goNext() {
-                    slide.active = true;
-                    activeSlide.active = false;
+                    self.setSelectSlide(slide);
 
                     afterPosition = beforePosition + (moveUnit * (curActiveIndex - slideIndex)) + "%";
                     middlePosition = afterPosition;
@@ -155,7 +155,6 @@
                         });
                         lastTransition.then(transitionDone, transitionDone);
                     }
-                    activeSlide = slide;
                     self.restart();
 
                     function transitionDone() {
@@ -165,115 +164,69 @@
                     }
                 }
             };
-            /**
-             * 适配位置
-             * @param {Boolean} isUpdateCloneNode 是否更新用于无限滚动的克隆节点
-             * @returns
-             */
-            self.adjustPosition = function (isUpdateCloneNode) {
-                var curActiveIndex = self.getActiveIndex();
-                var positionAttrName = $scope.carouselConfig.layout === 'v' ? 'top' : 'left';
-                var slideSize = slides.length;
-                var beforePosition;
-
-                // 添加前后节点，方便做无限滚动。
-                // 这里的节点不进行编译和链接，所以不触发`gx-slide`的`addSlide`
-                if (isUpdateCloneNode) {
-                    while (cloneNodeAtFront < viewSize) {
-                        self.appendSlideDOM(0, -cloneNodeAtFront - 1);
-                        cloneNodeAtFront++;
-                    }
-                    while (cloneNodeAtFront > viewSize) {
-                        self.removeSlideDOM(0);
-                        cloneNodeAtFront--;
-                    }
-                    while (cloneNodeAtEnd < viewSize) {
-                        self.appendSlideDOM(-1, cloneNodeAtEnd);
-                        cloneNodeAtEnd++;
-                    }
-                    while (cloneNodeAtEnd > viewSize) {
-                        self.removeSlideDOM(-1);
-                        cloneNodeAtEnd--;
-                    }
-                }
-                self.updateLayout(slideSize + cloneNodeAtEnd + cloneNodeAtFront,
-                    $scope.carouselConfig.viewSize);
-
-                beforePosition = -(curActiveIndex + cloneNodeAtFront) * 100 / viewSize;
-                $scope.layoutSize[positionAttrName] = beforePosition + "%";
-                return beforePosition;
-            };
-
-            /**
-             * 添加轮播元素，会同时更新因为无限滚动而添加的节点副本
-             * @param {Scope} slide 
-             * @param {DOMElement} element 
-             */
-            self.addSlide = function (slide, element) {
-                slide.$element = element;
-                slides.push(slide);
-
-                if (slides.length === 1) {
-                    self.setSelect(slide);
-                    self.restart();
-                }
-                if (cloneNodeAtFront > 0 && slides.length > viewSize) {
-                    self.removeSlideDOM(0);
-                    self.appendSlideDOM(Math.max(0, viewSize - 2), -1);
-                    self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront,
-                        $scope.carouselConfig.viewSize);
-                } else {
-                    self.resetSliderDOM();
-                }
-            };
-            /**
-             * 移除轮播元素，会同时更新因为无限滚动而添加的节点副本
-             * @param {Scope} slide
-             */
-            self.removeSlide = function (slide) {
+            
+            self.getActiveIndex = function () {
                 for (var i = 0; i < slides.length; i++) {
-                    if (slides[i] === slide) {
-                        if (slide.active) {
-                            slide.active = false;
-                            activeSlide = null;
-                        }
-                        slides.splice(i, 1);
-                        break;
+                    if (slides[i].active) {
+                        return i;
                     }
                 }
-
-                if (cloneNodeAtFront > 0 && slides.length > viewSize) {
-                    self.removeSlideDOM(viewSize - 1);
-                    self.appendSlideDOM(0, -1);
-                    self.updateLayout(slides.length + cloneNodeAtEnd + cloneNodeAtFront,
-                        $scope.carouselConfig.viewSize);
-                } else {
-                    for (var i = 0; i < slides.length; i++) {
+            };
+            self.setSelectSlide = function (slide, index) {
+                for (var i = 0; i < slides.length; i++) {
+                    if (slides[i] === slide || index === i) {
+                        slides[i].active = true;
+                        activeSlide = slides[i];
+                        index = i;
+                    } else {
                         slides[i].active = false;
                     }
+                }
+                if (!slide && !(angular.isNumber(index) && index >= 0)) {
                     activeSlide = null;
-                    self.resetSliderDOM();
+                    index = -1;
                 }
-
-                if (!activeSlide && slides[0]) {
-                    self.setSelect(slides[0]);
-                }
-
-                self.restart();
+                return index;
             };
-            /**
-             * 移除因为无限滚动而额外添加的DOM节点
-             */
-            self.resetSliderDOM = function () {
-                while (cloneNodeAtEnd > 0) {
-                    self.removeSlideDOM(-1);
-                    cloneNodeAtEnd--;
+            self.updateCloneNode = function (cloneNodeNeedSize) {
+                cloneNodeNeedSize = cloneNodeNeedSize === 0 ? cloneNodeNeedSize : (cloneNodeNeedSize || viewSize);
+                while (cloneNodeAtFront < cloneNodeNeedSize) {
+                    self.appendSlideDOM(0, -cloneNodeAtFront - 1);
+                    cloneNodeAtFront++;
                 }
-                while (cloneNodeAtFront > 0) {
+                while (cloneNodeAtFront > cloneNodeNeedSize) {
                     self.removeSlideDOM(0);
                     cloneNodeAtFront--;
                 }
-                self.updateLayout(slides.length, viewSize);
+                while (cloneNodeAtEnd < cloneNodeNeedSize) {
+                    self.appendSlideDOM(-1, cloneNodeAtEnd);
+                    cloneNodeAtEnd++;
+                }
+                while (cloneNodeAtEnd > cloneNodeNeedSize) {
+                    self.removeSlideDOM(-1);
+                    cloneNodeAtEnd--;
+                }
+            };
+            self.adjustPosition = function () {
+                var curActiveIndex = self.getActiveIndex();
+                var positionAttrName = $scope.carouselConfig.layout === 'v' ? 'top' : 'left';
+                var beforePosition = -(curActiveIndex + cloneNodeAtFront) * 100 / viewSize;
+                $scope.layoutSize[positionAttrName] = beforePosition + "%";
+                return beforePosition;
+            };
+            /**
+             * 更新父元素及子元素的大小
+             * @param {Number} slideNum 所有子元素的数量（包括副本）
+             * @param {Number} viewNum 单窗口可视子元素的数量
+             * @returns
+             */
+            self.updateCarouselSize = function (slideNum, viewNum) {
+                var positionAttrName = $scope.carouselConfig.layout === "v" ? "height" : "width";
+                var slideSize = 100 / slideNum + "%";
+                var slideDOMs = $scope.$transcludeElement.children();
+                slideDOMs.css(positionAttrName, slideSize);
+                $scope.layoutSize[positionAttrName] = 100 * slideNum / viewNum + "%";
+                return slideSize;
             };
             /**
              * 添加已有滑动元素的副本 （编译后）
@@ -314,19 +267,74 @@
                     lastSlideDOM.remove();
                 }
             };
+
             /**
-             * 更新父元素及子元素的大小
-             * @param {Number} slideNum 所有子元素的数量（包括副本）
-             * @param {Number} viewNum 单窗口可视子元素的数量
-             * @returns
+             * 添加轮播元素，会同时更新因为无限滚动而添加的节点副本
+             * @param {Scope} slide 
+             * @param {DOMElement} element 
              */
-            self.updateLayout = function (slideNum, viewNum) {
-                var positionAttrName = $scope.carouselConfig.layout === "v" ? "height" : "width";
-                var slideSize = 100 / slideNum + "%";
-                var slideDOMs = $scope.$transcludeElement.children();
-                slideDOMs.css(positionAttrName, slideSize);
-                $scope.layoutSize[positionAttrName] = 100 * slideNum / viewNum + "%";
-                return slideSize;
+            self.addSlide = function (slide, element) {
+                slide.$element = element;
+                slides.push(slide);
+
+                if (cloneNodeAtFront > 0) {
+                    // handle existant cloned node
+                    self.removeSlideDOM(0);
+                    self.appendSlideDOM(Math.max(0, viewSize - 2), -1);
+                } else {
+                    self.updateCloneNode(0);
+                }
+                self.updateCarouselSize(slides.length + cloneNodeAtEnd + cloneNodeAtFront, viewSize);
+                
+                if (slides.length === 1) {
+                    self.setSelect(slide);
+                    self.restart();
+                }
+            };
+            /**
+             * 移除轮播元素，会同时更新因为无限滚动而添加的节点副本
+             * @param {Scope} slide
+             */
+            self.removeSlide = function (slide) {
+                var slideSize = slides.length;
+                var slideIndex;
+                var curActiveIndex;
+                for (var i = 0; i < slideSize; i++) {
+                    if (slide.active) {
+                        curActiveIndex = i;
+                    }
+                    if (slides[i] === slide) {
+                        slideIndex = i;
+                        slides.splice(i, 1);
+                        slideSize--;
+                        break;
+                    }
+                }
+
+                if (slideSize <= viewSize) {
+                    // no enough slide
+                    self.setSelectSlide(null, 0);
+                    self.updateCloneNode(0);
+                    self.updateCarouselSize(slideSize, viewSize);
+                } else {
+                    if (cloneNodeAtFront > 0) {
+                        // has appended clone node, should update the node
+                        self.removeSlideDOM(viewSize - 1);
+                        self.appendSlideDOM(0, -viewSize);
+                    } else if (slideIndex > curActiveIndex) {
+                        // hasn't appended clone node, but the removed node is being viewed
+                        self.updateCloneNode();
+                        self.updateCarouselSize(slideSize, viewSize);
+                        self.adjustPosition();
+                    }
+
+                    if (slideIndex === curActiveIndex && slides[0]) {
+                        self.setSelectSlide(null, 0);
+                    }
+                }
+
+                self.adjustPosition();
+                self.restart();
             };
             self.updateViewSize = function (newViewSize) {
                 if (newViewSize === viewSize) { return; }
@@ -335,34 +343,25 @@
                 viewSize = newViewSize;
                 
                 if (slideSize < viewSize) {
-                    self.resetSliderDOM();
-                    self.updateLayout(slideSize, viewSize);
-                    if (activeSlide) {
-                        activeSlide.active = false;
-                    }
-                    activeSlide = null;
+                    // no enough slide
+                    self.updateCloneNode(0);
                     if (slides.length) {
-                        self.setSelect(slides[0]);
+                        self.setSelectSlide(slides[0]);
+                    } else {
+                        self.setSelectSlide();
                     }
                 } else {
                     if (!cloneNodeAtFront && !cloneNodeAtEnd) {
+                        // no cloned node before
                         if (newViewSize > oldViewSize) {
-                            self.adjustPosition(true);
-                        } else {
-                            self.adjustPosition();
+                            self.updateCloneNode();
                         }
                     } else {
-                        self.adjustPosition(true);
+                        self.updateCloneNode();
                     }
                 }
-            };
-
-            self.getActiveIndex = function () {
-                for (var i = 0; i < slides.length; i++) {
-                    if (slides[i].active) {
-                        return i;
-                    }
-                }
+                self.updateCarouselSize(slideSize + cloneNodeAtFront + cloneNodeAtEnd, viewSize);
+                self.adjustPosition();
             };
 
             self.restart = function () {
