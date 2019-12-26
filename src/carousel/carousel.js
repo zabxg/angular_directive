@@ -165,6 +165,7 @@
                 }
             };
             
+            // 获取左侧第一个节点索引
             self.getActiveIndex = function () {
                 for (var i = 0; i < slides.length; i++) {
                     if (slides[i].active) {
@@ -172,6 +173,7 @@
                     }
                 }
             };
+            // 设置选中节点,slide和index选传一个
             self.setSelectSlide = function (slide, index) {
                 for (var i = 0; i < slides.length; i++) {
                     if (slides[i] === slide || index === i) {
@@ -188,6 +190,7 @@
                 }
                 return index;
             };
+            // 更新克隆节点,不传参取默认的viewSize
             self.updateCloneNode = function (cloneNodeNeedSize) {
                 cloneNodeNeedSize = cloneNodeNeedSize === 0 ? cloneNodeNeedSize : (cloneNodeNeedSize || viewSize);
                 while (cloneNodeAtFront < cloneNodeNeedSize) {
@@ -207,6 +210,7 @@
                     cloneNodeAtEnd--;
                 }
             };
+            // 重设偏移量
             self.adjustPosition = function () {
                 var curActiveIndex = self.getActiveIndex();
                 var positionAttrName = $scope.carouselConfig.layout === 'v' ? 'top' : 'left';
@@ -214,12 +218,7 @@
                 $scope.layoutSize[positionAttrName] = beforePosition + "%";
                 return beforePosition;
             };
-            /**
-             * 更新父元素及子元素的大小
-             * @param {Number} slideNum 所有子元素的数量（包括副本）
-             * @param {Number} viewNum 单窗口可视子元素的数量
-             * @returns
-             */
+            // 更新轮播窗体大小,传入的slideNum需要包括克隆节点的数量
             self.updateCarouselSize = function (slideNum, viewNum) {
                 var positionAttrName = $scope.carouselConfig.layout === "v" ? "height" : "width";
                 var slideSize = 100 / slideNum + "%";
@@ -228,11 +227,7 @@
                 $scope.layoutSize[positionAttrName] = 100 * slideNum / viewNum + "%";
                 return slideSize;
             };
-            /**
-             * 添加已有滑动元素的副本 （编译后）
-             * @param {Number} archorIndex 插入的位置，支持-1，计算时要考虑克隆节点
-             * @param {Number} copyIndex 需要复制的元素，支持负值，为需要拷贝的slide的对应索引
-             */
+            // 复制已有节点的副本并插入
             self.appendSlideDOM = function (archorIndex, copyIndex) {
                 copyIndex = copyIndex + (copyIndex >= 0 ? 0 : slides.length);
                 
@@ -255,10 +250,7 @@
                     archorElement.after(slideCopyElement);
                 }
             };
-            /**
-             * 移除节点
-             * @param {Number} index 需要删除的元素位置，支持负值，计算时要考虑克隆节点
-             */
+            // 移除已有节点的DOM
             self.removeSlideDOM = function (index) {
                 var slideDOMs = $scope.$transcludeElement.children();
                 var slideIndex = index + (index >= 0 ? 0 : slideDOMs.length);
@@ -336,6 +328,10 @@
                 self.adjustPosition();
                 self.restart();
             };
+            /**
+             * 更新视图大小
+             * @param {Number} newViewSize
+             */
             self.updateViewSize = function (newViewSize) {
                 if (newViewSize === viewSize) { return; }
                 var slideSize = slides.length;
