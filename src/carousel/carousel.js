@@ -419,8 +419,7 @@
             controller: 'carouselController',
             controllerAs: 'carouselCtrl',
             templateUrl: 'src/carousel/carousel.html',
-            link: {
-                pre: function (scope, ele, attrs, carouselController, transcludeFn) {
+            link: function (scope, ele, attrs, carouselController, transcludeFn) {
 
                 /**
                  * @property {Number} viewSize 每个视图可见的元素数量
@@ -492,7 +491,6 @@
                 scope.$on("$destroy", function () {
                     carouselController.pause();
                 });
-            }
             }
         };
     });
