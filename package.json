@@ -2,7 +2,7 @@
     "name": "angular-directive",
     "version": "0.1.0",
     "dependencies": {
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "lodash": "^3.10.1"
     },
     "devDependencies": {
