@@ -6,7 +6,7 @@
         "lodash": "^3.10.1"
     },
     "devDependencies": {
-        "angular": "^1.2.32",
+        "angular": "^1.8.3",
         "angular-mocks": "^1.2.32",
         "grunt": "^1.0.4",
         "grunt-karma": "^3.0.2",
